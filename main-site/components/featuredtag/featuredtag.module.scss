@@ -1,0 +1,36 @@
+@import "../SCSS/variables.scss";
+
+.f-tag {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 55px;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0 10px;
+
+    .f-tag-no {
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 16px;
+      letter-spacing: -0.02em;
+      color: #7f8596;
+      margin-bottom: 0px;
+    }
+
+    .f-tag-content {
+      font-weight: 700;
+      font-size: 0.875rem;
+      line-height: 24px;
+      color: #fcfcf9;
+    }
+  }
+}

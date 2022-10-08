@@ -1,0 +1,41 @@
+.FI {
+  background: #ff9900;
+  box-shadow: 0px 4px 34px 0px #ff990099;
+  position: fixed;
+  width: 85px;
+  height: 85px;
+  left: 5vw;
+  top: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 120px;
+  z-index: 3;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  animation: 5s forwards infinite updown;
+
+  img {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

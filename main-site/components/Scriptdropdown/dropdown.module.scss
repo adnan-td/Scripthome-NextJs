@@ -1,0 +1,51 @@
+@import "../SCSS/variables.scss";
+
+.dropdown {
+  width: 100%;
+  user-select: none;
+  position: relative;
+  background: #101828;
+  border-radius: 12px;
+  padding: 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+.dropdown .dropdown-btn {
+  width: 110%;
+  padding: 8px 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: #2d324e;
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.31), inset 0px 1px 1px rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.dropdown .dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 4px 6px;
+  background: #101828;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  font-weight: 500;
+  color: $base-white;
+  width: 100%;
+  z-index: 10;
+  border-radius: 12px;
+}
+.dropdown .dropdown-content .dropdown-item {
+  padding: 10px;
+  margin: 10px 1px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.dropdown .dropdown-content .dropdown-item:hover {
+  background: #2d324e;
+}

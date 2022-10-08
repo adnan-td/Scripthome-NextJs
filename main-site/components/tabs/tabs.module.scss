@@ -1,0 +1,91 @@
+@import "../SCSS/variables.scss";
+
+.tabs-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 12px 12px;
+  gap: 2rem;
+
+  .tabs-ul {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    background: #101828;
+    border-radius: 12px;
+    padding: 5px;
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.tab {
+  width: 100%;
+  padding: 32px;
+  padding-top: 0;
+  font-family: sans-serif;
+  color: #fcfcf9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  div {
+    width: 100%;
+  }
+}
+
+.tabs-ul.inline {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+}
+
+.tabs-ul.inline,
+.tabs-li {
+  display: inline-block;
+  margin-left: 0;
+  padding: 10px;
+  // border-bottom: 2px solid #eee;
+  transition: all 0.5s;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  color: #adb8d6;
+}
+
+.tabs-ul.inline,
+.tabs-li.selected {
+  background: #2d324e;
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.31),
+    inset 0px 1px 1px rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  color: #fcfcf9;
+}
+
+@media only screen and (max-width: 500px) {
+  .tab {
+    padding: 1rem;
+    padding-top: 0;
+    gap: 1rem;
+  }
+}
+
+.div_tab {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

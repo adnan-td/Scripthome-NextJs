@@ -1,0 +1,29 @@
+@import "../SCSS/variables.scss";
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $nav-color;
+  color: $text-light-color;
+  padding: 30px 10px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+  img {
+    margin: 5px 3vw 5px 6vw;
+  }
+  p {
+    margin: 5px 6vw 5px 3vw;
+  }
+  @media only screen and (max-width: 400px) {
+    .footer {
+      justify-content: center;
+    }
+    img {
+      display: none;
+    }
+    p {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

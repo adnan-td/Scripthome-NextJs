@@ -1,0 +1,125 @@
+@import "../SCSS/variables.scss";
+
+.carousel2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    border: none;
+    text-decoration: none;
+    background: $base-white;
+    color: black;
+    height: 40px;
+    width: 46px;
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 4.47931px 35.8345px rgba(0, 0, 0, 0.2);
+    filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.25));
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    overflow: hidden;
+
+    .carousel-card {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      background: #2e323b;
+      box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      padding: 16px 24px 16px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: #4a1fb8;
+        box-shadow: 0px 8px 24px rgba(94, 45, 220, 0.3);
+      }
+
+      .cc-img {
+        width: 250px;
+        border-radius: 12px;
+        aspect-ratio: 230/165;
+      }
+
+      .card-content {
+        display: grid;
+        grid-template-rows: 3.46fr 1fr;
+        justify-items: flex-start;
+
+        .card-content-header {
+          h4 {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 28px;
+            color: $base-white;
+            margin: 3px 0;
+          }
+          p {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #e0e0e0;
+          }
+        }
+        .lav-c {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 60%;
+          gap: 20px;
+
+          .lav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+
+            .lav-img-c {
+              background: #17151f;
+              box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05), 0px 2px 4px rgba(48, 49, 51, 0.1);
+              border-radius: 6px;
+              width: 40px;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .lav-inner-c {
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              flex-direction: column;
+              gap: 3px;
+
+              h5 {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 17px;
+                color: $base-white;
+              }
+
+              p {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10px;
+                line-height: 10px;
+                color: #d0d5dd;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
