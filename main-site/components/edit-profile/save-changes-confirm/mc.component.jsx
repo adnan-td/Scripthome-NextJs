@@ -9,10 +9,10 @@ const Modalmc = ({ handleClose }) => {
     <div className={styles["modal-cover"]} onClick={handleClose}>
       <div className={styles["sign-up-modal"]} onClick={(e) => e.stopPropagation()}>
         <button className={styles["close-div"]} onClick={handleClose}>
-          <Image src={CloseIcon} alt="" className={styles["close-icon"]} />
+          <img src={CloseIcon} alt="" className={styles["close-icon"]} />
         </button>
         <div className={styles["top-content"]}>
-          <Image src={LockImg} alt="mail-icon" />
+          <img src={LockImg} alt="mail-icon" />
           <div className={styles["header-content"]}>
             <p>Confirm Changes</p>
             <span>Enter your password to confirm the changes.</span>
@@ -22,7 +22,7 @@ const Modalmc = ({ handleClose }) => {
             <label htmlFor="">Your Password</label>
             <div className={styles["password-div"]}>
               <input type="password" />
-              <Image src={EyeShow} alt="show icon" />
+              <img src={EyeShow} alt="show icon" />
             </div>
           </form>
         </div>
