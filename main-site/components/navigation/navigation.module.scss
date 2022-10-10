@@ -311,6 +311,7 @@
     border: 1px solid #f2f4f7;
     box-shadow: 8px 8px 48px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    overflow: hidden;
     .nui-header {
       display: flex;
       flex-direction: column;
@@ -352,6 +353,7 @@
       }
     }
     .nui-dropdown-row {
+      margin: 0 !important;
       cursor: pointer;
       text-decoration: none;
       background: none;
@@ -361,10 +363,15 @@
       align-items: center;
       padding: 10px 16px;
       gap: 12px;
+      width: 100%;
 
       min-width: 250px;
       height: 40px;
       border-bottom: 1px solid #eaecf0;
+
+      &:hover {
+        background-color: #eaecf0;
+      }
       p {
         font-family: "Poppins";
         font-style: normal;

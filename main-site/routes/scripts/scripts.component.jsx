@@ -54,7 +54,6 @@ const Scripts = () => {
             <div className={styles["authorbox"]}>
               <div className={styles["leftauthor"]}>
                 <p className={styles["madeby"]}>Made by</p>
-                <br />
                 <div className={styles["authorboxc1"]}>
                   <img
                     src="/script/avatars/avatar2.png"
@@ -69,7 +68,6 @@ const Scripts = () => {
               </div>
               <div className={styles["rightauthor"]}>
                 <p className={styles["uploadby"]}>Uploaded by</p>
-                <br />
                 <div className={styles["authorboxc1"] + " " + styles["authorboxc12"]}>
                   <img
                     src="/script/avatars/avatar.png"

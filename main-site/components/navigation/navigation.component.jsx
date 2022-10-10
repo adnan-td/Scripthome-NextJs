@@ -4,6 +4,7 @@ import { Fragment, useState, useContext, useEffect } from "react";
 import Signinmodal from "../../components/signin-modal/modal.component";
 import Signupmodal from "../../components/signup-modal/modal.component";
 import Search from "../searchbar/search.component";
+import EditUser from "../edit-profile/modal.component";
 
 import { WidthContext } from "../../contexts/screenwidth/screenwidth.context";
 import { UserContext } from "../../contexts/user/user.context";
@@ -164,10 +165,10 @@ function NavUserIcon({ user, logout }) {
               </div>
             </div>
           </div>
-          <button className={styles["nui-dropdown-row"]}>
+          <EditUser className={styles["nui-dropdown-row"]}>
             <img alt="" src="/Nav-Icon/user-icon.svg" />
             <p>Edit profile</p>
-          </button>
+          </EditUser>
           <button className={styles["nui-dropdown-row"]} onClick={logout}>
             <img alt="" src="/Nav-Icon/logout-icon.svg" />
             <p>Log out</p>

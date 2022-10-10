@@ -2,7 +2,7 @@
 
 .home {
   color: $base-white;
-  width: 100vw;
+  width: 100%;
   font-family: "Poppins";
   display: flex;
   justify-content: center;
@@ -259,6 +259,7 @@
       align-items: center;
       img {
         width: 512px;
+        z-index: 1;
       }
     }
   }
@@ -281,7 +282,7 @@
     .mps-inside {
       display: flex;
       flex-direction: column;
-      width: 90%;
+      width: 100%;
       justify-content: center;
       align-items: flex-start;
 
