@@ -1,3 +1,6 @@
+## About
+ This is the Nextjs version of the scripthome full stack web project which will finally be able to got to production stage.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
