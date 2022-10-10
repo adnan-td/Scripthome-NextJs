@@ -1,4 +1,20 @@
 import styles from "./mc.module.scss";
+import { useState } from "react";
+
+export default function WatchVideoModal({ className, children }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <button onClick={handleShow} className={className}>
+        {children}
+      </button>
+      {show ? <Modalmc handleClose={handleClose} /> : ""}
+    </>
+  );
+}
 
 const Modalmc = ({ handleClose }) => {
   return (
@@ -15,7 +31,11 @@ const Modalmc = ({ handleClose }) => {
             </div>
             <div className={styles["youtube-box"]}>
               <img src="/Script/Modal-Icons/Play-button.svg" alt="" className={styles["y-play"]} />
-              <img src="/Script/Modal-Icons/Video-player.png" alt="" className={styles["y-overlay"]} />
+              <img
+                src="/Script/Modal-Icons/Video-player.png"
+                alt=""
+                className={styles["y-overlay"]}
+              />
             </div>
           </div>
         </div>
@@ -23,5 +43,3 @@ const Modalmc = ({ handleClose }) => {
     </div>
   );
 };
-
-export default Modalmc;

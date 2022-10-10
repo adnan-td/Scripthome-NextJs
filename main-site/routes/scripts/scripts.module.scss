@@ -672,3 +672,171 @@
     stroke: red;
   }
 }
+
+// Script all Styling
+
+.scriptall {
+  width: min(100%, 1920px);
+  position: relative;
+  padding: 4rem 7rem;
+  backdrop-filter: blur(50px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3rem;
+
+  @media (max-width: 900px) {
+    padding: 4rem 2rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    &__heading {
+      font-weight: 600;
+      font-size: 36px;
+      line-height: 54px;
+      letter-spacing: -0.02em;
+      color: $base-white;
+
+      @media (max-width: 900px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .recentu-bottom {
+      z-index: 1;
+      width: 100%;
+      display: grid;
+      gap: 32px;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      .recentu-bottom {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media only screen and (max-width: 1200px) {
+      .recentu-bottom {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media only screen and (max-width: 500px) {
+      .recentu-bottom {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .paginationCon {
+    background-color: #1a1b20;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+
+    &:hover {
+      background-color: #421b8b;
+    }
+
+    &__active,
+    &:active {
+      background-color: $main-theme;
+    }
+
+    &__t {
+      color: $base-white;
+      font-weight: 600;
+    }
+  }
+}
+
+.userdiv {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+
+  &__img {
+    border-radius: 0.5rem;
+  }
+  &__content {
+    &__name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $base-white;
+    }
+
+    &__post {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff80;
+    }
+  }
+}
+
+.home-data {
+  width: 100%;
+  .ht-data__mod {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    .ht-data {
+      width: 100%;
+      max-width: 1920px;
+      padding: 3rem 0rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+
+      @media (max-width: 500px) {
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (min-width: 501px) and (max-width: 1100px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 2rem;
+      }
+
+      .ht-data-inside {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .ht-data-no {
+          font-weight: 700;
+          font-size: 3.25rem;
+          line-height: 78px;
+          color: $base-white;
+
+          @media (max-width: 900px) {
+            font-size: 2.5rem;
+            line-height: initial;
+          }
+        }
+
+        .ht-data-name {
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 24px;
+          color: $base-white;
+        }
+      }
+    }
+  }
+}

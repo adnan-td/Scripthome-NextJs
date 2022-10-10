@@ -10,7 +10,7 @@ const Search = ({ style }) => {
   return (
     <>
       <div className={styles["search-box-container"]} style={{ ...style }}>
-        <button onClick={handleShow}>
+        <button onClick={handleShow} className={styles["search-button"]}>
           <img src="/Nav-Icon/search-icon-nav.svg" alt="search-icon" />
         </button>
       </div>

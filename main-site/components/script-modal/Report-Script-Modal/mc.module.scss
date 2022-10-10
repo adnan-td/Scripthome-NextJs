@@ -3,7 +3,7 @@
 .modal-cover {
   z-index: 10;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -78,46 +78,30 @@
           }
         }
 
-        .script-box {
-          padding: 1rem 4rem 1rem 1.125rem;
-          width: 100%;
-          aspect-ratio: 5/2;
-          background: #1d2939;
+        .report-box {
           display: flex;
-          flex-direction: row;
-          gap: 1.5rem;
-          border-radius: 0.75rem;
-          overflow-x: hidden;
-          overflow-y: scroll;
+          flex-direction: column;
+          gap: 0.5rem;
+          width: 100%;
 
-          
-
-          .script-number,
-          .right-script-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.25rem;
-
-            p {
-              font-size: 0.875rem;
-              font-weight: 400;
-            }
+          .r-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #344054;
           }
 
-          .script-number {
-            p {
-              color: rgba(255, 255, 255, 0.6);
-            }
-          }
-          .right-script-text {
-            p {
-              color: $base-white;
+          .r-input {
+            width: 100%;
+            aspect-ratio: 5/2;
+            border: 2px solid $modal-gray;
+            border-radius: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            text-align: start;
+            resize: none;
 
-              span {
-                color: #f97066;
-                font-weight: 500;
-              }
+            &:focus {
+              outline: none;
+              border: 2px solid $error-600;
             }
           }
         }
@@ -154,12 +138,12 @@
       }
 
       .next-button {
-        background: $main-theme;
+        background: $error-600;
         color: $base-white;
 
         &:active,
         &:hover {
-          background-color: $main-theme-light;
+          background-color: $error-500;
           color: $base-white !important;
         }
       }

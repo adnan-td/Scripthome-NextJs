@@ -66,7 +66,7 @@ export default function Dashboard() {
                 aria-current="page"
                 style={{ color: "#8c8888" }}
               >
-                Welcome Skumminity Admin
+                Welcome Scripthome Admin
               </li>
             </ol>
           </nav>
