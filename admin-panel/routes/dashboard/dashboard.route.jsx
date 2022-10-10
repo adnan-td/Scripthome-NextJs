@@ -3,6 +3,14 @@ import { useEffect, useContext, useState } from "react";
 import Link from "next/link";
 import { SearchContext } from "../../contexts/searchfield/search.context";
 
+import stylesa from "../../app.module.scss";
+import stylesb from "../../bootstrap.module.scss";
+
+const styles = (classname) => {
+  if (stylesa[classname]) return stylesa[classname];
+  if (stylesb[classname]) return stylesb[classname];
+};
+
 const scripts = [{}, {}];
 export default function Dashboard() {
   const { searchfield } = useContext(SearchContext);
@@ -47,21 +55,25 @@ export default function Dashboard() {
   }, [current, filteredscripts]);
 
   return (
-    <div className="main2">
-      <div className="main-header">
+    <div className={styles("main2")}>
+      <div className={styles("main-header")}>
         <div>
           <h3>Dashboard</h3>
           <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item" aria-current="page" style={{ color: "#8c8888" }}>
+            <ol className={styles("breadcrumb")}>
+              <li
+                className={styles("breadcrumb-item")}
+                aria-current="page"
+                style={{ color: "#8c8888" }}
+              >
                 Welcome Skumminity Admin
               </li>
             </ol>
           </nav>
         </div>
       </div>
-      <div className="table-container">
-        <table className="table">
+      <div className={styles("table-container")}>
+        <table className={styles("table")}>
           <tbody>
             <tr>
               <td>Scripts</td>
@@ -91,7 +103,7 @@ export default function Dashboard() {
           </tbody>
         </table>
       </div>
-      <div className="foot">
+      <div className={styles("foot")}>
         <p>
           Displaying {current + shortscripts.length} Out of {filteredscripts.length}
         </p>
@@ -111,44 +123,44 @@ function Tr({ img, script, srno }) {
 
   return (
     <tr>
-      <td className="dashboard-scripts">
-        <div className="im">
+      <td className={styles("dashboard-scripts")}>
+        <div className={styles("im")}>
           <img src={img} alt="loading" />
         </div>
         <div>
-          <p className="im-1">{title}</p>
-          <p className="im-2">By {madeby}</p>
+          <p className={styles("im-1")}>{title}</p>
+          <p className={styles("im-2")}>By {madeby}</p>
         </div>
       </td>
-      <td className="align-middle">{likes} Likes</td>
-      <td className="align-middle">{views} Views</td>
-      <td className="align-middle">
+      <td className={styles("align-middle")}>{likes} Likes</td>
+      <td className={styles("align-middle")}>{views} Views</td>
+      <td className={styles("align-middle")}>
         {active ? (
-          <div className="active-script" style={{ height: "40px", width: "60%" }}>
+          <div className={styles("active-script")} style={{ height: "40px", width: "60%" }}>
             Active
           </div>
         ) : (
-          <div className="inactive-script" style={{ height: "40px", width: "60%" }}>
+          <div className={styles("inactive-script")} style={{ height: "40px", width: "60%" }}>
             Inactive
           </div>
         )}
       </td>
 
-      <td className="align-middle">
+      <td className={styles("align-middle")}>
         <p style={{ minWidth: "96px" }}>{date}</p>
       </td>
-      <td className="align-middle">
+      <td className={styles("align-middle")}>
         <Link href={`/admin/scripts/editscript?id=${srno}`}>
-          <a className="btn-3">
-            <div className="pen-icon">
+          <a className={styles("btn-3")}>
+            <div className={styles("pen-icon")}>
               <img src="/Adminpanel/img/Pencil.svg" alt="" />
             </div>
           </a>
         </Link>
       </td>
-      <td className="align-middle">
-        <a href=" " className="btn-3">
-          <div className="eye-icon">
+      <td className={styles("align-middle")}>
+        <a href=" " className={styles("btn-3")}>
+          <div className={styles("eye-icon")}>
             <img src="/Adminpanel/img/Eye.svg" alt="" />
           </div>
         </a>

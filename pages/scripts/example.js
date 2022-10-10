@@ -1,13 +1,13 @@
 import Head from "next/head";
 //
 import { AnimatePresence } from "framer-motion";
-import AnimatedPage from "../main-site/components/animations/animatedpage";
-import Navigation from "../main-site/components/navigation/navigation.component";
-import Footer from "../main-site/components/footer/footer.component";
-import FI from "../main-site/components/floatingicon/fi.component";
-import ScriptsAll from "../main-site/routes/scripts/scriptsall.component";
+import AnimatedPage from "../../main-site/components/animations/animatedpage";
+import Navigation from "../../main-site/components/navigation/navigation.component";
+import Footer from "../../main-site/components/footer/footer.component";
+import Scripts from "../../main-site/routes/scripts/scripts.component";
+import FI from "../../main-site/components/floatingicon/fi.component";
 
-import styles from "../styles/mainpage.module.scss";
+import styles from "../../styles/mainpage.module.scss";
 
 const ScriptsPage = () => {
   return (
@@ -22,7 +22,7 @@ const ScriptsPage = () => {
         <Navigation key={1} />
         <FI />
         <AnimatedPage key={2}>
-          <ScriptsAll />
+          <Scripts />
           <Footer />
         </AnimatedPage>
       </AnimatePresence>

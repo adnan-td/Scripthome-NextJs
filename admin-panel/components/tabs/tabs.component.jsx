@@ -1,23 +1,34 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import stylesa from "../../app.module.scss";
+import stylesb from "../../bootstrap.module.scss";
+
+const styles = (classname) => {
+  if (stylesa[classname]) return stylesa[classname];
+  if (stylesb[classname]) return stylesb[classname];
+  return null;
+};
+
 const Tabs = ({ isopen, screenwidth }) => {
   const router = useRouter();
   return (
     <>
-      <div className="collapse tabs show" id="navbarToggleExternalContent">
-        <div className={isopen && screenwidth < 500 ? "side-bar" : ""} id="sb">
+      <div className={isopen ? styles("tabs") + " " + styles("show") : styles("tabs")}>
+        <div className={isopen && screenwidth < 500 ? styles("side-bar") : styles("")} id="sb">
           <Link href="/admin/dashboard">
             <a style={{ textDecoration: "none", cursor: "pointer" }}>
               <h3>Skumminity</h3>
             </a>
           </Link>
-          <ul className="nav flex-column">
-            <li className="nav-item">
+          <ul className={styles("nav") + " " + styles("flex-column")}>
+            <li className={styles("nav-item")}>
               <Link href="/admin/dashboard">
                 <a
                   className={
-                    router.pathname.includes("/admin/dashboard") ? "nav-link active" : "nav-link"
+                    router.pathname.includes("/admin/dashboard")
+                      ? styles("nav-link") + " " + styles("active")
+                      : styles("nav-link")
                   }
                 >
                   Dashboard
@@ -26,7 +37,9 @@ const Tabs = ({ isopen, screenwidth }) => {
               <Link href="/admin/scripts">
                 <a
                   className={
-                    router.pathname.includes("/admin/scripts") ? "nav-link active" : "nav-link"
+                    router.pathname.includes("/admin/scripts")
+                      ? styles("nav-link") + " " + styles("active")
+                      : styles("nav-link")
                   }
                 >
                   Scripts
@@ -35,7 +48,9 @@ const Tabs = ({ isopen, screenwidth }) => {
               <Link href="/admin/reports">
                 <a
                   className={
-                    router.pathname.includes("/admin/reports") ? "nav-link active" : "nav-link"
+                    router.pathname.includes("/admin/reports")
+                      ? styles("nav-link") + " " + styles("active")
+                      : styles("nav-link")
                   }
                 >
                   Reports
@@ -44,7 +59,9 @@ const Tabs = ({ isopen, screenwidth }) => {
               <Link href="/admin/admins">
                 <a
                   className={
-                    router.pathname.includes("/admin/admins") ? "nav-link active" : "nav-link"
+                    router.pathname.includes("/admin/admins")
+                      ? styles("nav-link") + " " + styles("active")
+                      : styles("nav-link")
                   }
                 >
                   Admins

@@ -137,7 +137,11 @@
             border: 2px solid rgba(97, 191, 101, 0.1);
           }
           &:active {
-            background: linear-gradient(153.06deg, #74d680 -0.31%, #378b29 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #74d680 -0.31%,
+              #378b29 99.69%
+            );
           }
           &:focus {
             border: 2px solid rgba(116, 214, 128, 1);
@@ -154,7 +158,11 @@
             );
           }
           &:active {
-            background: linear-gradient(153.06deg, #ff0000 -0.31%, #990000 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #ff0000 -0.31%,
+              #990000 99.69%
+            );
           }
           &:focus {
             border: 2px solid #ff0000;
@@ -175,7 +183,11 @@
             );
           }
           &:active {
-            background: linear-gradient(153.06deg, #f6fc9c -0.31%, #eaf818 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #f6fc9c -0.31%,
+              #eaf818 99.69%
+            );
           }
           &:focus {
             border: 2px solid #f6fc9c;
@@ -639,5 +651,24 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+}
+
+.heart__like {
+  stroke: $base-white;
+
+  &:hover {
+    stroke: red;
+    fill: hsla(347, 82%, 48%, 0.15);
+  }
+
+  &:active {
+    fill: red;
+    stroke: red;
+  }
+
+  &__active {
+    fill: red;
+    stroke: red;
   }
 }

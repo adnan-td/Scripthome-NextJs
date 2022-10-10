@@ -3,7 +3,6 @@ import { ScreenWidth } from "../main-site/contexts/screenwidth/screenwidth.conte
 import { SearchField } from "../admin-panel/contexts/searchfield/search.context";
 import { SessionProvider } from "next-auth/react";
 import "../styles/globals.scss";
-import "../admin-panel/App.css";
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,31 +1,38 @@
-import "./mc.module.scss";
-import MailImg from "../../../assets/Modal/sign-up/email-address-icon.svg";
-import CloseIcon from "../../../assets/Modal/sign-up/x-close.svg";
+import styles from "./mc.module.scss";
 
 const Modalmc = ({ handleClose }) => {
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="sign-up-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close-div" onClick={handleClose}>
-          <img src={CloseIcon} alt="" className="close-icon" />
+    <div className={styles["modal-cover"]} onClick={handleClose}>
+      <div
+        className={styles["sign-up-modal"]}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className={styles["close-div"]} onClick={handleClose}>
+          <img
+            src="/Modal/sign-up/x-close.svg"
+            alt=""
+            className={styles["close-icon"]}
+          />
         </button>
-        <div className="top-content">
-          <img src={MailImg} alt="mail-icon" />
-          <div className="header-content">
+        <div className={styles["top-content"]}>
+          <img src="/Modal/sign-up/email-address-icon.svg" alt="mail-icon" />
+          <div className={styles["header-content"]}>
             <p>Email Address</p>
-            <span>Please enter the email address for the Scripthome account.</span>
+            <span>
+              Please enter the email address for the Scripthome account.
+            </span>
           </div>
 
-          <form className="email-input input-field">
+          <form className={styles["email-input"] + " " + styles["input-field"]}>
             <label htmlFor="">Email Address</label>
             <input type="email" title="Type your email address" />
           </form>
         </div>
-        <div className="bottom-button">
-          <button className="cancel-button" onClick={handleClose}>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["cancel-button"]} onClick={handleClose}>
             Cancel
           </button>
-          <button className="next-button">Next</button>
+          <button className={styles["next-button"]}>Next</button>
         </div>
       </div>
     </div>

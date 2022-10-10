@@ -1,24 +1,23 @@
-import "./mc.module.scss";
-import ImgIcon from "../../../assets/Modal/Ad-Blocker-detect.svg";
+import styles from "./mc.module.scss";
 
 const Modalmc = ({ handleClose }) => {
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="Script-Modal" onClick={(e) => e.stopPropagation()}>
-        <div className="header-wrapper-mod">
-          <div className="h-img-tag">
-            <img src={ImgIcon} alt="" />
+    <div className={styles["modal-cover"]} onClick={handleClose}>
+      <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
+        <div className={styles["header-wrapper-mod"]}>
+          <div className={styles["h-img-tag"]}>
+            <img src="/Modal/Ad-Blocker-detect.svg" alt="" />
           </div>
-          <div className="h-content-div">
-            <p className="h-content-1">AdBlocker Detected</p>
-            <p className="h-content-2">
-              It looks like you're using an ad blocker. That's okay. Who doesn't? But without
-              advertising-income, we can't keep making this site awesome.
+          <div className={styles["h-content-div"]}>
+            <p className={styles["h-content-1"]}>AdBlocker Detected</p>
+            <p className={styles["h-content-2"]}>
+              It looks like you{"'"}re using an ad blocker. That{"'"}s okay. Who doesn{"'"}t? But without
+              advertising-income, we can{"'"}t keep making this site awesome.
             </p>
           </div>
         </div>
-        <div className="bottom-button">
-          <button className="confirm-button">I have Disabled AdBlocker</button>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["confirm-button"]}>I have Disabled AdBlocker</button>
         </div>
       </div>
     </div>

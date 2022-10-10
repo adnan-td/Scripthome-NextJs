@@ -11,12 +11,12 @@ export default async function getuser(req, res) {
       let user = await userqueries.getUserbyEmail(email);
       if (user.rows[0]) {
         user = user.rows[0];
-        // console.log(password, user.password);
+        console.log(password, user.password);
         try {
           if (await bcrypt.compare(password, user.password)) {
             res.status(200).send(user);
           } else {
-            // console.log("password wrong");
+            console.log("password wrong");
             res.status(406).send({ message: "Password incorrect" });
           }
         } catch (e) {
