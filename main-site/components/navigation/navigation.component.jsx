@@ -21,7 +21,8 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const screenwidth = useContext(WidthContext);
   const { user } = useContext(UserContext);
-  const { status } = useSession();
+  // const { status } = useSession();
+  const status = "authenticated";
   const router = useRouter();
 
   useEffect(() => {

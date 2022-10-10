@@ -1,31 +1,31 @@
-import "./mc.module.scss";
-import WelcomeImg from "../../../assets/Question-Modal/Welcome-04.png";
+import styles from "./mc.module.scss";
 
 const Modalmc = ({ handleClose }) => {
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="Script-Modal" onClick={(e) => e.stopPropagation()}>
-        <div className="header-wrapper">
-          <div className="h-img-wrap">
-            <img src={WelcomeImg} alt="" className="welcome-img" />
+    <div className={styles["modal-cover"]} onClick={handleClose}>
+      <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
+        <div className={styles["header-wrapper"]}>
+          <div className={styles["h-img-wrap"]}>
+            <img src="/Question-Modal/Welcome-04.png" alt="" className={styles["welcome-img"]} />
           </div>
-          <div className="h-content-div">
-            <p className="h-content-1">Our Daily Uploads</p>
-            <p className="h-content-2">
-              On Scripthome we daily upload scripts for the most popular games.
+          <div className={styles["h-content-div"]}>
+            <p className={styles["h-content-1"]}>Earn with Us</p>
+            <p className={styles["h-content-2"]}>
+              Earn Money by partnering with us. Join our server to get more
+              details on how you can earn with us.
             </p>
           </div>
-          <div className="dot-wrapper">
-            <div className="dot-div"></div>
-            <div className="dot-div"></div>
-            <div className="dot-div"></div>
-            <div className="dot-div dot-div-active"></div>
+          <div className={styles["dot-wrapper"]}>
+            <div className={styles["dot-div"]}></div>
+            <div className={styles["dot-div"]}></div>
+            <div className={styles["dot-div"]}></div>
+            <div className={styles["dot-div"] + " " + styles["dot-div-active"]}></div>
+            <div className={styles["dot-div"]}></div>
           </div>
         </div>
-        <div className="bottom-button">
-          <button className="next-button" onClick={handleClose}>
-            Complete Tour
-          </button>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["cancel-button"]}>Skip</button>
+          <button className={styles["next-button"]}>Earn Now</button>
         </div>
       </div>
     </div>

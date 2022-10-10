@@ -13,7 +13,7 @@ const AdminPage = () => {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  if (!session) {
+  if (session) {
     return {
       props: {},
       redirect: {

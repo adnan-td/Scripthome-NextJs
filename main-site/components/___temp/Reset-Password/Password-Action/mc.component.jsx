@@ -1,42 +1,39 @@
 import "./mc.module.scss";
-import LockImg from "../../../assets/Edit-Profile-Modal/lock-icon.svg";
-import EyeShow from "../../../assets/Modal/sign-up/eye.svg";
-import CloseIcon from "../../../assets/Modal/sign-up/x-close.svg";
 
 const Modalmc = ({ handleClose }) => {
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="sign-up-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close-div" onClick={handleClose}>
-          <img src={CloseIcon} alt="" className="close-icon" />
+    <div className={styles["modal-cover"]} onClick={handleClose}>
+      <div className={styles["sign-up-modal"]} onClick={(e) => e.stopPropagation()}>
+        <button className={styles["close-div"]} onClick={handleClose}>
+          <img src="/Modal/sign-up/x-close.svg" alt="" className={styles["close-icon"]} />
         </button>
-        <div className="top-content">
-          <img src={LockImg} alt="mail-icon" />
-          <div className="header-content">
+        <div className={styles["top-content"]}>
+          <img src="/Edit-Profile-Modal/lock-icon.svg" alt="mail-icon" />
+          <div className={styles["header-content"]}>
             <p>Confirm Password Change</p>
             <span>Enter a new password for your scripthome account.</span>
           </div>
 
-          <form className="password-input input-field">
+          <form className={styles["password-input" + " " + styles["input-field"]]}>
             <label htmlFor="">New Password</label>
-            <div className="password-div">
+            <div className={styles["password-div"]}>
               <input type="password" />
-              <img src={EyeShow} alt="show icon" />
+              <img src="/Modal/sign-up/eye.svg" alt="show icon" />
             </div>
           </form>
-          <form className="password-input input-field">
+          <form className={styles["password-input" + " " + styles["input-field"]]}>
             <label htmlFor="">Confirm Password</label>
-            <div className="password-div">
+            <div className={styles["password-div"]}>
               <input type="password" />
-              <img src={EyeShow} alt="show icon" />
+              <img src="/Modal/sign-up/eye.svg" alt="show icon" />
             </div>
           </form>
         </div>
-        <div className="bottom-button">
-          <button className="cancel-button" onClick={handleClose}>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["cancel-button"]} onClick={handleClose}>
             Cancel
           </button>
-          <button className="next-button">Confirm</button>
+          <button className={styles["next-button"]}>Confirm</button>
         </div>
       </div>
     </div>

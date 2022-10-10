@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import ArrowButtons from "../../components/arrowbuttons/arrowbuttons.component";
 
+import stylesa from "../../app.module.scss";
+import stylesb from "../../bootstrap.module.scss";
+
+const styles = (classname) => {
+  if (stylesa[classname]) return stylesa[classname];
+  if (stylesb[classname]) return stylesb[classname];
+};
+
 const reports = [{}, {}];
 export default function Reports() {
   const [current, Setcurrent] = useState(0);
@@ -27,13 +35,13 @@ export default function Reports() {
   // }, [current, reports]);
 
   return (
-    <div className="main2">
-      <div className="main-header">
+    <div className={styles("main2")}>
+      <div className={styles("main-header")}>
         <div>
           <h3>Reports</h3>
           <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
+            <ol className={styles("breadcrumb")}>
+              <li className={styles("breadcrumb-item")}>
                 <Link href="/admin/dashboard">
                   <a
                     style={{
@@ -46,33 +54,37 @@ export default function Reports() {
                   </a>
                 </Link>
               </li>
-              <li className="breadcrumb-item" aria-current="page" style={{ color: "#8c8888" }}>
+              <li
+                className={styles("breadcrumb-item")}
+                aria-current="page"
+                style={{ color: "#8c8888" }}
+              >
                 Reports
               </li>
             </ol>
           </nav>
         </div>
-        {/* <div className="edit-users">
+        {/* <div className={styles("edit-users")}>
           <a href=" ">
-            Newest <i className="fa-solid fa-caret-right"></i>
+            Newest <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
           </a>
         </div>
-        <div className="dropdown edit-users">
-          <button className="dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-            <span>Newest</span> <i className="fa-solid fa-caret-right"></i>
+        <div className={styles("dropdown edit-users")}>
+          <button className={styles("dropdown-toggle")} type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Newest</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
           </button>
-          <ul className="dropdown-menu dropdown-menu-shadow" aria-labelledby="dropdownMenuButton4">
+          <ul className={styles("dropdown-menu dropdown-menu-shadow")} aria-labelledby="dropdownMenuButton4">
             <li>
-              <a href=" " className="btn btn-light report-old">
+              <a href=" " className={styles("btn btn-light report-old")}>
                 Oldest
               </a>
             </li>
           </ul>
         </div> */}
       </div>
-      <div className="table-container">
-        <table className="table">
-          <tbody>
+      <div className={styles("table-container")}>
+        <table className={styles("table")}>
+          <tbody style={{ width: "100%" }}>
             <tr>
               <td>Reported Scripts</td>
               <td>Review</td>
@@ -84,7 +96,7 @@ export default function Reports() {
           </tbody>
         </table>
       </div>
-      <div className="foot">
+      <div className={styles("foot")}>
         <p>
           Displaying {current + shortreports.length} Out of {reports.length}
         </p>
@@ -105,17 +117,17 @@ function Tr({ report }) {
     <tr>
       <td>
         <div style={{ minWidth: "180px" }}>
-          <p className="im-1">{rsName}</p>
-          {/* <p className="im-1 date-edit">21 June 2020, 12:42 AM</p> */}
-          <p className="im-1 date-edit">Reported by: {reportedBy}</p>
+          <p className={styles("im-1")}>{rsName}</p>
+          {/* <p className={styles("im-1")} date-edit">21 June 2020, 12:42 AM</p> */}
+          <p className={styles("im-1") + " " + styles("date-edit")}>Reported by: {reportedBy}</p>
         </div>
       </td>
       <td>
-        <p className="reports-review">{review}</p>
+        <p className={styles("reports-review")}>{review}</p>
       </td>
       <td>
         <div style={{ display: "flex" }}>
-          <a href=" " className="resolve-a">
+          <a href=" " className={styles("resolve-a")}>
             {" "}
             Resolve{" "}
           </a>

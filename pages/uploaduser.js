@@ -5,11 +5,11 @@ import AnimatedPage from "../main-site/components/animations/animatedpage";
 import Navigation from "../main-site/components/navigation/navigation.component";
 import Footer from "../main-site/components/footer/footer.component";
 import FI from "../main-site/components/floatingicon/fi.component";
-import ScriptsAll from "../main-site/routes/scripts/scriptsall.component";
 
 import styles from "../styles/mainpage.module.scss";
+import Adduser from "../main-site/routes/uploaduser/adduser.route";
 
-const ScriptsPage = () => {
+const AddUserPage = () => {
   return (
     <div className={styles["mainsite-bg"]}>
       <Head>
@@ -22,7 +22,7 @@ const ScriptsPage = () => {
         <Navigation key={1} />
         <FI />
         <AnimatedPage key={2}>
-          <ScriptsAll />
+          <Adduser />
           <Footer />
         </AnimatedPage>
       </AnimatePresence>
@@ -30,4 +30,4 @@ const ScriptsPage = () => {
   );
 };
 
-export default ScriptsPage;
+export default AddUserPage;
