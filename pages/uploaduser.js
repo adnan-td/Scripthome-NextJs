@@ -22,8 +22,10 @@ const AddUserPage = () => {
         <Navigation key={1} />
         <FI />
         <AnimatedPage key={2}>
-          <Adduser />
-          <Footer />
+          <div className={styles["place-center-t"]}>
+            <Adduser />
+            <Footer />
+          </div>
         </AnimatedPage>
       </AnimatePresence>
     </div>

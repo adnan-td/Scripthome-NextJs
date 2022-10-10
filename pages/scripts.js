@@ -22,8 +22,10 @@ const ScriptsPage = () => {
         <Navigation key={1} />
         <FI />
         <AnimatedPage key={2}>
-          <ScriptsAll />
-          <Footer />
+          <div className={styles["place-center-t"]}>
+            <ScriptsAll />
+            <Footer />
+          </div>
         </AnimatedPage>
       </AnimatePresence>
     </div>

@@ -1,4 +1,20 @@
 import styles from "./mc.module.scss";
+import { useState } from "react";
+
+export default function GetScriptModal({ className, children }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <button onClick={handleShow} className={className}>
+        {children}
+      </button>
+      {show ? <Modalmc handleClose={handleClose} /> : ""}
+    </>
+  );
+}
 
 const Modalmc = ({ handleClose }) => {
   return (
@@ -40,13 +56,15 @@ const Modalmc = ({ handleClose }) => {
                 <p className={styles["script-text"]}>while _G.bruh do </p>
                 <p className={styles["script-text"]}> wait()</p>
                 <p className={styles["script-text"]}> .</p>
-                <p className={styles["script-text"]}>for _,v in next, game.Workspace:GetDescendants() do</p>
-                <p className={styles["script-text"]}>if v.Name == "outerOrb" then</p>
+                <p className={styles["script-text"]}>
+                  for _,v in next, game.Workspace:GetDescendants() do
+                </p>
+                <p className={styles["script-text"]}>if v.Name == {`"outerOrb"`} then</p>
                 <p className={styles["script-text"]}>
                   {" "}
                   v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                 </p>
-                <p className={styles["script-text"]}> elseif v.Name == "outerGem" then</p>
+                <p className={styles["script-text"]}> elseif v.Name == {`"outerGem"`} then</p>
                 <p className={styles["script-text"]}>
                   {" "}
                   v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -89,5 +107,3 @@ const Modalmc = ({ handleClose }) => {
     </div>
   );
 };
-
-export default Modalmc;

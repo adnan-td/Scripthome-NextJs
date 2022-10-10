@@ -5,7 +5,7 @@ const AdminPage = () => {
   return (
     <>
       <Head>
-        <title>Skumminity Admin</title>
+        <title>Scripthome Admin</title>
       </Head>
     </>
   );

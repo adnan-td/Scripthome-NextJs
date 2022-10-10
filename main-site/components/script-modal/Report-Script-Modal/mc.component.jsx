@@ -1,4 +1,20 @@
 import styles from "./mc.module.scss";
+import { useState } from "react";
+
+export default function ReportScriptModal({ className, children }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <button onClick={handleShow} className={className}>
+        {children}
+      </button>
+      {show ? <Modalmc handleClose={handleClose} /> : ""}
+    </>
+  );
+}
 
 const Modalmc = ({ handleClose }) => {
   return (
@@ -29,5 +45,3 @@ const Modalmc = ({ handleClose }) => {
     </div>
   );
 };
-
-export default Modalmc;

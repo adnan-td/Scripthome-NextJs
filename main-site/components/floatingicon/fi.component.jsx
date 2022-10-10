@@ -1,9 +1,10 @@
+import FloatingModal from "../Question-Modal/modal.component";
 import styles from "./fi.module.scss";
 
 export default function FI() {
   return (
-    <button className={styles["FI"]}>
+    <FloatingModal className={styles["FI"]}>
       <img src="/message-question-square.svg" alt="loading" />
-    </button>
+    </FloatingModal>
   );
 }

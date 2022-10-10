@@ -58,9 +58,9 @@
         line-height: 70px;
         max-width: 800px;
 
-        @media (max-width: 900px) {
+        @media (max-width: 756px) {
           font-size: 1.25rem;
-          line-height: 1.5rem;
+          line-height: 2rem;
         }
 
         .home__span {
@@ -91,7 +91,7 @@
           left: 102px;
           width: 12rem;
 
-          @media (max-width: 900px) {
+          @media (max-width: 756px) {
             width: 4rem;
             left: 60px;
             bottom: -5px;
@@ -105,7 +105,7 @@
         align-items: center;
         gap: 1.75rem;
 
-        @media (max-width: 900px) {
+        @media (max-width: 600px) {
           flex-direction: column;
           width: 100%;
         }
@@ -126,7 +126,7 @@
           display: flex;
           gap: 0.5rem;
 
-          @media (max-width: 900px) {
+          @media (max-width: 600px) {
             width: 100%;
             justify-content: center;
           }
@@ -232,11 +232,23 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+
 
         @media (max-width: 900px) {
-          flex-direction: column;
-          gap: 2rem;
           padding: 4rem 2rem;
+        }
+  
+        @media (max-width: 500px) {
+          gap: 2rem;
+          justify-content: center;
+          align-items: center;
+        }
+  
+        @media (min-width: 501px) and (max-width: 1100px) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          row-gap: 2rem;
         }
 
         .ht-data-inside {

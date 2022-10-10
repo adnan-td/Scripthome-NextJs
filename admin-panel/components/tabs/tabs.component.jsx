@@ -15,10 +15,10 @@ const Tabs = ({ isopen, screenwidth }) => {
   return (
     <>
       <div className={isopen ? styles("tabs") + " " + styles("show") : styles("tabs")}>
-        <div className={isopen && screenwidth < 500 ? styles("side-bar") : styles("")} id="sb">
+        <div className={isopen && screenwidth < 500 ? styles("side-bar") : styles("")} id="sb" style={{ width: "100%" }}>
           <Link href="/admin/dashboard">
             <a style={{ textDecoration: "none", cursor: "pointer" }}>
-              <h3>Skumminity</h3>
+              <h3>Scripthome</h3>
             </a>
           </Link>
           <ul className={styles("nav") + " " + styles("flex-column")}>
