@@ -27,7 +27,11 @@
     gap: 2rem;
     flex-direction: column;
     position: relative;
-    margin: 0 1rem;
+    margin: 1rem;
+
+    @media (max-width: 700px) {
+      width: 90%;
+    }
 
     .header-wrapper-mod {
       display: flex;
@@ -76,6 +80,9 @@
       margin: 0 !important;
       font-size: 1rem;
       border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
     }
 
     .cancel-button {

@@ -8,7 +8,7 @@ export default function Dropdown({ selected, setSelected }) {
     <div className={styles["dropdown"]}>
       <div className={styles["dropdown-btn"]} onClick={(e) => setIsActive(!isActive)}>
         {options[selected]}
-        <img src=" " alt="loading" />
+        <img src="/Script/chevron-down.svg" alt="loading" />
       </div>
       {isActive && (
         <div className={styles["dropdown-content"]}>

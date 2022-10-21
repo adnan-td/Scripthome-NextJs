@@ -26,8 +26,12 @@
     gap: 2rem;
     flex-direction: column;
     position: relative;
-    margin: 0 1rem;
     padding-bottom: 1.5rem;
+    margin: 1rem;
+
+    @media (max-width: 700px) {
+      width: 90%;
+    }
 
     .top-content {
       width: 100%;
@@ -60,7 +64,7 @@
         justify-content: center;
         align-items: center;
         gap: 1.5rem;
-        
+
         .scr-content {
           display: flex;
           flex-direction: column;
@@ -94,6 +98,9 @@
           font-weight: 500;
           color: #fff;
           transition: all ease-in-out 100ms;
+          border: none;
+          cursor: pointer;
+          font-weight: 500;
 
           &:hover {
             background: $main-theme-light;

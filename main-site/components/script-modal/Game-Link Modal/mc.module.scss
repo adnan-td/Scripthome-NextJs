@@ -16,7 +16,7 @@
   .Script-Modal {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     z-index: 12;
-    max-width: 840px;
+    max-width: 512px;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -27,7 +27,11 @@
     gap: 2rem;
     flex-direction: column;
     position: relative;
-    margin: 0 1rem;
+    margin: 1rem;
+
+    @media (max-width: 700px) {
+      width: 90%;
+    }
 
     .close-div {
       position: absolute;
@@ -38,6 +42,9 @@
       right: 1rem;
       margin: 0 !important;
       border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
 
       &:hover {
         background: #eceff3;
@@ -64,40 +71,134 @@
         gap: 1.25rem;
         width: 100%;
 
-        .header-content {
+        .header-content-mod {
           display: flex;
-          flex-direction: row;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           justify-content: center;
           gap: 1rem;
 
-          p {
-            font-size: 1.125rem;
-            font-weight: 500;
-            color: #101828;
+          &__text {
+            display: flex;
+            flex-direction: column;
+            &__title {
+              font-size: 1.125rem;
+              font-weight: 500;
+              line-height: 28px;
+              color: #101828;
+            }
+            &__sub {
+              font-size: 0.875rem;
+              font-weight: 400;
+              line-height: 20px;
+              color: #667085;
+            }
           }
         }
 
-        .youtube-box {
+        .gamediv {
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 0.5rem;
+          gap: 6px;
           width: 100%;
-          aspect-ratio: 5/2;
-          border-radius: 0.75rem;
-          overflow: hidden;
-          position: relative;
 
-          .y-overlay {
-            width: 100%;
+          &__label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #344054;
+            line-height: 20px;
           }
 
-          .y-play {
-            width: 3rem;
-            position: absolute;
+          &__wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+
+            &__content {
+              padding: 10px 14px;
+              border: 1px solid #d0d5dd;
+              border-radius: 8px;
+              width: 100%;
+
+              &__link {
+                color: #101828;
+              }
+            }
+
+            &__button {
+              padding: 10px;
+              display: flex;
+              background-color: $base-white;
+              border: none;
+              border-radius: 0.5rem;
+              cursor: pointer;
+
+              @media (max-width: 600px) {
+                display: none;
+              }
+
+              &:hover {
+                background-color: #f2f4f7;
+              }
+
+              &:active {
+                background-color: #eaecf0;
+              }
+            }
           }
+        }
+      }
+    }
+
+    .bottom-button {
+      display: flex;
+      gap: 0.75rem;
+      width: 100%;
+
+      @media (max-width: 500px) {
+        flex-direction: column-reverse;
+      }
+
+      .anchorlink {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.625rem 1.125rem;
+        margin: 0 !important;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .cancel-button {
+        background: linear-gradient(0deg, $base-white, $base-white),
+          linear-gradient(0deg, #d0d5dd, #d0d5dd);
+        border: 2px solid #a1acbe;
+        color: #344054;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+        &:active,
+        &:focus {
+          background: rgba(0, 0, 0, 0.25);
+          color: #000;
+        }
+      }
+
+      .next-button-mod-game {
+        background: #039855;
+        color: $base-white;
+
+        &:active,
+        &:hover {
+          background: #12b76a;
+          color: $base-white !important;
         }
       }
     }

@@ -11,13 +11,18 @@
     border: none;
     color: $text-light-color;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.23);
+    background: rgba(0, 0, 0, 0.23) !important;
     border-radius: 8px;
     display: flex;
     font-size: 16px;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
+      background: rgba(0, 0, 0, 0.33) !important;
+    }
+
+    &:active {
+      background: rgba(0, 0, 0, 0.53) !important;
     }
   }
 }

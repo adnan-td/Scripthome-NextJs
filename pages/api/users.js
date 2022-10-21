@@ -3,8 +3,7 @@ const bcrypt = require("bcrypt");
 
 export default async function getuser(req, res) {
   if (req.method === "GET") {
-    let allusers = await userqueries.getAllUsers();
-    allusers = allusers.rows;
+    const allusers = await userqueries.getAllUsers();
     res.status(200).send(allusers);
   } else if (req.method === "POST") {
     const { name, email, password, admin, verified, user } = req.body;

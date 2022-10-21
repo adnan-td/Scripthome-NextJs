@@ -38,13 +38,23 @@
       margin: 0 10px;
       color: $text-light-color;
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 0.5rem;
       font-weight: 600;
+
+      svg {
+        fill: #D4D4D5;
+      }
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.23);
         border-radius: 5px;
         color: $base-white;
+
+        svg {
+          fill: $base-white;
+        }
       }
 
       .nav-link-arrow {
@@ -67,6 +77,10 @@
       background-color: rgba(0, 0, 0, 0.23);
       border-radius: 5px;
       color: $base-white;
+
+      svg {
+        fill: $base-white;
+      }
       .nav-link-arrow {
         display: initial;
       }
@@ -311,6 +325,8 @@
     border: 1px solid #f2f4f7;
     box-shadow: 8px 8px 48px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    overflow: hidden;
+
     .nui-header {
       display: flex;
       flex-direction: column;
@@ -361,10 +377,18 @@
       align-items: center;
       padding: 10px 16px;
       gap: 12px;
-
       min-width: 250px;
       height: 40px;
       border-bottom: 1px solid #eaecf0;
+      margin: 0 !important;
+      width: 100%;
+      &:hover {
+        background: #eceff3;
+      }
+
+      &:focus {
+        background: #cfd2d7;
+      }
       p {
         font-family: "Poppins";
         font-style: normal;

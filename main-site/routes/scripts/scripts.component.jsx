@@ -10,7 +10,15 @@ import WatchVideoModal from "../../components/script-modal/Youtube-Modal/mc.comp
 import ReportScriptModal from "../../components/script-modal/Report-Script-Modal/mc.component";
 import GameLinkModal from "../../components/script-modal/Game-Link Modal/mc.component";
 
-const Scripts = () => {
+const Scripts = ({ script, allscripts }) => {
+  function viewsComparison(a, b) {
+    const views1 = a.views;
+    const views2 = b.views;
+    return views1 - views2;
+  }
+  allscripts.sort(viewsComparison);
+  let shortscripts = allscripts.slice(0, 6);
+
   return (
     <div className={styles["scripts-main"]}>
       <Background />
@@ -47,29 +55,32 @@ const Scripts = () => {
             <div className={styles["view_title_div"]}>
               <div className={styles["top_div_part"]}>
                 <div className={styles["user-views"]}>
-                  <img src="/script/icons/eye.svg" alt="loading" /> <span>1024 views</span>
+                  <img src="/script/icons/eye.svg" alt="loading" />{" "}
+                  <span>{script.views} views</span>
                 </div>
                 <div className={styles["user-views"]}>
-                  <img src="/script/icons/calendar.svg" alt="loading" /> <span>22/08/2022</span>
+                  <img src="/script/icons/calendar.svg" alt="loading" /> <span>{script.date}</span>
                 </div>
               </div>
-              <h2>Thief Simulator Script | Auto Rob NPC, Make Money Fast</h2>
+              <h2>{script.title}</h2>
             </div>
             <div className={styles["scripts-left-buttons"]}>
-              <GetScriptModal className={styles["styled-button"]}>
-                <span>Get Script</span>
+              <GetScriptModal className={styles["styled-button"] + " " + styles["button__style"]}>
+                <span className={styles["button__style__span"]}>Get Script</span>
                 <img src="/script/icons/arrow-square-right.svg" alt="Get Script Button" />
               </GetScriptModal>
-              <GameLinkModal className={styles["game-link"]}>
-                <span>Join Game</span>
+              <GameLinkModal className={styles["game-link"] + " " + styles["button__style"]}>
+                <span className={styles["button__style__span"]}>Join Game</span>
                 <img src="/Script/Icons/game-link-icon.svg" alt="Game Link Button" />
               </GameLinkModal>
-              <WatchVideoModal className={styles["watch-video"]}>
-                <span>Watch Video</span>
+              <WatchVideoModal className={styles["watch-video"] + " " + styles["button__style"]}>
+                <span className={styles["button__style__span"]}>Watch Video</span>
                 <img src="/Script/Icons/youtube.svg" alt="Youtube Button" />
               </WatchVideoModal>
-              <ReportScriptModal className={styles["report-script"]}>
-                <span>Report Script</span>
+              <ReportScriptModal
+                className={styles["report-script"] + " " + styles["button__style"]}
+              >
+                <span className={styles["button__style__span"]}>Report Script</span>
                 <img src="/Script/Icons/report-script-flag.svg" alt="Report Script Button" />
               </ReportScriptModal>
             </div>
@@ -83,7 +94,7 @@ const Scripts = () => {
                     className={styles["authorimage1"]}
                   />
                   <div className={styles["authorboxc2"]}>
-                    <h4 className={styles["contentauthor1"]}>Alkeides Prudence</h4>
+                    <h4 className={styles["contentauthor1"]}>{script.madeby}</h4>
                     <p className={styles["lighttext"]}>Script Developer</p>
                   </div>
                 </div>
@@ -97,7 +108,7 @@ const Scripts = () => {
                     className={styles["authorimage2"]}
                   />
                   <div className={styles["authorboxc2"] + " " + styles["authorboxc3"]}>
-                    <h4 className={styles["contentauthor1"]}>Issac Goma</h4>
+                    <h4 className={styles["contentauthor1"]}>{script.user_id}</h4>
                     <p className={styles["lighttext"]}>25+ Scripts Uploaded</p>
                   </div>
                 </div>
@@ -106,11 +117,7 @@ const Scripts = () => {
           </div>
           <Tabs>
             <Panel title="Description">
-              <p className={styles["panel1"]}>
-                This new script for Thief Simulator allows you to make quite a good amount of money
-                in no time. The script will basically loop teleport you to robbable players and
-                automatically steal their money. Pretty insane, make sure to check it out!
-              </p>
+              <p className={styles["panel1"]}>{script.description}</p>
             </Panel>
             <Panel title="Features">
               <div className={styles["featured-tags"]}>
@@ -181,12 +188,9 @@ const Scripts = () => {
       <div className={styles["scripts-right"]}>
         <h2>Most Popular Scripts</h2>
         <div className={styles["script-cards"]}>
-          <ScriptPreview />
-          <ScriptPreview />
-          <ScriptPreview />
-          <ScriptPreview />
-          <ScriptPreview />
-          <ScriptPreview />
+          {shortscripts.map((script, key) => {
+            return <ScriptPreview script={script} key={key} />;
+          })}
         </div>
       </div>
     </div>

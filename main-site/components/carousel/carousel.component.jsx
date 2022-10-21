@@ -8,9 +8,9 @@ export default function Carousel2() {
   const [isRight, SetisRight] = useState(true);
   const [didClick, setClick] = useState({ 1: false, 2: false });
   const animationsRight = {
-    initial: (isRight) => ({ x: isRight ? -700 : 700, opacity: 0 }),
+    initial: (isRight) => ({ x: isRight ? 2000 : -2000, opacity: 0.6 }),
     animate: { x: 0, opacity: 1 },
-    exit: (isRight) => ({ x: !isRight ? -700 : 700, opacity: 0 }),
+    exit: (isRight) => ({ x: !isRight ? 2000 : -2000, opacity: 0.6 }),
   };
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Carousel2() {
             animate="animate"
             initial="initial"
             exit="exit"
-            transition={{ type: "spring", duration: 0.3 }}
+            transition={{ type: "line", duration: 0.3 }}
             key="1"
           >
             <CarouselCard />
@@ -64,7 +64,7 @@ export default function Carousel2() {
             animate="animate"
             initial="initial"
             exit="exit"
-            transition={{ type: "spring", duration: 0.3 }}
+            transition={{ type: "line", duration: 0.3 }}
             key="2"
           >
             <CarouselCard />
@@ -79,7 +79,7 @@ export default function Carousel2() {
             animate="animate"
             initial="initial"
             exit="exit"
-            transition={{ type: "spring", duration: 0.3 }}
+            transition={{ type: "line", duration: 0.3 }}
             key="3"
           >
             <CarouselCard />

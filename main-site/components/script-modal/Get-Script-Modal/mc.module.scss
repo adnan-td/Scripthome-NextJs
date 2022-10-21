@@ -27,7 +27,11 @@
     gap: 2rem;
     flex-direction: column;
     position: relative;
-    margin: 0 1rem;
+    margin: 1rem;
+
+    @media (max-width: 700px) {
+      width: 90%;
+    }
 
     .close-div {
       position: absolute;
@@ -38,6 +42,9 @@
       right: 1rem;
       margin: 0 !important;
       border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
 
       &:hover {
         background: #eceff3;
@@ -127,12 +134,19 @@
       gap: 0.75rem;
       width: 100%;
 
+      @media (max-width: 500px) {
+        flex-direction: column-reverse;
+      }
+
       button {
         width: 100%;
         padding: 0.625rem 1.125rem;
         margin: 0 !important;
         font-size: 1rem;
         border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
       }
 
       .cancel-button {
