@@ -18,17 +18,6 @@ const Modalmc = ({ handleClose, next }) => {
             <span>Please check your mail for the login link.</span>
           </div>
         </div>
-        <div className={styles["bottom-button"]}>
-          <a
-            href="https://mail.google.com/mail/"
-            target="_blank"
-            rel="noreferrer"
-            className={styles["next-button"]}
-            onClick={handleNext}
-          >
-            Open in Mail
-          </a>
-        </div>
       </div>
     </div>
   );

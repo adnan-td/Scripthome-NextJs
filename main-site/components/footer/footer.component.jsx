@@ -84,7 +84,7 @@ const Footer = () => {
       <div className={styles["footer__bottom"]}>
         <div className={styles["footer__bottom__wrapper"]}>
           <p className={styles["footer__bottom__wrapper__text"]}>
-            &copy; Hacoscripts. All rights reserved.
+            &copy; Scripthome. All rights reserved.
           </p>
         </div>
       </div>

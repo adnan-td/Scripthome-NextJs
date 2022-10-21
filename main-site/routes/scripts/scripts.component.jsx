@@ -174,7 +174,7 @@ const Scripts = ({ script, allscripts }) => {
               <hr
                 style={{
                   margin: "2rem 0",
-                  border: "1px solid rgb(65 198 70 / 20%)",
+                  border: "1px solid rgba(105, 65, 198, 0.3)",
                 }}
               />
               <div className={styles["featured-tags"]}>
@@ -251,7 +251,7 @@ const SpComment = () => {
       <hr
         style={{
           margin: "5px 0",
-          border: "1px solid rgb(65 198 70 / 20%)",
+          border: "1px solid rgba(105, 65, 198, 0.3)",
           width: "100%",
         }}
       />

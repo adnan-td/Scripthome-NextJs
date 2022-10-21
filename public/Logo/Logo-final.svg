@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;}
-</style>
-<g>
-	<polygon class="st0" points="460.4,72.6 384.2,72.6 310.7,200.1 301.6,215.8 350.3,264.2 380.7,211.5 451.8,88.3 451.4,88.3 	"/>
-	<polygon class="st0" points="198.4,284.2 149.7,235.8 119.3,288.5 48.2,411.7 48.6,411.7 39.6,427.4 115.8,427.4 189.3,299.9 	"/>
-	<path class="st0" d="M288.2,239.8l-18.9-18.6c-13-12.8-15.7-32.7-6.6-48.5l57.3-100.1h-76.2l-46.7,80.8
-		c-20.1,34.7-14.1,78.6,14.5,106.7l0,0l18.9,18.6c13,12.8,15.7,32.7,6.6,48.5l-57.3,100.1h76.2l46.7-80.8
-		C322.8,311.8,316.8,267.9,288.2,239.8L288.2,239.8z"/>
-</g>
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1210 1560" width="1210" height="1560">
+	<title>Flame-ai</title>
+	<defs>
+		<linearGradient id="g1" x1="630.7" y1="1299" x2="630.7" y2="252.5" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#f7982b"/>
+			<stop offset="1" stop-color="#f0562b"/>
+		</linearGradient>
+		<linearGradient id="g2" x1="423.7" y1="825.6" x2="857.6" y2="869.9" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#f0562b"/>
+			<stop offset="1" stop-color="#f7982b"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: url(#g2) } 
+	</style>
+	<g id="Layer 2">
+	</g>
+	<g id="Layer 1">
+		<g id="&lt;Group&gt;">
+			<path id="&lt;Compound Path&gt;" fill-rule="evenodd" class="s0" d="m849.4 1223.3c-144.4 117.6-356.8 95.9-474.4-48.5-56.4-69.2-107.9-178.7-78.8-326.2 24.6-124.3 94-180.5 75.9-247.9 76.4 67.2 68.2 147.7 51.4 214.3 84.2-86.5 31.4-151.4 54.6-262 22.6-108.1 86.1-232 259.6-300.5-124.6 171.6-23.8 378.1 12.3 437.1 2.2-55.1 32.4-176.9 115.7-215.7-57.8 187.1 77.2 262.4 101.5 422.2 23.4 118.4-17.7 245.6-117.8 327.2zm-74.7-219.2c8.4-82-51.3-155.3-133.3-163.6-82-8.4-155.3 51.3-163.6 133.3-8.4 82 51.3 155.2 133.3 163.6 82 8.4 155.2-51.3 163.6-133.3z"/>
+			<path id="&lt;Path&gt;" class="s1" d="m846.2 1091.8c-12.9 125.9-125.4 217.6-251.4 204.7-125.9-12.8-217.6-125.4-204.7-251.3 12.8-125.9 125.4-217.6 251.3-204.7-82-8.4-155.3 51.3-163.6 133.3-8.4 82 51.3 155.2 133.3 163.6 82 8.4 155.2-51.3 163.6-133.3 8.4-82-51.3-155.3-133.3-163.6 125.9 12.8 217.6 125.3 204.8 251.3z"/>
+		</g>
+	</g>
 </svg>

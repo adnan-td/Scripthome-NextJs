@@ -8,7 +8,7 @@ export default function PrivacyPage() {
           <div className={style["container"]}>
             <div>
               <h1 className={style["head-1"] + " " + style["font-family"]}>
-                Hacoscripts
+                Scripthome
               </h1>
               <p>Terms {"&"} Conditions</p>
             </div>
@@ -196,22 +196,22 @@ export default function PrivacyPage() {
                   </li>
                   <li className={style["font-family"]}>
                     Company: when this policy mentions “Company,” “we,” “us,” or
-                    “our,” it refers to Hacoscripts, that is responsible for
+                    “our,” it refers to Scripthome, that is responsible for
                     your information under this Privacy Policy.
                   </li>
                   <li className={style["font-family"]}>
-                    Country: where Hacoscripts or the owners/founders of
-                    Hacoscripts are based, in this case is USA
+                    Country: where Scripthome or the owners/founders of
+                    Scripthome are based, in this case is USA
                   </li>
                   <li className={style["font-family"]}>
                     Customer:&nbsp;refers to the company, organization or person
-                    that signs up to use the Hacoscripts Service to manage the
+                    that signs up to use the Scripthome Service to manage the
                     relationships with your consumers or service users.
                   </li>
                   <li className={style["font-family"]}>
                     Device:&nbsp;any internet connected device such as a phone,
                     tablet, computer or any other device that can be used to
-                    visit Hacoscripts and use the services.
+                    visit Scripthome and use the services.
                   </li>
                   <li className={style["font-family"]}>
                     IP address: Every device connected to the Internet is
@@ -222,7 +222,7 @@ export default function PrivacyPage() {
                   </li>
                   <li className={style["font-family"]}>
                     Personnel:&nbsp;refers to those individuals who are employed
-                    by Hacoscripts or are under contract to perform a service on
+                    by Scripthome or are under contract to perform a service on
                     behalf of one of the parties.
                   </li>
                   <li className={style["font-family"]}>
@@ -232,7 +232,7 @@ export default function PrivacyPage() {
                     identifiability of a natural person.
                   </li>
                   <li className={style["font-family"]}>
-                    Service: refers to the service provided by Hacoscripts as
+                    Service: refers to the service provided by Scripthome as
                     described in the relative terms (if available) and on this
                     platform.
                   </li>
@@ -243,11 +243,11 @@ export default function PrivacyPage() {
                     may interest you.
                   </li>
                   <li className={style["font-family"]}>
-                    Website: Hacoscripts’s site, which can be accessed via this
-                    URL: https://hacoscripts.com/
+                    Website: Scripthome’s site, which can be accessed via this
+                    URL: https://scripthome.org/
                   </li>
                   <li className={style["font-family"]}>
-                    You: a person or entity that is registered with Hacoscripts
+                    You: a person or entity that is registered with Scripthome
                     to use the Services.
                   </li>
                 </ul>
@@ -1196,7 +1196,7 @@ export default function PrivacyPage() {
                   sets forth the name, address, and contact information of the
                   party giving it, the facts giving rise to the dispute, and the
                   relief requested. You must send any Notice of Dispute via
-                  email to: [contact@hacoscripts.com] Haoscripts will send any
+                  email to: [contact@scripthome.org] Haoscripts will send any
                   Notice of Dispute to you by mail to your address if we have
                   it, or otherwise to your email address. You and Haoscripts
                   will attempt to resolve any dispute through informal
@@ -1515,7 +1515,7 @@ export default function PrivacyPage() {
                 </p>
                 <ul className={style["ul-mod"] + " " + style["text-muted"]}>
                   <li className={style["font-family"]}>
-                    Via Email: contact@hacoscripts.com
+                    Via Email: contact@scripthome.org
                   </li>
                 </ul>
               </div>

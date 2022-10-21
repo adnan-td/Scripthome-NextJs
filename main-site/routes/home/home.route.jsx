@@ -50,7 +50,7 @@ export default function Home() {
             </span>{" "}
             with scripts from
             <span className={styles["home__span"]}>
-              Hacoscripts
+              Scripthome
               <img
                 alt="loading"
                 src="/Homepage/pattern/hero-section-underline.svg"
@@ -125,7 +125,7 @@ export default function Home() {
           <div className={styles["hf-top-content"]}>
             <h3 className={styles["hf-header"]}>Why to choose us?</h3>
             <p className={styles["hf-hp"]}>
-              Hacoscripts{`'`}s mission is to provide scripts and help the
+              Scripthome{`'`}s mission is to provide scripts and help the
               players in making their roblox game journey pleasing to play
               through.
             </p>
@@ -142,9 +142,9 @@ export default function Home() {
                   Premium Roblox Scripts
                 </h4>
                 <p className={styles["hf-subp"]}>
-                  Hacoscripts provides a huge collection of scripts for Roblox
+                  Scripthome provides a huge collection of scripts for Roblox
                   players. You can find everything from premium to free scripts
-                  on Hacoscripts.
+                  on Scripthome.
                 </p>
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function Home() {
               <div className={styles["hf-text"]}>
                 <h4 className={styles["hf-subheader"]}>Our Community</h4>
                 <p className={styles["hf-subp"]}>
-                  Join the Hacoscripts community to get access to exclusive perks
+                  Join the Scripthome community to get access to exclusive perks
                   like getting notified whenever a new scripts uploads.
                 </p>
               </div>

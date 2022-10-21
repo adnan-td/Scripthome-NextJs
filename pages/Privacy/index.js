@@ -8,7 +8,7 @@ export default function PrivacyPage() {
           <div className={style["container"]}>
             <div>
               <h1 className={style["head-1"] + " " + style["font-family"]}>
-                Hacoscripts
+                Scripthome
               </h1>
               <p>Privacy Policy</p>
             </div>
@@ -63,9 +63,9 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Hacoscripts (“we,” “our,” or “us”) is committed to protecting
+                  Scripthome (“we,” “our,” or “us”) is committed to protecting
                   your privacy. This Privacy Policy explains how your personal
-                  information is collected, used, and disclosed by Hacoscripts.
+                  information is collected, used, and disclosed by Scripthome.
                 </p>
                 <p
                   className={
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
                 >
                   This Privacy Policy applies to our website, and its associated
                   subdomains (collectively, our “Service”) alongside our
-                  application, Hacoscripts. By accessing or using our Service,
+                  application, Scripthome. By accessing or using our Service,
                   you signify that you have read, understood, and agree to our
                   collection, storage, use, and disclosure of your personal
                   information as described in this Privacy Policy and our Terms
@@ -118,22 +118,22 @@ export default function PrivacyPage() {
                   </li>
                   <li className={style["font-family"]}>
                     Company: when this policy mentions “Company,” “we,” “us,” or
-                    “our,” it refers to Hacoscripts, that is responsible for
+                    “our,” it refers to Scripthome, that is responsible for
                     your information under this Privacy Policy.
                   </li>
                   <li className={style["font-family"]}>
-                    Country: where Hacoscripts or the owners/founders of
-                    Hacoscripts are based, in this case is USA
+                    Country: where Scripthome or the owners/founders of
+                    Scripthome are based, in this case is USA
                   </li>
                   <li className={style["font-family"]}>
                     Customer:&nbsp;refers to the company, organization or person
-                    that signs up to use the Hacoscripts Service to manage the
+                    that signs up to use the Scripthome Service to manage the
                     relationships with your consumers or service users.
                   </li>
                   <li className={style["font-family"]}>
                     Device:&nbsp;any internet connected device such as a phone,
                     tablet, computer or any other device that can be used to
-                    visit Hacoscripts and use the services.
+                    visit Scripthome and use the services.
                   </li>
                   <li className={style["font-family"]}>
                     IP address: Every device connected to the Internet is
@@ -144,7 +144,7 @@ export default function PrivacyPage() {
                   </li>
                   <li className={style["font-family"]}>
                     Personnel:&nbsp;refers to those individuals who are employed
-                    by Hacoscripts or are under contract to perform a service on
+                    by Scripthome or are under contract to perform a service on
                     behalf of one of the parties.
                   </li>
                   <li className={style["font-family"]}>
@@ -154,7 +154,7 @@ export default function PrivacyPage() {
                     identifiability of a natural person.
                   </li>
                   <li className={style["font-family"]}>
-                    Service: refers to the service provided by Hacoscripts as
+                    Service: refers to the service provided by Scripthome as
                     described in the relative terms (if available) and on this
                     platform.
                   </li>
@@ -165,11 +165,11 @@ export default function PrivacyPage() {
                     may interest you.
                   </li>
                   <li className={style["font-family"]}>
-                    Website: Hacoscripts{"'"}s site, which can be accessed via this
-                    URL: https://hacoscripts.com/
+                    Website: Scripthome{"'"}s site, which can be accessed via this
+                    URL: https://scripthome.org/
                   </li>
                   <li className={style["font-family"]}>
-                    You: a person or entity that is registered with Hacoscripts
+                    You: a person or entity that is registered with Scripthome
                     to use the Services.
                   </li>
                 </ul>
@@ -241,7 +241,7 @@ export default function PrivacyPage() {
                     style["head-1"]
                   }
                 >
-                  When does Hacoscripts use end user information from third
+                  When does Scripthome use end user information from third
                   parties?
                 </h1>
                 <p
@@ -253,8 +253,8 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Hacoscripts will collect End User Data necessary to provide
-                  the Hacoscripts services to our customers. End users may
+                  Scripthome will collect End User Data necessary to provide
+                  the Scripthome services to our customers. End users may
                   voluntarily provide us with information they have made
                   available on social media websites. If you provide us with any
                   such information, we may collect publicly available
@@ -273,7 +273,7 @@ export default function PrivacyPage() {
                     style["head-1"]
                   }
                 >
-                  When does Hacoscripts use customer information from third
+                  When does Scripthome use customer information from third
                   parties?
                 </h1>
                 <p
@@ -287,9 +287,9 @@ export default function PrivacyPage() {
                 >
                   We receive some information from the third parties when you
                   contact us. For example, when you submit your email address to
-                  us to show interest in becoming a Hacoscripts customer, we
+                  us to show interest in becoming a Scripthome customer, we
                   receive information from a third party that provides automated
-                  fraud detection services to Hacoscripts. We also occasionally
+                  fraud detection services to Scripthome. We also occasionally
                   collect information that is made publicly available on social
                   media websites. You can control how much of your information
                   social media websites make public by visiting these websites
@@ -407,7 +407,7 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Hacoscripts will collect personal information that you submit
+                  Scripthome will collect personal information that you submit
                   to us. We may also receive personal information about you from
                   third parties as described above.
                 </p>
@@ -526,7 +526,7 @@ export default function PrivacyPage() {
                   }
                 >
                   We keep your information only so long as we need it to provide
-                  Hacoscripts to you and fulfill the purposes described in this
+                  Scripthome to you and fulfill the purposes described in this
                   policy. This is also the case for anyone that we share your
                   information with and who carries out services on our behalf.
                   When we no longer need to use your information and there is no
@@ -567,7 +567,7 @@ export default function PrivacyPage() {
                   your private information (credit cards, social security
                   numbers, financials, etc.) is never kept on file. We cannot,
                   however, ensure or warrant the absolute security of any
-                  information you transmit to Hacoscripts or guarantee that your
+                  information you transmit to Scripthome or guarantee that your
                   information on the Service may not be accessed, disclosed,
                   altered, or destroyed by a breach of any of our physical,
                   technical, or managerial safeguards.
@@ -593,7 +593,7 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Hacoscripts is incorporated in USA. Information collected via
+                  Scripthome is incorporated in USA. Information collected via
                   our website, through direct interactions with you, or from use
                   of our help services may be transferred from time to time to
                   our offices or personnel, or to third parties, located
@@ -614,7 +614,7 @@ export default function PrivacyPage() {
                     style["head-1"]
                   }
                 >
-                  Is the information collected through the Hacoscripts Service
+                  Is the information collected through the Scripthome Service
                   secure?
                 </h1>
                 <p
@@ -662,8 +662,8 @@ export default function PrivacyPage() {
                   }
                 >
                   The rights you have to request updates or corrections to the
-                  information Hacoscripts collects depend on your relationship
-                  with Hacoscripts. Personnel may update or correct their
+                  information Scripthome collects depend on your relationship
+                  with Scripthome. Personnel may update or correct their
                   information as detailed in our internal company employment
                   policies.
                 </p>
@@ -752,9 +752,9 @@ export default function PrivacyPage() {
                 >
                   We reserve the right to transfer information to a third party
                   in the event of a sale, merger or other transfer of all or
-                  substantially all of the assets of Hacoscripts or any of its
+                  substantially all of the assets of Scripthome or any of its
                   Corporate Affiliates (as defined herein), or that portion of
-                  Hacoscripts or any of its Corporate Affiliates to which the
+                  Scripthome or any of its Corporate Affiliates to which the
                   Service relates, or in the event that we discontinue our
                   business or file a petition or have filed against us a
                   petition in bankruptcy, reorganization or similar proceeding,
@@ -786,7 +786,7 @@ export default function PrivacyPage() {
                   about you to our Corporate Affiliates. For purposes of this
                   Privacy Policy, {"'"}Corporate Affiliate{"'"} means any person
                   or entity which directly or indirectly controls, is controlled
-                  by or is under common control with Hacoscripts, whether by
+                  by or is under common control with Scripthome, whether by
                   ownership or otherwise. Any information relating to you that
                   we provide to our Corporate Affiliates will be treated by
                   those Corporate Affiliates in accordance with the terms of
@@ -844,7 +844,7 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  By using Hacoscripts or contacting us directly, you signify
+                  By using Scripthome or contacting us directly, you signify
                   your acceptance of this Privacy Policy. If you do not agree to
                   this Privacy Policy, you should not engage with our website,
                   or use our services. Continued use of the website, direct
@@ -877,7 +877,7 @@ export default function PrivacyPage() {
                   We{"'"}ve updated our&nbsp;Privacy Policy&nbsp;to provide you
                   with complete transparency into what is being set when you
                   visit our site and how it{"'"}s being used. By using our
-                  Hacoscripts, registering an account, or making a purchase, you
+                  Scripthome, registering an account, or making a purchase, you
                   hereby consent to our Privacy Policy and agree to its terms.
                 </p>
                 <br />
@@ -903,7 +903,7 @@ export default function PrivacyPage() {
                 >
                   This Privacy Policy applies only to the Services. The Services
                   may contain links to other websites not operated or controlled
-                  by Hacoscripts. We are not responsible for the content,
+                  by Scripthome. We are not responsible for the content,
                   accuracy or opinions expressed in such websites, and such
                   websites are not investigated, monitored or checked for
                   accuracy or completeness by us. Please remember that when you
@@ -936,7 +936,7 @@ export default function PrivacyPage() {
                   }
                 >
                   This website may contain third party advertisements and links
-                  to third party sites. Hacoscripts does not make any
+                  to third party sites. Scripthome does not make any
                   representation as to the accuracy or suitability of any of the
                   information contained in those advertisements or sites and
                   does not accept any responsibility or liability for the
@@ -952,7 +952,7 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Advertising keeps Hacoscripts and many of the websites and
+                  Advertising keeps Scripthome and many of the websites and
                   services you use free of charge. We work hard to make sure
                   that ads are safe, unobtrusive, and as relevant as possible.
                 </p>
@@ -967,8 +967,8 @@ export default function PrivacyPage() {
                 >
                   Third party advertisements and links to other sites where
                   goods or services are advertised are not endorsements or
-                  recommendations by Hacoscripts of the third party sites, goods
-                  or services. Hacoscripts takes no responsibility for the
+                  recommendations by Scripthome of the third party sites, goods
+                  or services. Scripthome takes no responsibility for the
                   content of any of the ads, promises made, or the
                   quality/reliability of the products or services offered in all
                   advertisements.
@@ -1025,7 +1025,7 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Hacoscripts uses {"'"}Cookies{"'"} to identify the areas of
+                  Scripthome uses {"'"}Cookies{"'"} to identify the areas of
                   our website that you have visited. A Cookie is a small piece
                   of data stored on your computer or mobile device by your web
                   browser. We use Cookies to enhance the performance and
@@ -1197,11 +1197,11 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  You acknowledge and agree that Hacoscripts shall not be
+                  You acknowledge and agree that Scripthome shall not be
                   responsible for any Third-Party Services, including their
                   accuracy, completeness, timeliness, validity, copyright
                   compliance, legality, decency, quality or any other aspect
-                  thereof. Hacoscripts does not assume and shall not have any
+                  thereof. Scripthome does not assume and shall not have any
                   liability or responsibility to you or any other person or
                   entity for any Third-Party Services.
                 </p>
@@ -1454,7 +1454,7 @@ export default function PrivacyPage() {
                   process. It also raises the stakes for compliance by
                   increasing enforcement and imposing greater fines for breach.
                   Beyond these facts it{"'"}s simply the right thing to do. At
-                  Hacoscripts we strongly believe that your data privacy is very
+                  Scripthome we strongly believe that your data privacy is very
                   important and we already have solid security and privacy
                   practices in place that go beyond the requirements of this new
                   regulation.
@@ -1482,7 +1482,7 @@ export default function PrivacyPage() {
                   }
                 >
                   We are committed to helping our customers meet the&nbsp;data
-                  subject rights requirements of GDPR. Hacoscripts processes or
+                  subject rights requirements of GDPR. Scripthome processes or
                   stores all personal data in fully vetted, DPA compliant
                   vendors. We do store all conversation and personal data for up
                   to 6 years unless your account is deleted. In which case, we
@@ -1728,7 +1728,7 @@ export default function PrivacyPage() {
                 </p>
                 <ul className={style["ul-mod"] + " " + style["text-muted"]}>
                   <li className={style["font-family"]}>
-                    Via Email: contact@hacoscripts.com
+                    Via Email: contact@scripthome.org
                   </li>
                 </ul>
               </div>

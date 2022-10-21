@@ -142,16 +142,16 @@
 
         .styled-button {
           border: none;
-          background: $main-theme-gradient;
+          background: linear-gradient(26.57deg, #53389e 8.33%, #6941c6 91.67%);
 
           &:hover {
-            box-shadow: 0px 4px 24px 0px $main-hover-card;
+            box-shadow: 0px 4px 24px 0px #9747ff66;
           }
           &:focus {
-            box-shadow: 0px 4px 24px 0px $main-hover-card;
+            box-shadow: 0px 4px 24px 0px #9747ff66;
           }
           &:active {
-            box-shadow: 0px 4px 24px 0px $main-hover-card;
+            box-shadow: 0px 4px 24px 0px #9747ff66;
           }
         }
 
@@ -510,7 +510,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  background: rgb(65 198 118 / 30%);
+  background: rgba(105, 65, 198, 0.3);
   border-radius: 12px;
   padding: 10px 3%;
 
@@ -597,16 +597,16 @@
 
   .styled-button {
     border: none;
-    background: $main-theme-gradient;
+    background: linear-gradient(26.57deg, #53389e 8.33%, #6941c6 91.67%);
 
     &:hover {
-      box-shadow: 0px 4px 24px 0px $main-hover-card;
+      box-shadow: 0px 4px 24px 0px #9747ff66;
     }
     &:focus {
-      box-shadow: 0px 4px 24px 0px $main-hover-card;
+      box-shadow: 0px 4px 24px 0px #9747ff66;
     }
     &:active {
-      box-shadow: 0px 4px 24px 0px $main-hover-card;
+      box-shadow: 0px 4px 24px 0px #9747ff66;
     }
   }
 }
@@ -790,7 +790,7 @@
     font-weight: 600;
 
     &:hover {
-      background-color: $main-hover-card;
+      background-color: #421b8b;
     }
 
     &__active,
