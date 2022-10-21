@@ -8,10 +8,8 @@ export default async function getuser(req, res) {
     if (!email && !password) {
       res.status(406).send({ message: "Please fill all the required fields" });
     } else {
-      let user = await userqueries.getUserbyEmail(email);
-      if (user.rows[0]) {
-        user = user.rows[0];
-        console.log(password, user.password);
+      const user = await userqueries.getUserbyEmail(email);
+      if (user) {
         try {
           if (await bcrypt.compare(password, user.password)) {
             res.status(200).send(user);

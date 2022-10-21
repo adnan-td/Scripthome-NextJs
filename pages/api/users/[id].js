@@ -4,13 +4,11 @@ const bcrypt = require("bcrypt");
 export default async function getoneuser(req, res) {
   const id = req.query.id;
   let exists = await userqueries.existsUserWithId(id);
-  exists = exists.rows[0].exists;
   if (exists) {
     if (req.method === "PUT") {
       const { name, email, password, admin, verified, user } = req.body;
       const role = whatRole(admin, verified, user);
-      let userbyid = await userqueries.getUserbyID(id);
-      userbyid = userbyid.rows[0];
+      const userbyid = await userqueries.getUserbyID(id);
       const doesPasswordMatch = await bcrypt.compare(password, userbyid.password);
       if (name && email && doesPasswordMatch) {
         await userqueries.updateUser(name, password, role, id);
@@ -29,15 +27,13 @@ export default async function getoneuser(req, res) {
       //   res.status(404).send("The User does not exist");
       // }
     } else if (req.method === "GET") {
-      let user = await userqueries.getUserbyID(id);
-      user = user.rows[0];
+      const user = await userqueries.getUserbyID(id);
       res.status(200).send(user);
     } else if (req.method === "POST") {
-      let user = await userqueries.getUserbyEmail(id);
-      user = user.rows[0];
+      const user = await userqueries.getUserbyEmail(id);
       res.status(200).send(user);
     }
-  }
+  } else res.status(404).send({ message: "not found" });
 }
 
 const whatRole = (admin, verified, user) => {

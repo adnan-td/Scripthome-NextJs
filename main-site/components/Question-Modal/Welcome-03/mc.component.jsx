@@ -6,38 +6,47 @@ const Modalmc = ({ handleClose, next }) => {
   };
   return (
     <div className={styles["modal-cover"]} onClick={handleClose}>
-      <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles["Script-Modal"]}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
-            <img src="/Question-Modal/Welcome-03.png" alt="" className={styles["welcome-img"]} />
+            <img
+              src="/Question-Modal/Welcome-03.png"
+              alt=""
+              className={styles["welcome-img"]}
+            />
           </div>
           <div className={styles["h-content-div"]}>
             <p className={styles["h-content-1"]}>Our Discord Server</p>
             <p className={styles["h-content-2"]}>
-              Joining our exclusive discord server gives you the ablitity to get notified when new
-              videos and scripts are uploaded.
+              Joining our exclusive discord server gives you the ablitity to get
+              notified when new videos and scripts are uploaded.
             </p>
           </div>
           <div className={styles["dot-wrapper"]}>
             <div className={styles["dot-div"]}></div>
             <div className={styles["dot-div"]}></div>
-            <div className={styles["dot-div"] + " " + styles["dot-div-active"]}></div>
+            <div
+              className={styles["dot-div"] + " " + styles["dot-div-active"]}
+            ></div>
             <div className={styles["dot-div"]}></div>
             <div className={styles["dot-div"]}></div>
           </div>
         </div>
         <div className={styles["bottom-button"]}>
-          <button
-            className={styles["cancel-button"]}
-            onClick={() => {
-              next(5);
-            }}
+          <a className={styles["anchorlink"]} onClick={handleNext}>
+            <button className={styles["cancel-button"]}>Skip</button>
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://discord.gg/9N6FWkshpk"
+            className={styles["anchorlink"]}
           >
-            Skip
-          </button>
-          <button className={styles["next-button"]} onClick={handleNext}>
-            Join Server
-          </button>
+            <button className={styles["next-button"]}>Join Server</button>
+          </a>
         </div>
       </div>
     </div>

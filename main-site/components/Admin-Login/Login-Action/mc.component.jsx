@@ -11,7 +11,7 @@ const Modalmc = ({ handleClose }) => {
           <div className={styles["top-content"]}>
             <img src="/Modal/Illustration.svg" alt="ill-icon" className={styles["ill-icon"]} />
             <div className={styles["header-content"]}>
-              <p>Log in to your account</p>
+              <p>Log in to Admin Panel</p>
               <span>Welcome back! Please enter your details.</span>
             </div>
             <form className={styles["email-input"] + " " + styles["input-field"]}>

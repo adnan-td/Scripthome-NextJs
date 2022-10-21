@@ -11,7 +11,6 @@ const Pagination = () => {
       <PaginationCon content="4" />
       <PaginationCon content="5" />
       <PaginationCon content="6" />
-      <PaginationCon content="7" />
       <PaginationCon content="Next" />
     </div>
   );

@@ -26,7 +26,7 @@ const Modalmc = ({ handleClose }) => {
         <div className={styles["top-content"]}>
           <div className={styles["div-header-wrapper"]}>
             <div className={styles["header-content"]}>
-              <img src="/Modal-Icons/Script-Modal-Icon.svg" alt="mail-icon" />
+              <img src="/Script/Modal-Icons/Script-Modal-Icon.svg" alt="mail-icon" />
               <p>Script</p>
             </div>
             <div className={styles["script-box"]}>

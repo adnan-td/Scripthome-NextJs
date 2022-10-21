@@ -1,10 +1,10 @@
 import styles from "../scripts.module.scss";
 
 const PaginationCon = (props) => {
-    const classpage = styles["paginationCon"] + " " + props.className;
+  const classpage = styles["paginationCon"] + " " + props.className;
   return (
     <div className={classpage}>
-      <p className={styles["paginationCon__t"]}>{props.content}</p>
+      <p>{props.content}</p>
     </div>
   );
 };
