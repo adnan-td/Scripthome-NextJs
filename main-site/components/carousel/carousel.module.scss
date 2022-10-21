@@ -44,15 +44,25 @@
       padding: 16px 24px 16px 16px;
       cursor: pointer;
 
+      @media (max-width: 600px) {
+        padding: 16px;
+        flex-direction: column;
+      }
+
       &:hover {
-        background: #4a1fb8;
-        box-shadow: 0px 8px 24px rgba(94, 45, 220, 0.3);
+        background: $main-theme;
+        box-shadow: 0px 8px 24px $main-hover-card;
       }
 
       .cc-img {
         width: 250px;
         border-radius: 12px;
         aspect-ratio: 230/165;
+
+        @media (max-width: 600px) {
+          width: 100%;
+          aspect-ratio: 197/111;
+        }
       }
 
       .card-content {
@@ -91,7 +101,8 @@
 
             .lav-img-c {
               background: #17151f;
-              box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05), 0px 2px 4px rgba(48, 49, 51, 0.1);
+              box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05),
+                0px 2px 4px rgba(48, 49, 51, 0.1);
               border-radius: 6px;
               width: 40px;
               height: 40px;

@@ -10,7 +10,7 @@ const Modalmc = ({ handleClose, next }) => {
       <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
-            <img src="/Question-Modal/Welcome-01.png" alt="" className={styles["welcome-img"]} />
+            <img src="/Question-Modal/Welcome-01.jpg" alt="" className={styles["welcome-img"]} />
           </div>
           <div className={styles["h-content-div"]}>
             <p className={styles["h-content-1"]}>Welcome to our Community</p>

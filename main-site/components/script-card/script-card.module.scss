@@ -7,14 +7,14 @@
   flex-direction: column;
   padding: 16px;
   gap: 12px;
-  background: #2d2d3d;
+  background: rgba(0, 0, 0, 0.24);
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   cursor: pointer;
 
   &:hover {
-    background: #4a1fb8;
-    box-shadow: 0px 8px 24px rgba(94, 45, 220, 0.3);
+    background: $main-theme;
+    box-shadow: 0px 8px 24px $main-hover-card;
   }
 
   .sc-img-c {
@@ -60,7 +60,7 @@
         align-items: center;
         padding: 4px 8px;
         gap: 5px;
-        background: #17151f;
+        background: #000;
         border-radius: 136px;
         font-size: 0.875rem;
         font-weight: 600;

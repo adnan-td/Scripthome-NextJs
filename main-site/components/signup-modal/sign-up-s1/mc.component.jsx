@@ -59,8 +59,8 @@ const Modalmc = ({ handleClose, next }) => {
         <div className={styles["top-content"]}>
           <img src="/Modal/sign-up/email-address-icon.svg" alt="mail-icon" />
           <div className={styles["header-content"]}>
-            <p>Email Address</p>
-            <span>Please enter a email for verifying your account.</span>
+            <p>Personal Details</p>
+            <span>Please enter an email and username for your account.</span>
           </div>
 
           <div className={styles["username-input"] + " " + styles["input-field"]}>
@@ -75,22 +75,6 @@ const Modalmc = ({ handleClose, next }) => {
               name="email"
               onChange={handleChange}
             />
-          </div>
-          <div className={styles["password-input"] + " " + styles["input-field"]}>
-            <label htmlFor="password">Password</label>
-            <div className={styles["password-div"]}>
-              <input type="password" name="password" onChange={handleChange} />
-              <img src="/Modal/sign-up/eye.svg" alt="show icon" />
-            </div>
-          </div>
-          <div className={styles["confirm-password-input"] + " " + styles["input-field"]}>
-            <label htmlFor="">
-              Confirm Password <span style={{ color: "red" }}>{error ? `(${error})` : ""}</span>
-            </label>
-            <div className={styles["password-div"]}>
-              <input type="password" name="cpassword" onChange={handleChange} />
-              <img src="/Modal/sign-up/eye.svg" alt="show icon" />
-            </div>
           </div>
         </div>
         <div className={styles["bottom-button"]}>

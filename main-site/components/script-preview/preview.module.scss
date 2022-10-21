@@ -2,7 +2,6 @@
 
 .viewscript {
   position: relative;
-  border: #242323;
   color: white;
   border-radius: 12px !important;
   width: 100%;
@@ -91,7 +90,7 @@
 }
 
 .get-script {
-  background: linear-gradient(26.57deg, #53389e 8.33%, #6941c6 91.67%);
+  background: $main-theme-gradient;
   box-sizing: content-box;
   color: $base-white;
   outline: none;
@@ -103,16 +102,16 @@
   font-weight: 600;
   font-size: 13px;
   &:hover {
-    box-shadow: 0px 4px 24px 0px #9747ff66;
-    background: #7f56d9;
+    box-shadow: 0px 4px 24px 0px $main-hover-card;
+    background: $main-card-button;
   }
   &:focus {
-    box-shadow: 0px 4px 24px 0px #9747ff66;
-    background: #7f56d9;
+    box-shadow: 0px 4px 24px 0px $main-hover-card;
+    background: $main-card-button;
   }
   &:active {
-    box-shadow: 0px 4px 24px 0px #9747ff66;
-    background: #7f56d9;
+    box-shadow: 0px 4px 24px 0px $main-hover-card;
+    background: $main-card-button;
   }
 }
 

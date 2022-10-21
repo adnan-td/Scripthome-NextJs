@@ -18,7 +18,8 @@
 
 .home {
   color: $base-white;
-  width: 100%;
+  width: min(100%,1920px);
+  margin: 0 auto;
   font-family: "Poppins";
   display: flex;
   justify-content: center;
@@ -58,7 +59,12 @@
         line-height: 70px;
         max-width: 800px;
 
-        @media (max-width: 756px) {
+        @media (max-width: 900px) {
+          font-size: 2.25rem;
+          line-height: 3.25rem;
+        }
+
+        @media (max-width: 500px) {
           font-size: 1.25rem;
           line-height: 2rem;
         }
@@ -78,7 +84,7 @@
             position: absolute;
             width: 100%;
             height: 45%;
-            background-color: #31343F;
+            background-color: #2b2d34;
             bottom: 0;
             left: 0;
             z-index: -1;
@@ -91,7 +97,13 @@
           left: 102px;
           width: 12rem;
 
-          @media (max-width: 756px) {
+          @media (max-width: 900px) {
+            width: 10rem;
+            left: 60px;
+            bottom: -11px;
+          }
+
+          @media (max-width: 500px) {
             width: 4rem;
             left: 60px;
             bottom: -5px;
@@ -153,16 +165,12 @@
         .styled-button {
           border: none;
           font-weight: 600;
-          background: linear-gradient(26.57deg, #53389e 8.33%, #6941c6 91.67%);
+          background: $main-theme-gradient;
 
-          &:hover {
-            box-shadow: 0px 4px 24px 0px #9747ff66;
-          }
+          &:hover,
+          &:active,
           &:focus {
-            box-shadow: 0px 4px 24px 0px #9747ff66;
-          }
-          &:active {
-            box-shadow: 0px 4px 24px 0px #9747ff66;
+            box-shadow: 0px 4px 24px 0px $main-hover-card;
           }
         }
       }
@@ -234,17 +242,16 @@
         align-items: center;
         flex-wrap: wrap;
 
-
         @media (max-width: 900px) {
           padding: 4rem 2rem;
         }
-  
+
         @media (max-width: 500px) {
           gap: 2rem;
           justify-content: center;
           align-items: center;
         }
-  
+
         @media (min-width: 501px) and (max-width: 1100px) {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -499,7 +506,7 @@
         gap: 0.5rem;
         border-radius: 12px;
         color: white;
-        background: #6941c6;
+        background: $main-theme-gradient;
         display: flex;
 
         @media (max-width: 600px) {
@@ -513,7 +520,7 @@
         &:hover,
         &:active,
         &:focus {
-          box-shadow: 0px 4px 24px 0px #9747ff66;
+          box-shadow: 0px 4px 24px 0px $main-hover-card;
         }
       }
     }
@@ -549,7 +556,7 @@
   gap: 0.5rem;
   border-radius: 12px;
   color: white;
-  background: #6941c6;
+  background: $main-theme-gradient;
   display: flex;
   cursor: pointer;
   width: 100%;
@@ -566,6 +573,6 @@
   &:hover,
   &:active,
   &:focus {
-    box-shadow: 0px 4px 24px 0px #9747ff66;
+    box-shadow: 0px 4px 24px 0px $main-hover-card;
   }
 }

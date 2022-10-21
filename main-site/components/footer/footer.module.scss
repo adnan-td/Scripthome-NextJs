@@ -2,29 +2,89 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: $nav-color;
-  color: $text-light-color;
-  padding: 30px 10px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
   width: 100%;
-  img {
-    margin: 5px 3vw 5px 6vw;
-  }
-  p {
-    margin: 5px 6vw 5px 3vw;
-  }
-  @media only screen and (max-width: 400px) {
-    .footer {
-      justify-content: center;
+
+  &__top {
+    width: min(100%, 1920px);
+    background-color: $footer-bg;
+    padding: 4rem 7rem 3rem;
+    display: flex;
+    gap: 4rem;
+
+    @media (max-width: 1000px) {
+      padding: 3.75rem 2rem;
+      flex-direction: column;
+      gap: 2rem;
     }
-    img {
-      display: none;
+
+    &__left {
+      max-width: 350px;
+      height: 100%;
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+
+      &__para {
+        color: #dadde4;
+      }
     }
-    p {
+
+    &__right {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       width: 100%;
-      text-align: center;
+
+      @media (max-width: 600px) {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 2rem;
+      }
+
+      &__col {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        &__head {
+          font-weight: 600;
+          text-transform: capitalize;
+          font-size: 14px;
+          color: #d0d5dd;
+        }
+
+        &__link {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          &__item {
+            font-weight: 600;
+            color: #eaecf0;
+            text-transform: capitalize;
+            width: fit-content;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    width: min(100%, 1920px);
+    display: flex;
+    flex-direction: row;
+    padding: 0 7rem 3rem;
+    background-color: $footer-bg-dark;
+    color: $text-light-color;
+
+    @media (max-width: 1000px) {
+      padding: 0 2rem 3.75rem;
     }
   }
 }

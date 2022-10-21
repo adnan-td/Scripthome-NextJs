@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
-    background: #101828;
+    background: #00000099;
     border-radius: 12px;
     padding: 5px;
 
@@ -69,7 +69,7 @@
 
 .tabs-ul.inline,
 .tabs-li.selected {
-  background: #2d324e;
+  background: #000;
   box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.31),
     inset 0px 1px 1px rgba(255, 255, 255, 0.05);
   border-radius: 8px;

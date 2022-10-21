@@ -15,6 +15,7 @@
     justify-content: center;
     align-items: center;
     flex: 71%;
+    width: 100%;
 
     .scripts-left-content {
       position: relative;
@@ -141,16 +142,16 @@
 
         .styled-button {
           border: none;
-          background: linear-gradient(26.57deg, #53389e 8.33%, #6941c6 91.67%);
+          background: $main-theme-gradient;
 
           &:hover {
-            box-shadow: 0px 4px 24px 0px #9747ff66;
+            box-shadow: 0px 4px 24px 0px $main-hover-card;
           }
           &:focus {
-            box-shadow: 0px 4px 24px 0px #9747ff66;
+            box-shadow: 0px 4px 24px 0px $main-hover-card;
           }
           &:active {
-            box-shadow: 0px 4px 24px 0px #9747ff66;
+            box-shadow: 0px 4px 24px 0px $main-hover-card;
           }
         }
 
@@ -160,7 +161,11 @@
             border: 2px solid rgba(97, 191, 101, 0.1);
           }
           &:active {
-            background: linear-gradient(153.06deg, #74d680 -0.31%, #378b29 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #74d680 -0.31%,
+              #378b29 99.69%
+            );
           }
           &:focus {
             border: 2px solid rgba(116, 214, 128, 1);
@@ -177,7 +182,11 @@
             );
           }
           &:active {
-            background: linear-gradient(153.06deg, #ff0000 -0.31%, #990000 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #ff0000 -0.31%,
+              #990000 99.69%
+            );
           }
           &:focus {
             border: 2px solid #ff0000;
@@ -198,7 +207,11 @@
             );
           }
           &:active {
-            background: linear-gradient(153.06deg, #f6fc9c -0.31%, #eaf818 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #f6fc9c -0.31%,
+              #eaf818 99.69%
+            );
           }
           &:focus {
             border: 2px solid #f6fc9c;
@@ -442,7 +455,7 @@
       width: 55px;
     }
 
-    div {
+    &__wrapper {
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -457,11 +470,35 @@
         color: $base-white;
       }
 
-      .sp-c-name {
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 24px;
-        color: rgba(255, 255, 255, 0.7);
+      &__2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        .sp-c-name {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .sp-c-tag {
+          padding: 0.25rem 0.5rem;
+          background-color: rgb(0 0 0 / 50%);
+          width: fit-content;
+          font-size: 0.875rem;
+          font-weight: 500;
+          border-radius: 0.5rem;
+          display: flex;
+          gap: 0.25rem;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 20px;
+          }
+        }
       }
     }
   }
@@ -473,7 +510,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  background: rgba(105, 65, 198, 0.3);
+  background: rgb(65 198 118 / 30%);
   border-radius: 12px;
   padding: 10px 3%;
 
@@ -560,16 +597,16 @@
 
   .styled-button {
     border: none;
-    background: linear-gradient(26.57deg, #53389e 8.33%, #6941c6 91.67%);
+    background: $main-theme-gradient;
 
     &:hover {
-      box-shadow: 0px 4px 24px 0px #9747ff66;
+      box-shadow: 0px 4px 24px 0px $main-hover-card;
     }
     &:focus {
-      box-shadow: 0px 4px 24px 0px #9747ff66;
+      box-shadow: 0px 4px 24px 0px $main-hover-card;
     }
     &:active {
-      box-shadow: 0px 4px 24px 0px #9747ff66;
+      box-shadow: 0px 4px 24px 0px $main-hover-card;
     }
   }
 }
@@ -675,7 +712,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   gap: 3rem;
   min-height: 90vh;
@@ -753,7 +790,7 @@
     font-weight: 600;
 
     &:hover {
-      background-color: #421b8b;
+      background-color: $main-hover-card;
     }
 
     &__active,

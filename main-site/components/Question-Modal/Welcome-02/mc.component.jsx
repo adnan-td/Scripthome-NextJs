@@ -13,7 +13,7 @@ const Modalmc = ({ handleClose, next }) => {
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
             <img
-              src="/Question-Modal/Welcome-02.png"
+              src="/Question-Modal/Welcome-02.jpg"
               alt=""
               className={styles["welcome-img"]}
             />

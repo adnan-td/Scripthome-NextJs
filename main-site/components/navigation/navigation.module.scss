@@ -18,9 +18,12 @@
     z-index: 6;
     display: flex;
     img {
-      width: 55px;
-      padding: 11px;
-      margin: 5px 3vw 5px 6vw;
+      width: 48px;
+      margin: 5px 2vw 5px 6vw;
+
+      @media (max-width: 1000px) {
+        width: 36px;
+      }
     }
   }
 
@@ -281,7 +284,7 @@
         margin: 0;
         margin-left: 20px;
         left: 10vw;
-        top: 3px;
+        top: 12px;
         position: absolute;
       }
     }

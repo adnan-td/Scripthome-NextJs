@@ -59,29 +59,57 @@ const Scripts = ({ script, allscripts }) => {
                   <span>{script.views} views</span>
                 </div>
                 <div className={styles["user-views"]}>
-                  <img src="/script/icons/calendar.svg" alt="loading" /> <span>{script.date}</span>
+                  <img src="/script/icons/calendar.svg" alt="loading" />{" "}
+                  <span>{script.date}</span>
                 </div>
               </div>
               <h2>{script.title}</h2>
             </div>
             <div className={styles["scripts-left-buttons"]}>
-              <GetScriptModal className={styles["styled-button"] + " " + styles["button__style"]}>
-                <span className={styles["button__style__span"]}>Get Script</span>
-                <img src="/script/icons/arrow-square-right.svg" alt="Get Script Button" />
+              <GetScriptModal
+                className={
+                  styles["styled-button"] + " " + styles["button__style"]
+                }
+              >
+                <span className={styles["button__style__span"]}>
+                  Get Script
+                </span>
+                <img
+                  src="/script/icons/arrow-square-right.svg"
+                  alt="Get Script Button"
+                />
               </GetScriptModal>
-              <GameLinkModal className={styles["game-link"] + " " + styles["button__style"]}>
+              <GameLinkModal
+                className={styles["game-link"] + " " + styles["button__style"]}
+              >
                 <span className={styles["button__style__span"]}>Join Game</span>
-                <img src="/Script/Icons/game-link-icon.svg" alt="Game Link Button" />
+                <img
+                  src="/Script/Icons/game-link-icon.svg"
+                  alt="Game Link Button"
+                />
               </GameLinkModal>
-              <WatchVideoModal className={styles["watch-video"] + " " + styles["button__style"]}>
-                <span className={styles["button__style__span"]}>Watch Video</span>
+              <WatchVideoModal
+                className={
+                  styles["watch-video"] + " " + styles["button__style"]
+                }
+              >
+                <span className={styles["button__style__span"]}>
+                  Watch Video
+                </span>
                 <img src="/Script/Icons/youtube.svg" alt="Youtube Button" />
               </WatchVideoModal>
               <ReportScriptModal
-                className={styles["report-script"] + " " + styles["button__style"]}
+                className={
+                  styles["report-script"] + " " + styles["button__style"]
+                }
               >
-                <span className={styles["button__style__span"]}>Report Script</span>
-                <img src="/Script/Icons/report-script-flag.svg" alt="Report Script Button" />
+                <span className={styles["button__style__span"]}>
+                  Report Script
+                </span>
+                <img
+                  src="/Script/Icons/report-script-flag.svg"
+                  alt="Report Script Button"
+                />
               </ReportScriptModal>
             </div>
             <div className={styles["authorbox"]}>
@@ -94,21 +122,33 @@ const Scripts = ({ script, allscripts }) => {
                     className={styles["authorimage1"]}
                   />
                   <div className={styles["authorboxc2"]}>
-                    <h4 className={styles["contentauthor1"]}>{script.madeby}</h4>
+                    <h4 className={styles["contentauthor1"]}>
+                      {script.madeby}
+                    </h4>
                     <p className={styles["lighttext"]}>Script Developer</p>
                   </div>
                 </div>
               </div>
               <div className={styles["rightauthor"]}>
                 <p className={styles["uploadby"]}>Uploaded by</p>
-                <div className={styles["authorboxc1"] + " " + styles["authorboxc12"]}>
+                <div
+                  className={
+                    styles["authorboxc1"] + " " + styles["authorboxc12"]
+                  }
+                >
                   <img
                     src="/script/avatars/avatar.png"
                     alt="author2_image"
                     className={styles["authorimage2"]}
                   />
-                  <div className={styles["authorboxc2"] + " " + styles["authorboxc3"]}>
-                    <h4 className={styles["contentauthor1"]}>{script.user_id}</h4>
+                  <div
+                    className={
+                      styles["authorboxc2"] + " " + styles["authorboxc3"]
+                    }
+                  >
+                    <h4 className={styles["contentauthor1"]}>
+                      {script.user_id}
+                    </h4>
                     <p className={styles["lighttext"]}>25+ Scripts Uploaded</p>
                   </div>
                 </div>
@@ -134,7 +174,7 @@ const Scripts = ({ script, allscripts }) => {
               <hr
                 style={{
                   margin: "2rem 0",
-                  border: "1px solid rgba(105, 65, 198, 0.3)",
+                  border: "1px solid rgb(65 198 70 / 20%)",
                 }}
               />
               <div className={styles["featured-tags"]}>
@@ -173,12 +213,18 @@ const Scripts = ({ script, allscripts }) => {
               </div>
               <div className={styles["sp-buttons"]}>
                 <button className={styles["previous-button"]}>
-                  <img src="/script/icons/arrow-square-right.svg" alt="arrow-icon" />
+                  <img
+                    src="/script/icons/arrow-square-right.svg"
+                    alt="arrow-icon"
+                  />
                   <span>Previous</span>
                 </button>
                 <button className={styles["styled-button"]}>
                   <span>Next</span>
-                  <img src="/script/icons/arrow-square-right.svg" alt="arrow-icon" />
+                  <img
+                    src="/script/icons/arrow-square-right.svg"
+                    alt="arrow-icon"
+                  />
                 </button>
               </div>
             </Panel>
@@ -205,17 +251,30 @@ const SpComment = () => {
       <hr
         style={{
           margin: "5px 0",
-          border: "1px solid rgba(105, 65, 198, 0.3)",
+          border: "1px solid rgb(65 198 70 / 20%)",
           width: "100%",
         }}
       />
       <div className={styles["sp-comment"]}>
-        <img alt="loading" src="/script/avatars/avatar.png" className={styles["white-border"]} />
-        <div>
+        <img
+          alt="loading"
+          src="/script/avatars/avatar.png"
+          className={styles["white-border"]}
+        />
+        <div className={styles["sp-comment__wrapper"]}>
           <p className={styles["sp-c-content"]}>
             Where to grow your business as a photographer: site or social media?
           </p>
-          <p className={styles["sp-c-name"]}>EstherHoward</p>
+          <div className={styles["sp-comment__wrapper__2"]}>
+            <p className={styles["sp-c-name"]}>EstherHoward</p>
+            <div
+              id="verified-user"
+              className={styles["sp-c-tag"] + " " + styles["verified-user"]}
+            >
+              <img src="/Script/verified.svg" alt="" />
+              Verified
+            </div>
+          </div>
         </div>
       </div>
     </>

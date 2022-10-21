@@ -17,7 +17,7 @@ const Modalmc = ({ handleClose, next }) => {
           <div className="header-content">
             <p>Please check your mail</p>
             <span>
-              We've sent a code to <b>spuniverse@gmail.com</b>
+              We{"'"}ve sent a code to <b>spuniverse@gmail.com</b>
             </span>
           </div>
           <div className="form-content">
@@ -37,7 +37,7 @@ const Modalmc = ({ handleClose, next }) => {
             </div>
             <div className="resend-div">
               <p className="re-text">
-                Didn't get the code? <a href="sudhanshuprasd.com">Click to resend.</a>
+                Didn{"'"}t get the code? <a href="sudhanshuprasd.com">Click to resend.</a>
               </p>
             </div>
           </div>
