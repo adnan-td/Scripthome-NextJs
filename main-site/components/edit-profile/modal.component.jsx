@@ -3,6 +3,7 @@ import Options from "./select-option/mc.component";
 import Epass from "./edit-password/mc.component";
 import Eusername from "./edit-username/mc.component";
 import Confirm from "./save-changes-confirm/mc.component";
+import ImgUpload from "./upload-img/mc.component";
 import { UserContext } from "../../contexts/user/user.context";
 
 export default function EditUser({ className, children }) {
@@ -30,17 +31,38 @@ export default function EditUser({ className, children }) {
       <button onClick={handleShow} className={className}>
         {children}
       </button>
-      {show === "Options" ? (
-        <Options handleClose={handleClose} setnewuser={setNewUser} setShow={setShow} />
-      ) : null}
+      {show === "Options" ? <Options handleClose={handleClose} setShow={setShow} /> : null}
       {show === "Epass" ? (
-        <Epass handleClose={handleClose} setnewuser={setNewUser} setShow={setShow} />
+        <Epass
+          handleClose={handleClose}
+          setnewuser={setNewUser}
+          newuser={newUser}
+          setShow={setShow}
+        />
       ) : null}
       {show === "Eusername" ? (
-        <Eusername handleClose={handleClose} setnewuser={setNewUser} setShow={setShow} />
+        <Eusername
+          handleClose={handleClose}
+          setnewuser={setNewUser}
+          newuser={newUser}
+          setShow={setShow}
+        />
+      ) : null}
+      {show === "Upload" ? (
+        <ImgUpload
+          handleClose={handleClose}
+          setnewuser={setNewUser}
+          newuser={newUser}
+          setShow={setShow}
+        />
       ) : null}
       {show === "Confirm" ? (
-        <Confirm handleClose={handleClose} setnewuser={setNewUser} setShow={setShow} />
+        <Confirm
+          handleClose={handleClose}
+          setnewuser={setNewUser}
+          newuser={newUser}
+          setShow={setShow}
+        />
       ) : null}
     </>
   );

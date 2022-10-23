@@ -6,6 +6,7 @@ export const UserContext = createContext({ user: null });
 
 export const User = ({ children }) => {
   const [user, Setuser] = useState(null);
+  const [refresh, setRefresh] = useState(false);
   const { data: session, status } = useSession();
   useEffect(() => {
     async function getuser() {
@@ -20,7 +21,7 @@ export const User = ({ children }) => {
     } else {
       Setuser(null);
     }
-  }, [session]);
-  const value = { user, status };
+  }, [session, refresh]);
+  const value = { user, status, refresh, setRefresh };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

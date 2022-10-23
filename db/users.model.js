@@ -39,21 +39,15 @@ async function getUserbyEmail(email) {
   });
 }
 
-async function addNewUser(name, email, role, password) {
-  db.query(
-    `insert into user (name, email, role, password) values('${name}','${email}',${role},'${password}' )`,
-    (err, result) => {
-      if (err) throw err;
-    }
-  );
+async function addNewUser(user) {
+  db.query(`insert into user set ?`, user, (err, result) => {
+    if (err) throw err;
+  });
 }
-async function updateUser(name, password, role, id) {
-  db.query(
-    `update user set name='${name}',password='${password}',role=${role} where id=${id}`,
-    (err, result) => {
-      if (err) throw err;
-    }
-  );
+async function updateUser(user, id) {
+  db.query(`update user set ? where id=${id}`, user, (err, result) => {
+    if (err) throw err;
+  });
 }
 
 async function existsUserWithId(id) {

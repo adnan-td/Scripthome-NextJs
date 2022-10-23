@@ -14,7 +14,6 @@ export default async function getuser(req, res) {
           if (await bcrypt.compare(password, user.password)) {
             res.status(200).send(user);
           } else {
-            console.log("password wrong");
             res.status(406).send({ message: "Password incorrect" });
           }
         } catch (e) {

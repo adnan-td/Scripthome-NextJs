@@ -149,7 +149,7 @@ const Navigation = () => {
               <div className={styles["nav-button-separator"]}>
                 <img src="/Nav-Icon/nav-seperator.svg" alt="" />
               </div>
-              {status !== "unauthenticated" ? (
+              {status !== "unauthenticated" && user ? (
                 <NavUserIcon user={user} logout={HandleLogout} />
               ) : (
                 <>
@@ -185,14 +185,16 @@ function NavUserIcon({ user, logout }) {
           SetisOpen(!isOpen);
         }}
       >
-        <img alt="" src="/Script/Avatars/avatar.png" />
+        {/* <img alt="" src="/Script/Avatars/avatar.png" /> */}
+        <img alt="" src={user.img} />
       </div>
 
       {isOpen && (
         <div className={styles["nui-dropdown"]}>
           <div className={styles["nui-header"]}>
             <div className={styles["nui-header-inner"]}>
-              <img alt="" src="/Script/Avatars/avatar.png" />
+              <img alt="" src={user.img} />
+              {/* <img alt="" src="/Script/Avatars/avatar.png" /> */}
               <div className={styles["nui-details"]}>
                 <p className={styles["nui-p1"]}>{user.name}</p>
                 <p className={styles["nui-p2"]}>{user.email}</p>

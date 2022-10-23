@@ -37,10 +37,10 @@ function isValid(script) {
   if (
     script.id &&
     script.user_id &&
-    script.title.length === 0 &&
-    script.madeby.length === 0 &&
-    script.script_code.length === 0 &&
-    script.description.length === 0
+    script.title.length !== 0 &&
+    script.madeby.length !== 0 &&
+    script.script_code.length !== 0 &&
+    script.description.length !== 0
   ) {
     return true;
   } else return false;
