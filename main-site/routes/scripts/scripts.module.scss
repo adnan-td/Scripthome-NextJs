@@ -34,6 +34,8 @@
       }
 
       .scripts-like {
+        border: none;
+        cursor: pointer;
         position: absolute;
         display: flex;
         justify-content: center;
@@ -47,12 +49,17 @@
         right: 23px;
         top: 20px;
 
+        .script-like-para {
+          margin-top: 0.25rem;
+        }
+
         .heart__like {
           width: 24px;
           stroke: #d4d4d5;
         }
 
-        span {
+        p {
+          margin-top: 0.25rem;
           font-weight: 600;
           color: #d4d4d5;
         }
@@ -65,7 +72,6 @@
         }
 
         &:active,
-        &:focus,
         &__active {
           background-color: #13151a;
           svg {
@@ -73,8 +79,21 @@
             stroke: red !important;
           }
 
-          span {
+          p {
             color: $base-white;
+          }
+        }
+
+        &__active {
+          &:hover {
+            svg {
+              fill: red;
+              stroke: red !important;
+            }
+
+            p {
+              color: $base-white;
+            }
           }
         }
       }
@@ -87,6 +106,7 @@
         border: 6px solid #31343f;
         img {
           width: 100%;
+          object-fit: cover;
         }
       }
 
@@ -161,11 +181,7 @@
             border: 2px solid rgba(97, 191, 101, 0.1);
           }
           &:active {
-            background: linear-gradient(
-              153.06deg,
-              #74d680 -0.31%,
-              #378b29 99.69%
-            );
+            background: linear-gradient(153.06deg, #74d680 -0.31%, #378b29 99.69%);
           }
           &:focus {
             border: 2px solid rgba(116, 214, 128, 1);
@@ -182,11 +198,7 @@
             );
           }
           &:active {
-            background: linear-gradient(
-              153.06deg,
-              #ff0000 -0.31%,
-              #990000 99.69%
-            );
+            background: linear-gradient(153.06deg, #ff0000 -0.31%, #990000 99.69%);
           }
           &:focus {
             border: 2px solid #ff0000;
@@ -207,11 +219,7 @@
             );
           }
           &:active {
-            background: linear-gradient(
-              153.06deg,
-              #f6fc9c -0.31%,
-              #eaf818 99.69%
-            );
+            background: linear-gradient(153.06deg, #f6fc9c -0.31%, #eaf818 99.69%);
           }
           &:focus {
             border: 2px solid #f6fc9c;
@@ -299,6 +307,8 @@
   .top_div_part {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
     .user-views:nth-child(2) {
       background: #000;
@@ -448,7 +458,7 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     margin: 20px 0;
 
     img {
@@ -510,26 +520,68 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  background: rgba(105, 65, 198, 0.3);
+  background-color: rgba(105, 65, 198, 0.3);
   border-radius: 12px;
   padding: 10px 3%;
+
+  &--active {
+    background-color: rgba(105, 65, 198, 0.5);
+    border: 2px solid rgba(105, 65, 198, 1);
+  }
 
   img {
     width: 55px;
   }
 
-  div {
+  &__div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-left: 15px;
+    gap: 1rem;
+
+    &__input {
+      width: 100%;
+      border: none;
+      padding: 0.5rem;
+      background-color: transparent;
+      color: white;
+
+      @media (min-width: 600px) {
+        font-size: 1rem;
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+        font-size: 0.875rem;
+
+        @media (min-width: 600px) {
+          font-size: 1rem;
+        }
+      }
+
+      &:focus-within {
+        border: none;
+        outline: none;
+      }
+    }
+
+    &__button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .arrow-img {
+        width: 24px;
+      }
+    }
 
     p {
       font-weight: 600;
-    }
-
-    .arrow-img {
-      width: 20px;
     }
   }
 }
@@ -752,6 +804,12 @@
       }
     }
 
+    @media only screen and (min-width: 1600px) {
+      .recentu-bottom {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
     @media only screen and (max-width: 1200px) {
       .recentu-bottom {
         grid-template-columns: repeat(2, 1fr);
@@ -807,6 +865,8 @@
 
   &__img {
     border-radius: 0.5rem;
+    height: 176px;
+    width: 176px;
 
     @media (max-width: 900px) {
       width: 88px;

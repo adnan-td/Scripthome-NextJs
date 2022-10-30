@@ -2,6 +2,7 @@ import Link from "next/link";
 import ArrowButtons from "../../components/arrowbuttons/arrowbuttons.component";
 import { useContext, useState, useEffect } from "react";
 import { SearchContext } from "../../contexts/searchfield/search.context";
+import Edit from "../../components/edit-admin-role-modal/mc.component.jsx";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
@@ -89,20 +90,10 @@ export default function Admins({ admins }) {
                 aria-current="page"
                 style={{ color: "#8c8888" }}
               >
-                Admin Panel Users
+                All Users
               </li>
             </ol>
           </nav>
-        </div>
-        <div className={styles("edit-users")}>
-          <Link href="/admin/admins/addadmin">
-            <a>
-              Add Users{" "}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                <path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z" />
-              </svg>
-            </a>
-          </Link>
         </div>
       </div>
       <div className={styles("table-container")}>
@@ -137,9 +128,9 @@ export default function Admins({ admins }) {
 }
 
 function Tr({ srno, admin }) {
-  const [dropdowntoggle, setdtoggle] = useState(false);
   let { name, email, role } = admin;
   const roleconverter = (role) => {
+    if (role === -1) role = "Deactivated";
     if (role === 0) role = "Users";
     if (role === 1) role = "Verified";
     if (role === 2) role = "Admin";
@@ -153,49 +144,57 @@ function Tr({ srno, admin }) {
       <td>{name}</td>
       <td>{email}</td>
       <td>
-        <div className={role.toLocaleLowerCase()}>{role}</div>
+        <div className={styles(role.toLocaleLowerCase())}>{role}</div>
       </td>
       <td>
-        <div className={styles("dropdown")} style={{ position: "relative" }}>
-          <button
-            className={styles("dropdown-toggle") + " " + styles("dots")}
-            type="button"
-            onClick={() => {
-              setdtoggle(!dropdowntoggle);
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path d="M120 256c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm160 0c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm104 56c-30.9 0-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56s-25.1 56-56 56z" />
-            </svg>
-          </button>
-          {dropdowntoggle ? (
-            <ul className={styles("dropdown-menu") + " " + styles("dropdown-menu-shadow-orange")}>
-              <li>
-                <Link href={`/admin/admins/editadmin/${admin.id}`}>
-                  <a className={styles("dropdown-item")}>
-                    <span style={{ color: "green" }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
-                      </svg>
-                    </span>
-                    Edit
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <a className={styles("dropdown-item")} href=" ">
-                  <span style={{ color: "#fd683e" }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                      <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-                    </svg>
-                  </span>
-                  Deactivate
-                </a>
-              </li>
-            </ul>
-          ) : null}
+        <div>
+          <EditUser className={styles("dropdown-item-mod")} user={admin}>
+            Edit
+          </EditUser>
         </div>
       </td>
     </tr>
+  );
+}
+
+function EditUser({ className, user, children }) {
+  const [show, setShow] = useState(false);
+  const [newUser, setNewUser] = useState(user);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = () => {
+    setShow(true);
+    setNewUser(user);
+  };
+
+  // useEffect(() => {
+  //   async function SubmitForm() {
+  //     setShow(false);
+  //   }
+  //   if (show === "Submit") {
+  //     SubmitForm();
+  //   }
+  // }, [show, newUser]);
+
+  return (
+    <>
+      <button
+        style={{ border: "none", backgroundColor: "transparent" }}
+        onClick={handleShow}
+        className={className}
+      >
+        {children}
+      </button>
+      {show ? (
+        <Edit
+          handleClose={handleClose}
+          setnewuser={setNewUser}
+          newuser={newUser}
+          setShow={setShow}
+        />
+      ) : null}
+    </>
   );
 }

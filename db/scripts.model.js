@@ -5,7 +5,7 @@ async function getAllScripts() {
     db.query(`select * from script`, (err, result) => {
       if (err) throw err;
       if (result) resolve(result);
-      else reject(null);
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -18,7 +18,20 @@ async function getScriptbyID(id) {
     db.query(`select * from script where id='${id}'`, (err, result) => {
       if (err) throw err;
       if (result) resolve(result[0]);
-      else reject(null);
+      else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function getScriptbyTitle(title) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select * from script where title='${title}'`, (err, result) => {
+      if (result) resolve(result[0]);
+      if (err) throw err;
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -32,7 +45,7 @@ async function getScriptsbyUserID(id) {
       if (err) throw err;
       if (result) resolve(result);
       if (result.length === 0) resolve([]);
-      else reject(null);
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -46,7 +59,7 @@ async function addNewScript(script) {
   });
 }
 async function updateScript(script) {
-  db.query(`update script where id=${script.id} set ?`, script, (err, result) => {
+  db.query(`update script set ? where id=${script.id}`, script, (err, result) => {
     if (err) throw err;
   });
 }
@@ -62,7 +75,26 @@ async function existsScriptWithId(id) {
           break;
         }
         resolve(result);
-      } else reject(null);
+      } else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function existsScriptWithTitle(title) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select exists(select 1 from script where title=${title})`, (err, result) => {
+      if (err) throw err;
+      if (result) {
+        result = result[0];
+        for (var k in result) {
+          result = result[k];
+          break;
+        }
+        resolve(result);
+      } else resolve(null);
     });
   });
   return query.then((result) => {
@@ -81,8 +113,10 @@ export const scriptqueries = {
   addNewScript,
   updateScript,
   existsScriptWithId,
+  existsScriptWithTitle,
   removeScriptById,
   getScriptbyID,
+  getScriptbyTitle,
   getScriptsbyUserID,
 };
 

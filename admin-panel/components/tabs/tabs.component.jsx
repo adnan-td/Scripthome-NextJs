@@ -15,7 +15,11 @@ const Tabs = ({ isopen, screenwidth }) => {
   return (
     <>
       <div className={isopen ? styles("tabs") + " " + styles("show") : styles("tabs")}>
-        <div className={isopen && screenwidth < 500 ? styles("side-bar") : styles("")} id="sb" style={{ width: "100%" }}>
+        <div
+          className={isopen && screenwidth < 500 ? styles("side-bar") : styles("")}
+          id="sb"
+          style={{ width: "100%" }}
+        >
           <Link href="/admin/dashboard">
             <a style={{ textDecoration: "none", cursor: "pointer" }}>
               <h3>Scripthome</h3>
@@ -65,6 +69,17 @@ const Tabs = ({ isopen, screenwidth }) => {
                   }
                 >
                   Admins
+                </a>
+              </Link>
+              <Link href="/admin/comments">
+                <a
+                  className={
+                    router.pathname.includes("/admin/comments")
+                      ? styles("nav-link") + " " + styles("active")
+                      : styles("nav-link")
+                  }
+                >
+                  Comments
                 </a>
               </Link>
             </li>

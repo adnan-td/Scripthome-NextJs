@@ -4,6 +4,7 @@ import Epass from "./edit-password/mc.component";
 import Eusername from "./edit-username/mc.component";
 import Confirm from "./save-changes-confirm/mc.component";
 import ImgUpload from "./upload-img/mc.component";
+import RandomAvatar from "./random-avatar/mc.component";
 import { UserContext } from "../../contexts/user/user.context";
 
 export default function EditUser({ className, children }) {
@@ -13,9 +14,11 @@ export default function EditUser({ className, children }) {
 
   const handleClose = () => {
     setShow(null);
+  };
+  const handleShow = () => {
+    setShow("Options");
     setNewUser(user);
   };
-  const handleShow = () => setShow("Options");
 
   useEffect(() => {
     async function SubmitForm() {
@@ -28,7 +31,11 @@ export default function EditUser({ className, children }) {
 
   return (
     <>
-      <button onClick={handleShow} className={className}>
+      <button
+        style={{ border: "none", backgroundColor: "transparent" }}
+        onClick={handleShow}
+        className={className}
+      >
         {children}
       </button>
       {show === "Options" ? <Options handleClose={handleClose} setShow={setShow} /> : null}
@@ -58,6 +65,14 @@ export default function EditUser({ className, children }) {
       ) : null}
       {show === "Confirm" ? (
         <Confirm
+          handleClose={handleClose}
+          setnewuser={setNewUser}
+          newuser={newUser}
+          setShow={setShow}
+        />
+      ) : null}
+      {show === "Random-Avatar" ? (
+        <RandomAvatar
           handleClose={handleClose}
           setnewuser={setNewUser}
           newuser={newUser}

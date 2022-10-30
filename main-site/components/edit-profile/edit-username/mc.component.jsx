@@ -1,12 +1,39 @@
 import { useState } from "react";
 import styles from "./mc.module.scss";
+import axios from "axios";
+import { hostname } from "../../../../config/hostname";
+
+function CheckUserName(name) {
+  var decimal = /^[A-Za-z]\w{4,14}$/;
+  if (name.match(decimal)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
   const [name, setName] = useState("");
 
-  function handleNext() {
-    setnewuser({ ...newuser, name: name });
-    setShow("Confirm");
+  async function existsUser(name) {
+    const res = await axios({
+      url: `${hostname}/api/getuserbyname/${name}`,
+      method: "get",
+    });
+    return res.data.exists;
+  }
+
+  async function handleNext() {
+    if (!CheckUserName(name)) {
+      toast.error(
+        "Please enter username of atleast 5 character long, containing only letters, numbers, underscores!"
+      );
+    } else if (await existsUser(name)) {
+      toast.error("Username already exists! Please select another one!");
+    } else {
+      setnewuser({ ...newuser, name: name });
+      setShow("Confirm");
+    }
   }
 
   return (

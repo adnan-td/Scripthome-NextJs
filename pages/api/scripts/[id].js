@@ -10,9 +10,9 @@ export default async function getoneuser(req, res) {
         await scriptqueries.updateScript(script);
         res.status(200).send({ message: "The User has been updated" });
       } else if (exists) {
-        res.status(406).send({ message: "Please fill all the required fields" });
+        res.status(200).send({ message: "Please fill all the required fields" });
       } else {
-        res.status(404).send({ message: "The User does not exist" });
+        res.status(200).send({ message: "The User does not exist" });
       }
     }
     // else if (req.method === "DELETE") {
@@ -28,8 +28,12 @@ export default async function getoneuser(req, res) {
       const script = await scriptqueries.getScriptbyID(id);
       res.status(200).send(script);
     }
+  } else if (req.method === "GET") {
+    const script = await scriptqueries.getScriptbyID(id);
+    console.log(script);
+    res.status(200).send(script);
   } else {
-    res.status(404).send({ message: "Does not exist" });
+    res.status(200).send({ message: "Does not exist" });
   }
 }
 

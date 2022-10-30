@@ -1,48 +1,58 @@
 import styles from "./mc.module.scss";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { hostname } from "../../../../config/hostname";
 
-const Modalmc = ({ handleClose, next }) => {
+function CheckUserName(name) {
+  var decimal = /^[A-Za-z]\w{4,14}$/;
+  if (name.match(decimal)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function CheckUserEmail(email) {
+  var decimal =
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  if (email.match(decimal)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const Modalmc = ({ handleClose, setModal, setNewuser, newuser, getOTP }) => {
   const [formFields, setFormFields] = useState({
     name: "",
     email: "",
-    password: "",
-    cpassword: "",
     user: "on",
   });
-  const [error, setError] = useState("");
-  const { name, email, password, cpassword, user } = formFields;
+  const { name, email, user } = formFields;
 
-  async function handleNext() {
-    if (password !== cpassword) {
-      setError("Password does not match");
-    } else {
-      setError("");
-      const newUser = {
-        name: name,
-        email: email,
-        password: password,
-        user: user,
-      };
-      const res = await PostNewUser(newUser);
-      if (res.status === 200) {
-        // next(2);
-        handleClose();
-        setError("Done for now");
-      } else {
-        setError("Error Occured");
-      }
-    }
+  async function existsUser(name) {
+    const res = await axios({
+      url: `${hostname}/api/getuserbyname/${name}`,
+      method: "get",
+    });
+    return res.data.exists;
   }
 
-  async function PostNewUser(data) {
-    const response = await fetch(`/api/users`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-    return await response;
+  async function handleNext() {
+    if (!CheckUserName(name)) {
+      toast.error(
+        "Please enter username of atleast 5 character long, containing only letters, numbers, underscores!"
+      );
+    } else if (!CheckUserEmail(email)) {
+      toast.error("Please enter a valid email address!");
+    } else if (await existsUser(name)) {
+      toast.error("Username already exists! Please select another one!");
+    } else {
+      setNewuser(formFields);
+      getOTP(email);
+      setModal(2);
+    }
   }
 
   const handleChange = (event) => {

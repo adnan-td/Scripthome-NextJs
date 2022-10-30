@@ -2,6 +2,7 @@ import { useRef } from "react";
 import styles from "./mc.module.scss";
 import axios from "axios";
 import { hostname } from "../../../../config/hostname";
+import { toast } from "react-toastify";
 
 const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
   const fileInputRef = useRef(null);
@@ -34,6 +35,7 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
 
       // console.log("response ---> ", response);
       setnewuser({ ...newuser, img: response.data.img });
+      toast.success("Image was Successfully Uploaded!");
       setShow("Confirm");
     };
     onChange(formData);
@@ -42,7 +44,7 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
   };
 
   const handleNext = () => {
-    // next(4);
+    setShow("Random-Avatar");
   };
   return (
     <div className={styles["modal-cover"]} onClick={handleClose}>
@@ -56,11 +58,11 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
             <span>Upload the photograph that you want for your profile.</span>
           </div>
 
-          <form className={styles["upload-div"]} ref={formRef}>
+          <form className={styles["upload-div"]} ref={formRef} onClick={onClickHandler}>
             <img src="/Modal/sign-up/upload-icon.svg" alt="" />
             <div className={styles["up-content-div"]}>
               <p className={styles["up-text"]}>
-                <button type="button" className={styles["up-action"]} onClick={onClickHandler}>
+                <button type="button" className={styles["up-action"]}>
                   Click to upload
                 </button>{" "}
                 or drag and drop
@@ -77,7 +79,7 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
             />
           </form>
           <div className={styles["click-random-div"]}>
-            <p>Or click next to choose randomly generated avatar</p>
+            <p>Or click to choose randomly generated avatar</p>
           </div>
         </div>
         <div className={styles["bottom-button"]}>
@@ -85,7 +87,7 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
             Cancel
           </button>
           <button className={styles["next-button"]} onClick={handleNext}>
-            Next
+            Choose Random
           </button>
         </div>
       </div>

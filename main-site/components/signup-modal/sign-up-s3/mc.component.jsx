@@ -1,45 +1,93 @@
-import "./mc.module.scss";
-import UploadIcon from "../../../assets/Modal/sign-up/upload-icon.svg";
-import CloseIcon from "../../../assets/Modal/sign-up/x-close.svg";
+import { useRef } from "react";
+import styles from "./mc.module.scss";
+import axios from "axios";
+import { hostname } from "../../../../config/hostname";
+import { toast } from "react-toastify";
 
-const Modalmc = ({ handleClose, next }) => {
+const Modalmc = ({ handleClose, setnewuser, newuser, next }) => {
+  const fileInputRef = useRef(null);
+  const formRef = useRef(null);
+
+  const onClickHandler = () => {
+    fileInputRef.current.click();
+  };
+
+  const onChangeHandler = (event) => {
+    if (event.target.files.length !== 1) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    Array.from(event.target.files).forEach((file) => {
+      formData.append(event.target.name, file);
+    });
+
+    const onChange = async (formData) => {
+      const config = {
+        headers: { "content-type": "multipart/form-data" },
+        onUploadProgress: (event) => {
+          console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
+        },
+      };
+
+      const response = await axios.post(`${hostname}/api/uploadimg`, formData, config);
+
+      // console.log("response ---> ", response);
+      setnewuser({ ...newuser, img: response.data.img });
+      toast.success("Image was Successfully Uploaded!");
+      next(5);
+    };
+    onChange(formData);
+
+    formRef.current.reset();
+  };
+
   const handleNext = () => {
     next(4);
   };
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="sign-up-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close-div" onClick={handleClose}>
-          <img src={CloseIcon} alt="" className="close-icon" />
+    <div className={styles["modal-cover"]}>
+      <div className={styles["sign-up-modal"]} onClick={(e) => e.stopPropagation()}>
+        <button className={styles["close-div"]} onClick={handleClose}>
+          <img src="/Modal/sign-up/x-close.svg" alt="" className={styles["close-icon"]} />
         </button>
-        <div className="top-content">
-          <div className="header-content">
+        <div className={styles["top-content"]}>
+          <div className={styles["header-content"]}>
             <p>Upload a Photograph</p>
             <span>Upload the photograph that you want for your profile.</span>
           </div>
 
-          <div className="upload-div">
-            <img src={UploadIcon} alt="" />
-            <div className="up-content-div">
-              <p className="up-text">
-                <a className="up-action" href=" ">
+          <form className={styles["upload-div"]} ref={formRef}>
+            <img src="/Modal/sign-up/upload-icon.svg" alt="" />
+            <div className={styles["up-content-div"]}>
+              <p className={styles["up-text"]}>
+                <button type="button" className={styles["up-action"]} onClick={onClickHandler}>
                   Click to upload
-                </a>{" "}
+                </button>{" "}
                 or drag and drop
               </p>
               <p>SVG, PNG, JPG or Webp (max. 500 KB)</p>
             </div>
-          </div>
-          <div className="click-random-div">
-            <p>Or click next to choose randomly generated avatar</p>
+            <input
+              multiple={false}
+              name="uploadimg"
+              onChange={onChangeHandler}
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              type="file"
+            />
+          </form>
+          <div className={styles["click-random-div"]}>
+            <p>Or choose randomly generated avatar</p>
           </div>
         </div>
-        <div className="bottom-button">
-          <button className="cancel-button" onClick={handleClose}>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["cancel-button"]} onClick={handleClose}>
             Cancel
           </button>
-          <button className="next-button" onClick={handleNext}>
-            Next
+          <button className={styles["next-button"]} onClick={handleNext}>
+            Choose Random
           </button>
         </div>
       </div>

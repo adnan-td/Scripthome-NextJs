@@ -7,14 +7,13 @@ export default async function getoneuser(req, res) {
   if (exists) {
     if (req.method === "PUT") {
       const user = req.body;
-      console.log(user);
-      // const { name, email, password, admin, verified, user } = req.body;
-      // request contains matching password only rest can be anything
       const role = whatRole(user.admin, user.verified, user.user, user.role);
       const userbyid = await userqueries.getUserbyID(id);
-      const doesPasswordMatch = await bcrypt.compare(user.password, userbyid.password);
-
-      if (user.name && user.email && doesPasswordMatch) {
+      let doesPasswordMatch = await bcrypt.compare(user.password, userbyid.password);
+      if (!doesPasswordMatch && user.password === userbyid.password) {
+        doesPasswordMatch = true;
+      }
+      if (doesPasswordMatch) {
         const newuser = {
           name: user.name,
           password: user.new_password ? await bcrypt.hash(user.new_password, 10) : null,
@@ -29,13 +28,14 @@ export default async function getoneuser(req, res) {
             delete newuser[key];
           }
         }
-        console.log(newuser);
         await userqueries.updateUser(newuser, id);
-        res.status(200).send({ message: "The User has been updated" });
+        res.status(201).send({ message: "The User has been updated" });
+      } else if (!doesPasswordMatch) {
+        res.status(200).send({ message: "Old Password does not match!" });
       } else if (exists) {
-        res.status(406).send({ message: "Please fill all the required fields" });
+        res.status(200).send({ message: "Please fill all the required fields" });
       } else {
-        res.status(404).send({ message: "The User does not exist" });
+        res.status(200).send({ message: "The User does not exist" });
       }
     } else if (req.method === "DELETE") {
       // if (exists) {
@@ -52,7 +52,7 @@ export default async function getoneuser(req, res) {
       const user = await userqueries.getUserbyEmail(id);
       res.status(200).send(user);
     }
-  } else res.status(404).send({ message: "not found" });
+  } else res.status(200).send({ message: "not found" });
 }
 
 const whatRole = (admin, verified, user, role) => {
@@ -60,6 +60,7 @@ const whatRole = (admin, verified, user, role) => {
   else if (verified === "on") return 1;
   else if (user === "on") return 0;
   else if (Number.isInteger(role)) return role;
+  else return null;
 };
 
 // function isValid(user) {

@@ -24,3 +24,15 @@
 
 /api/checkuser/:email
 (GET-user_by_email)
+
+/api/getuserbyname/:name
+(GET-user_by_name, # POST=user_by_slug)
+
+/api/verify
+(GET-verification_otp)
+
+/api/statistics
+/api/views
+/api/likes
+/api/comments
+/api/reports

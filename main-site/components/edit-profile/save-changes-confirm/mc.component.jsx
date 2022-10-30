@@ -3,6 +3,8 @@ import axios from "axios";
 import { hostname } from "../../../../config/hostname";
 import { useContext, useState } from "react";
 import { UserContext } from "../../../contexts/user/user.context";
+import { toast } from "react-toastify";
+import InputPassword from "../../input/input.component";
 
 const Modalmc = ({ handleClose, newuser }) => {
   const [password, setPassword] = useState("");
@@ -16,7 +18,7 @@ const Modalmc = ({ handleClose, newuser }) => {
         password: password,
       },
     });
-    if (checkpass.status === 200) {
+    if (checkpass.status === 201) {
       console.log(newuser);
       await axios({
         method: "put",
@@ -24,9 +26,10 @@ const Modalmc = ({ handleClose, newuser }) => {
         data: { ...newuser, password: password },
       });
       setRefresh(!refresh);
+      toast.success("Profile Updated Successfully!");
       handleClose();
     } else {
-      // toast saying pls check your password
+      toast.error("Please check if your password is correct");
     }
   }
 
@@ -45,16 +48,13 @@ const Modalmc = ({ handleClose, newuser }) => {
 
           <form className={styles["password-input"] + " " + styles["input-field"]}>
             <label htmlFor="">Your Password</label>
-            <div className={styles["password-div"]}>
-              <input
-                type="password"
-                name="password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <img src="/Modal/sign-up/eye.svg" alt="show icon" />
-            </div>
+            <InputPassword
+              className={styles["password-div"]}
+              name="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
           </form>
         </div>
         <div className={styles["bottom-button"]}>

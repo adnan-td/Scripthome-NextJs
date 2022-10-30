@@ -5,22 +5,21 @@ import { SearchContext } from "../../contexts/searchfield/search.context";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { AllScriptContext } from "../../../main-site/contexts/allscripts/scripts.context";
+import axios from "axios";
+import { hostname } from "../../../config/hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
 
-const scripts = [{}, {}, {}, {}, {}, {}];
 export default function Scripts() {
   const { searchfield } = useContext(SearchContext);
+  const { scripts } = useContext(AllScriptContext);
   const [current, Setcurrent] = useState(0);
   const [shortscripts, Setshortscripts] = useState([]);
   const [filteredscripts, Setfilteredscripts] = useState([]);
-  const images = [];
-  for (let i = 1; i < 7; i++) {
-    images.push(`/Adminpanel/img/img${i}.jpg`);
-  }
 
   const Addcurrent = () => {
     if (current + 6 > filteredscripts.length) {
@@ -40,14 +39,17 @@ export default function Scripts() {
     if (searchfield !== "") {
       Setfilteredscripts(
         scripts.filter((script) => {
-          return script.title.includes(searchfield) || script.madeby.includes(searchfield);
+          return (
+            script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+            script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+          );
         })
       );
       Setcurrent(0);
     } else {
       Setfilteredscripts(scripts);
     }
-  }, [searchfield]);
+  }, [searchfield, scripts]);
   // }, [searchfield, scripts]);
 
   useEffect(() => {
@@ -98,14 +100,7 @@ export default function Scripts() {
       <div className={styles("group-cards")}>
         <div className={styles("container-of-cards")}>
           {shortscripts.map((item, key) => {
-            return (
-              <Card
-                img={images[Math.floor(Math.random() * images.length)]}
-                script={item}
-                key={key}
-                srno={current + key}
-              />
-            );
+            return <Card img={item.img} script={item} key={key} srno={current + key} />;
           })}
         </div>
       </div>
@@ -125,9 +120,8 @@ export default function Scripts() {
 }
 
 function Card({ img, script, srno }) {
-  const { title, likes, views, active } = script;
+  const { title, likes, views, isActive: active } = script;
   const [isActive, SetisActive] = useState(null);
-  // const {title, madeby, active, likes, views, date} = script
   useEffect(() => {
     SetisActive(active);
   }, [active]);
@@ -159,15 +153,25 @@ function Card({ img, script, srno }) {
               paddingTop: "0.5rem",
             }}
           >
-            <Link href={`editscript?id=${srno}`}>
-              <a className={styles("btn") + " " + styles("btn-primary") + " " + styles("btn-1") + " " + styles("btn-orange-mod")}>
+            <Link href={`/admin/scripts/editscript/${script.id}`}>
+              <a
+                className={
+                  styles("btn") +
+                  " " +
+                  styles("btn-primary") +
+                  " " +
+                  styles("btn-1") +
+                  " " +
+                  styles("btn-orange-mod")
+                }
+              >
                 Edit Script
               </a>
             </Link>
             {isActive ? (
-              <ButtonIA SetisActive={SetisActive} />
+              <ButtonIA SetisActive={SetisActive} script={script} />
             ) : (
-              <ButtonAI SetisActive={SetisActive} />
+              <ButtonAI SetisActive={SetisActive} script={script} />
             )}
           </div>
         </div>
@@ -176,13 +180,24 @@ function Card({ img, script, srno }) {
   );
 }
 
-function ButtonIA({ SetisActive }) {
+import Router from "next/router";
+
+function ButtonIA({ SetisActive, script }) {
+  async function handleUpdate(ia) {
+    const res = await axios({
+      url: `${hostname}/api/scripts/${script.id}`,
+      method: "put",
+      data: { ...script, isActive: ia },
+    });
+    Router.reload(window.location.pathname);
+  }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button
         className={styles("unselected")}
         onClick={() => {
           SetisActive(false);
+          handleUpdate(false);
         }}
       >
         Inactive
@@ -192,7 +207,16 @@ function ButtonIA({ SetisActive }) {
   );
 }
 
-function ButtonAI({ SetisActive }) {
+function ButtonAI({ SetisActive, script }) {
+  async function handleUpdate(ia) {
+    const res = await axios({
+      url: `${hostname}/api/scripts/${script.id}`,
+      method: "put",
+      data: { ...script, isActive: ia },
+    });
+
+    Router.reload(window.location.pathname);
+  }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button className={styles("inactive-script")}>Inactive</button>
@@ -200,6 +224,7 @@ function ButtonAI({ SetisActive }) {
         className={styles("unselected")}
         onClick={() => {
           SetisActive(true);
+          handleUpdate(true);
         }}
       >
         Active

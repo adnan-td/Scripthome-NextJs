@@ -1,12 +1,25 @@
 import styles from "./script-card.module.scss";
 import Link from "next/link";
+import axios from "axios";
+import { hostname } from "../../../config/hostname";
 
 export default function ScriptCard({ script }) {
+  var slugify = require("slugify");
+  async function handleView() {
+    await axios(`${hostname}/api/views`, {
+      method: "post",
+      data: {
+        method: "add",
+        id: script.id,
+      },
+    });
+  }
+
   return (
-    <Link href={`/scripts/${script.id}`}>
-      <div className={styles["scriptcard"]}>
+    <Link href={`/scripts/${slugify(script.title, { lower: true })}`}>
+      <div className={styles["scriptcard"]} onClick={handleView}>
         <div className={styles["sc-img-c"]}>
-          <img alt="loading" src="/Homepage/Image/card-img.jpg" />
+          <img alt="loading" src={script.img} />
         </div>
         <div className={styles["sc-content"]}>
           <div className={styles["sc-text"]}>

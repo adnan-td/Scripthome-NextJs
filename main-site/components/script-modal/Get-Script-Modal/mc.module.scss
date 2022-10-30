@@ -28,6 +28,7 @@
     flex-direction: column;
     position: relative;
     margin: 1rem;
+    top: -200px;
 
     @media (max-width: 700px) {
       width: 90%;
@@ -89,13 +90,22 @@
           padding: 1rem 4rem 1rem 1.125rem;
           width: 100%;
           aspect-ratio: 5/2;
-          background: #1d2939;
           display: flex;
-          flex-direction: row;
-          gap: 1.5rem;
+          flex-direction: column;
+          gap: 0.25rem;
+          background: #1d2939;
           border-radius: 0.75rem;
           overflow-x: hidden;
           overflow-y: scroll;
+
+          .script-box-content {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.875rem;
+            overflow-wrap: anywhere;
+          }
 
           .script-number,
           .right-script-text {
@@ -111,18 +121,21 @@
           }
 
           .script-number {
+            .s-line-num {
+              -webkit-user-select: none; /* Safari */
+              -ms-user-select: none; /* IE 10 and IE 11 */
+              user-select: none; /* Standard syntax */
+            }
             p {
               color: rgba(255, 255, 255, 0.6);
             }
           }
           .right-script-text {
-            p {
-              color: $base-white;
+            color: $base-white;
 
-              span {
-                color: #f97066;
-                font-weight: 500;
-              }
+            span {
+              color: #f97066;
+              font-weight: 500;
             }
           }
         }

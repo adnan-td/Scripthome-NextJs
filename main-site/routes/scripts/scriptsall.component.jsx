@@ -2,42 +2,43 @@ import styles from "./scripts.module.scss";
 
 import ScriptPreview from "../../components/script-preview/preview.component";
 import Background from "../../components/background/background.component";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { hostname } from "../../../config/hostname";
 import ReactPaginate from "react-paginate";
+import { WidthContext } from "../../contexts/screenwidth/screenwidth.context";
 
-const ScriptsAll = () => {
-  const [scripts, setScripts] = useState([]);
-  useEffect(() => {
-    async function getscripts() {
-      const res = await fetch(`${hostname}/api/scripts`);
-      if (res.status === 200) {
-        const scripts = await res.json();
-        setScripts(scripts);
-      }
-    }
-    getscripts();
-  }, []);
-
+const ScriptsAll = ({ scripts }) => {
   const [displayscripts, setds] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-
-  const itemsPerPage = 9;
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const screenwidth = useContext(WidthContext);
 
   useEffect(() => {
-    const pagesVisited = pageNumber * itemsPerPage;
-    setds(
-      scripts.slice(pagesVisited, pagesVisited + itemsPerPage).map((script, key) => {
-        return <ScriptPreview script={script} key={key} />;
-      })
-    );
-  }, [pageNumber, scripts]);
+    if (screenwidth > 1600) {
+      setItemsPerPage(12);
+    } else {
+      setItemsPerPage(9);
+    }
+  }, [screenwidth]);
 
-  const pageCount = Math.ceil(scripts.length / itemsPerPage);
+  useEffect(() => {
+    if (scripts) {
+      const pagesVisited = pageNumber * itemsPerPage;
+      setds(
+        scripts.slice(pagesVisited, pagesVisited + itemsPerPage).map((script, key) => {
+          return <ScriptPreview script={script} key={key} />;
+        })
+      );
+    }
+  }, [pageNumber, scripts, itemsPerPage]);
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+  if (scripts) {
+    var pageCount = Math.ceil(scripts.length / itemsPerPage);
+
+    var changePage = ({ selected }) => {
+      setPageNumber(selected);
+    };
+  }
 
   return (
     <div className={styles["scriptall"]}>

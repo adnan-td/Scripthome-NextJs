@@ -31,7 +31,7 @@ async function getUserbyEmail(email) {
     db.query(`select * from user where email='${email}'`, (err, result) => {
       if (err) throw err;
       if (result[0]) resolve(result[0]);
-      else reject(null);
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -61,13 +61,65 @@ async function existsUserWithId(id) {
           break;
         }
         resolve(result);
-      } else reject(null);
+      } else resolve(null);
     });
   });
   return query.then((result) => {
     return result;
   });
 }
+
+async function existsUserWithEmail(email) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select exists(select 1 from user where email='${email}')`, (err, result) => {
+      if (err) throw err;
+      if (result) {
+        result = result[0];
+        for (var k in result) {
+          result = result[k];
+          break;
+        }
+        resolve(result);
+      } else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function existsUserWithName(name) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select exists(select 1 from user where name='${name}')`, (err, result) => {
+      if (err) throw err;
+      if (result) {
+        result = result[0];
+        for (var k in result) {
+          result = result[k];
+          break;
+        }
+        resolve(result);
+      } else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function getUserbyName(name) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select * from user where name='${name}'`, (err, result) => {
+      if (err) throw err;
+      if (result[0]) resolve(result[0]);
+      else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
 async function removeUserById(id) {
   db.query(`delete from user where id=${id}`, (err, result) => {
     if (err) throw err;
@@ -82,4 +134,7 @@ export const userqueries = {
   removeUserById,
   getUserbyID,
   getUserbyEmail,
+  getUserbyName,
+  existsUserWithEmail,
+  existsUserWithName,
 };

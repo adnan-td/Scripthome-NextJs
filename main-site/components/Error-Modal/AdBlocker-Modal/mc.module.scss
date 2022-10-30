@@ -104,6 +104,7 @@
     .confirm-button {
       background: $warning-600 !important;
       color: $base-white !important;
+      border: none;
 
       &:active,
       &:hover {

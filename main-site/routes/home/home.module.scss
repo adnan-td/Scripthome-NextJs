@@ -18,7 +18,8 @@
 
 .home {
   color: $base-white;
-  width: 100%;
+  width: min(100%, 1920px);
+  margin: 0 auto;
   font-family: "Poppins";
   display: flex;
   justify-content: center;
@@ -149,11 +150,7 @@
             border: 2px solid rgba(97, 191, 101, 0.1);
           }
           &:active {
-            background: linear-gradient(
-              153.06deg,
-              #74d680 -0.31%,
-              #378b29 99.69%
-            );
+            background: linear-gradient(153.06deg, #74d680 -0.31%, #378b29 99.69%);
           }
           &:focus {
             border: 2px solid rgba(116, 214, 128, 1);
@@ -537,6 +534,12 @@
     @media only screen and (min-width: 1200px) {
       .recentu-bottom {
         grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media only screen and (min-width: 1600px) {
+      .recentu-bottom {
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 

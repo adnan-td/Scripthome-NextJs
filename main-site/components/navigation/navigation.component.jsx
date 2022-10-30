@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext, useEffect, useRef } from "react";
 
 import Signinmodal from "../../components/signin-modal/modal.component";
 import Signupmodal from "../../components/signup-modal/modal.component";
@@ -105,7 +105,7 @@ const Navigation = () => {
             </Link>
             <a
               className={styles["nav-link"] + " " + styles["nav-link2"]}
-              href="https://discord.gg/9N6FWkshpk"
+              href="https://discord.gg/aVxZkmjhtb"
               target="_blank"
               rel="noreferrer"
             >
@@ -150,7 +150,15 @@ const Navigation = () => {
                 <img src="/Nav-Icon/nav-seperator.svg" alt="" />
               </div>
               {status !== "unauthenticated" && user ? (
-                <NavUserIcon user={user} logout={HandleLogout} />
+                screenwidth > navResponse ? (
+                  <NavUserIcon user={user} logout={HandleLogout} />
+                ) : (
+                  <NavUserButtonsMobile
+                    user={user}
+                    logout={HandleLogout}
+                    screenwidth={screenwidth}
+                  />
+                )
               ) : (
                 <>
                   <Signinmodal className={styles["nav-b1"]}>Log In</Signinmodal>{" "}
@@ -177,6 +185,24 @@ export default Navigation;
 
 function NavUserIcon({ user, logout }) {
   const [isOpen, SetisOpen] = useState(false);
+  const boxRef = useRef(null);
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          SetisOpen(false);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  useOutsideAlerter(boxRef);
   return (
     <div className={styles["nui"]}>
       <div
@@ -190,7 +216,7 @@ function NavUserIcon({ user, logout }) {
       </div>
 
       {isOpen && (
-        <div className={styles["nui-dropdown"]}>
+        <div className={styles["nui-dropdown"]} ref={boxRef}>
           <div className={styles["nui-header"]}>
             <div className={styles["nui-header-inner"]}>
               <img alt="" src={user.img} />
@@ -211,6 +237,33 @@ function NavUserIcon({ user, logout }) {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+function NavUserButtonsMobile({ user, logout, screenwidth }) {
+  return (
+    <div className={styles["nav-button-container"]}>
+      <>
+        <button className={styles["nav-b2"] + " " + styles["nav-b2--mod"]} onClick={logout}>
+          Log Out{" "}
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M14.8658 1.6665L5.13487 1.6665C4.6956 1.66649 4.31661 1.66648 4.00447 1.69198C3.67502 1.7189 3.34733 1.77833 3.03202 1.93899C2.56161 2.17867 2.17916 2.56112 1.93948 3.03153C1.77882 3.34685 1.71939 3.67453 1.69247 4.00398C1.66697 4.31612 1.66698 4.69508 1.66699 5.13435L1.66699 14.8653C1.66698 15.3046 1.66697 15.6836 1.69247 15.9957C1.71939 16.3252 1.77882 16.6528 1.93948 16.9681C2.17916 17.4386 2.56161 17.821 3.03202 18.0607C3.34733 18.2214 3.67502 18.2808 4.00447 18.3077C4.31661 18.3332 4.69557 18.3332 5.13486 18.3332H14.8658C15.3051 18.3332 15.684 18.3332 15.9962 18.3077C16.3256 18.2808 16.6533 18.2214 16.9686 18.0607C17.439 17.821 17.8215 17.4386 18.0612 16.9681C18.2218 16.6528 18.2813 16.3252 18.3082 15.9957C18.3337 15.6836 18.3337 15.3046 18.3337 14.8653V5.13437C18.3337 4.69508 18.3337 4.31612 18.3082 4.00398C18.2813 3.67453 18.2218 3.34685 18.0612 3.03153C17.8215 2.56112 17.439 2.17867 16.9686 1.93899C16.6533 1.77833 16.3256 1.7189 15.9962 1.69198C15.684 1.66648 15.3051 1.66649 14.8658 1.6665ZM9.41107 6.07725C9.73651 5.75181 10.2641 5.75181 10.5896 6.07725L13.9229 9.41058C14.2484 9.73602 14.2484 10.2637 13.9229 10.5891L10.5896 13.9224C10.2641 14.2479 9.73651 14.2479 9.41107 13.9224C9.08563 13.597 9.08563 13.0694 9.41107 12.7439L11.3218 10.8332L6.66699 10.8332C6.20676 10.8332 5.83366 10.4601 5.83366 9.99984C5.83366 9.5396 6.20676 9.1665 6.66699 9.1665H11.3218L9.41107 7.25576C9.08563 6.93032 9.08563 6.40269 9.41107 6.07725Z"
+              fill="white"
+            />
+          </svg>
+        </button>{" "}
+        <EditUser className={styles["nav-b1"]}>Edit Profile</EditUser>
+      </>
     </div>
   );
 }

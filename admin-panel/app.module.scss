@@ -55,6 +55,10 @@
   height: 100vh;
   flex-shrink: 0;
   display: none;
+
+  @media (max-width: 499px) {
+    width: 100%;
+  }
 }
 
 .tabs ul {
@@ -102,6 +106,7 @@
 
 .nav-leftside {
   display: flex;
+  gap: 1rem;
 }
 
 .nav-search-dropdown {
@@ -119,7 +124,7 @@
   color: #8c8888;
   background-color: #8c888814;
   border-radius: 15px;
-  padding: 3px 10px;
+  padding: 5px 10px;
   padding-right: 5px;
   display: flex;
   align-items: center;
@@ -130,11 +135,17 @@
   background-color: unset;
   border: none;
   width: 125px;
+
+  &:focus-within,
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .search button {
   background-color: unset;
   border: none;
+  display: flex;
 }
 
 .search button i {
@@ -243,7 +254,8 @@
 .verified,
 .admin,
 .super-admin,
-.users {
+.users,
+.deactivated {
   border-radius: 3px;
   width: 120px;
   text-align: center;
@@ -262,6 +274,13 @@
   font-size: 14px;
 }
 
+.super-admin {
+  color: #57007a;
+  background-color: rgb(87 0 122 / 8%);
+  font-weight: 300;
+  font-size: 14px;
+}
+
 .admin {
   color: #2b3ac1;
   background-color: #e9eef9;
@@ -269,7 +288,7 @@
   font-size: 14px;
 }
 
-.super-admin,
+.deactivated,
 .inactive-script {
   color: #df0000;
   background-color: #fbefef;
@@ -383,6 +402,8 @@
   background-color: #ffffff;
   border: none;
   box-shadow: 0 8px 32px rgba(253, 104, 62, 0.2);
+  right: 1rem;
+  z-index: 10;
 }
 
 .dropdown-menu li a {
@@ -391,9 +412,15 @@
   gap: 0.4rem;
   background-color: #ffffff;
   border: none;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 0.75rem 1.25rem;
+  font-size: 14px;
+  font-weight: 500;
+
+  span {
+    display: flex;
+  }
 }
 
 /* scripts page  */
@@ -416,6 +443,46 @@
   margin: 0 5px;
 }
 
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
+.btn:hover {
+  color: #212529;
+}
+.btn-check:focus + .btn,
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
 .btn-1 {
   background-color: #fd683e;
   color: #ffffff;
@@ -425,7 +492,7 @@
 }
 
 .btn-1:hover {
-  background-color: #fd673ed4;
+  background-color: #db3305d4;
 }
 
 .btn-2 {
@@ -441,6 +508,8 @@
 
 .btn-3 {
   text-decoration: none;
+  width: max-content;
+  border: none;
 }
 
 .card-img-top {
@@ -460,6 +529,7 @@
   border-radius: 0.8rem;
   border: none;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  height: max-content;
 }
 
 .card-body {
@@ -479,6 +549,8 @@
 .card-title {
   font-weight: 600;
   color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
 }
 
 .container-of-cards {
@@ -576,7 +648,10 @@
 }
 
 .im img {
-  height: 70px;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .im-1 {
@@ -622,6 +697,10 @@
   background-color: #e9f9ee;
   font-size: x-large;
   width: 40px;
+
+  &__mod {
+    background-color: #fee4e2;
+  }
 }
 
 .eye-icon {
@@ -643,6 +722,7 @@
 .resolve-a {
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .delete-a {
@@ -656,11 +736,15 @@
 }
 
 .resolve-a {
-  color: #2bc155;
+  color: #fff;
+  background-color: #219943;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
 }
 
 .resolve-a:hover {
-  color: #2bc156d3;
+  background-color: rgb(27, 177, 27);
   cursor: pointer;
 }
 
@@ -817,6 +901,7 @@ select:focus {
     border-color: inherit;
     border-style: solid;
     border-width: 0;
+    padding: 0.5rem 1rem;
   }
   fieldset {
     min-width: 0;
@@ -902,5 +987,29 @@ select:focus {
 
   &:focus {
     background-color: #ff5223 !important;
+  }
+}
+
+.card-text {
+  display: flex;
+  gap: 0.33rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-item-mod {
+  cursor: pointer;
+  background-color: rgb(214, 250, 214) !important;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 0.875rem;
+
+  &:hover {
+    background-color: rgb(195, 252, 195) !important;
   }
 }

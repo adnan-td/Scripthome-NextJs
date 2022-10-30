@@ -13,6 +13,10 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
 
+  @media (max-width: 790px) {
+    align-items: flex-start;
+  }
+
   .sign-up-modal {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     z-index: 12;
@@ -42,6 +46,8 @@
       right: 1rem;
       margin: 0 !important;
       border-radius: 0.5rem;
+      border: none;
+      background-color: transparent;
 
       &:hover {
         background: #eceff3;
@@ -89,14 +95,18 @@
         display: flex;
         flex-direction: column;
         gap: 0.375rem;
+        width: 100%;
         .form-wrapper {
           width: 100%;
           display: flex;
           gap: 0.5rem;
           .input-field-2 {
+            display: flex;
+            width: 100%;
+            gap: 0.375rem;
             input {
-              min-height: 80px;
-              max-width: 80px;
+              aspect-ratio: 4/5;
+              width: 100%;
               border-radius: 0.5rem;
               border: 2px solid #d6bbfb;
               padding: 0.625rem 0.5rem;
@@ -143,9 +153,11 @@
             color: #667085;
             font-weight: 400;
 
-            a {
+            button {
               color: #667085;
               text-decoration: underline;
+              background: none;
+              border: none;
 
               &:hover,
               &:active {
@@ -161,7 +173,7 @@
       display: flex;
       gap: 0.75rem;
       width: 100%;
-      
+
       @media (max-width: 500px) {
         flex-direction: column-reverse;
       }
@@ -193,6 +205,7 @@
       .next-button {
         background: $main-theme;
         color: $base-white;
+        border: none;
 
         &:active,
         &:hover {

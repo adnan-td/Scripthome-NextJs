@@ -1,6 +1,7 @@
 import { useState, createContext, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { hostname } from "../../../config/hostname";
+import axios from "axios";
 
 export const UserContext = createContext({ user: null });
 
@@ -10,10 +11,12 @@ export const User = ({ children }) => {
   const { data: session, status } = useSession();
   useEffect(() => {
     async function getuser() {
-      const res = await fetch(`${hostname}/api/checkuser/${session.user.email}`);
+      const res = await axios({
+        method: "get",
+        url: `${hostname}/api/checkuser/${session.user.email}`,
+      });
       if (res.status === 200) {
-        const message = await res.json();
-        Setuser(message);
+        Setuser(res.data);
       }
     }
     if (session) {

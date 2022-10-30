@@ -1,22 +1,44 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import ArrowButtons from "../../components/arrowbuttons/arrowbuttons.component";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { SearchContext } from "../../contexts/searchfield/search.context";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { hostname } from "../../../config/hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
 
-const reports = [{}, {}];
-export default function Reports() {
+export default function Reports({ reports }) {
   const [current, Setcurrent] = useState(0);
   const [shortreports, Setshortreports] = useState([]);
+  const [filteredReports, SetfilteredReports] = useState([]);
+  const { searchfield } = useContext(SearchContext);
+
+  useEffect(() => {
+    if (searchfield !== "") {
+      SetfilteredReports(
+        reports.filter((report) => {
+          console.log(report);
+          return (
+            report.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+            report.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+          );
+        })
+      );
+      Setcurrent(0);
+    } else {
+      SetfilteredReports(reports);
+    }
+  }, [searchfield, reports]);
 
   const Addcurrent = () => {
-    if (current + 10 > reports.length) {
+    if (current + 10 > filteredReports.length) {
       return;
     }
     Setcurrent(current + 10);
@@ -30,8 +52,8 @@ export default function Reports() {
   };
 
   useEffect(() => {
-    Setshortreports(reports.slice(current, current + 10));
-  }, [current]);
+    Setshortreports(filteredReports.slice(current, current + 10));
+  }, [current, filteredReports]);
   // }, [current, reports]);
 
   return (
@@ -111,26 +133,45 @@ export default function Reports() {
   );
 }
 
+import Router from "next/router";
+
 function Tr({ report }) {
-  const { rsName, reportedBy, review } = report;
+  const { name: by_name, body, title: script_name } = report;
+  async function handleResolve() {
+    const res = await axios({
+      url: `${hostname}/api/reports`,
+      method: "post",
+      data: {
+        method: "update",
+        report: {
+          id: report.id,
+          resolved: 1,
+        },
+      },
+    });
+    toast.success("Report resolved successfully!");
+    setTimeout(() => {
+      Router.reload(window.location.pathname);
+    }, 1000);
+  }
   return (
     <tr>
       <td>
         <div style={{ minWidth: "180px" }}>
-          <p className={styles("im-1")}>{rsName}</p>
+          <p className={styles("im-1")}>{script_name}</p>
           {/* <p className={styles("im-1")} date-edit">21 June 2020, 12:42 AM</p> */}
-          <p className={styles("im-1") + " " + styles("date-edit")}>Reported by: {reportedBy}</p>
+          <p className={styles("im-1") + " " + styles("date-edit")}>Reported by: {by_name}</p>
         </div>
       </td>
       <td>
-        <p className={styles("reports-review")}>{review}</p>
+        <p className={styles("reports-review")}>{body}</p>
       </td>
       <td>
         <div style={{ display: "flex" }}>
-          <a href=" " className={styles("resolve-a")}>
+          <button className={styles("resolve-a")} onClick={handleResolve}>
             {" "}
             Resolve{" "}
-          </a>
+          </button>
         </div>
       </td>
     </tr>

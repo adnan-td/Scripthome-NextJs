@@ -47,7 +47,7 @@
       font-weight: 600;
 
       svg {
-        fill: #D4D4D5;
+        fill: #d4d4d5;
       }
 
       &:hover {
@@ -146,7 +146,7 @@
         align-items: center;
         padding: 12px 24px;
         margin: 15px 0;
-        background: $main-theme;
+        background-color: $main-theme;
         border-radius: 8px;
         color: $base-white;
         font-size: 1rem;
@@ -154,6 +154,14 @@
         &:active,
         &:hover {
           background-color: $main-theme-light;
+        }
+
+        &--mod {
+          background: linear-gradient(153.06deg, #ff0000 -0.31%, #990000 99.69%);
+          display: flex;
+          gap: 0.25rem;
+          justify-content: center;
+          align-items: center;
         }
       }
     }
@@ -238,6 +246,7 @@
           justify-content: center;
           align-items: flex-start;
           margin: 0;
+          gap: 0.5rem;
 
           .nav-b1,
           .nav-b2 {
@@ -349,6 +358,8 @@
           width: 40px;
           height: 40px;
           border-radius: 200px;
+          background-color: black;
+          object-fit: cover;
         }
         .nui-details {
           .nui-p1 {

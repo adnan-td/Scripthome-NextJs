@@ -66,3 +66,52 @@ export default db;
 //   PRIMARY KEY(id),
 //   FOREIGN KEY (user_id) REFERENCES user(id)
 //   )`;
+
+// CREATE TABLE views (
+// 	id int AUTO_INCREMENT NOT NULL,
+//     user_id INT NOT NULL,
+//     script_id INT NOT NULL,
+//     date DATE DEFAULT CURRENT_DATE,
+// 	PRIMARY KEY(id),
+//     FOREIGN KEY (user_id) REFERENCES user(id),
+//     FOREIGN KEY (script_id) REFERENCES script(id)
+// )
+
+// CREATE TABLE likes (
+// 	id int AUTO_INCREMENT NOT NULL,
+//     user_id INT NOT NULL,
+//     script_id INT NOT NULL,
+// 	PRIMARY KEY(id),
+//     FOREIGN KEY (user_id) REFERENCES user(id),
+//     FOREIGN KEY (script_id) REFERENCES script(id)
+// );
+
+// CREATE TABLE report (
+// 	id int AUTO_INCREMENT NOT NULL,
+//     reported_by INT NOT NULL,
+//     body TEXT NOT NULL,
+//     script_id INT NOT NULL,
+//     resolved BOOLEAN NOT NULL DEFAULT false,
+// 	PRIMARY KEY(id),
+//     FOREIGN KEY (reported_by) REFERENCES user(id),
+//     FOREIGN KEY (script_id) REFERENCES script(id)
+// );
+
+// CREATE TABLE comments (
+// 	id int AUTO_INCREMENT NOT NULL,
+//     comment_by INT NOT NULL,
+//     body TEXT NOT NULL,
+//     script_id INT NOT NULL,
+// 	PRIMARY KEY(id),
+//     FOREIGN KEY (comment_by) REFERENCES user(id),
+//     FOREIGN KEY (script_id) REFERENCES script(id)
+// );
+
+// CREATE TABLE statistics (
+// 	id int AUTO_INCREMENT NOT NULL,
+// 	total_scripts INT DEFAULT 0,
+//     total_scripts_month INT DEFAULT 0,
+//     total_views INT DEFAULT 0,
+//     total_views_month INT DEFAULT 0,
+// 	PRIMARY KEY(id)
+// );
