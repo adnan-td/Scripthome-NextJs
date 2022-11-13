@@ -6,7 +6,6 @@ import { SearchContext } from "../../contexts/searchfield/search.context";
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
 import { toast } from "react-toastify";
 
 const styles = (classname) => {
@@ -127,14 +126,15 @@ export default function Comments({ comments }) {
 }
 
 import Router from "next/router";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 function Tr({ comment }) {
-  // var slugify = require("slugify");
-  const { name, body, img } = comment;
+  const { user } = useContext(UserContext);
+  const { name, body, user_img } = comment;
 
   async function handleDelete() {
     await axios({
-      url: `${hostname}/api/comments`,
+      url: `/api/comments`,
       method: "post",
       data: {
         method: "delete",
@@ -142,16 +142,14 @@ function Tr({ comment }) {
       },
     });
     toast.success("Deleted Successfully!");
-    setTimeout(() => {
-      Router.reload(window.location.pathname);
-    }, 1000);
+    Router.replace(Router.asPath);
   }
 
   return (
     <tr>
       <td className={styles("dashboard-scripts")}>
         <div className={styles("im")}>
-          <img src={img} alt="loading" />
+          <img src={user_img} alt="loading" />
         </div>
         <div>
           <p className={styles("im-1")}>{name}</p>
@@ -163,11 +161,13 @@ function Tr({ comment }) {
         <p style={{ minWidth: "96px" }}>{body}</p>
       </td>
       <td className={styles("align-middle")}>
-        <button className={styles("btn-3")} onClick={handleDelete}>
-          <div className={styles("pen-icon__mod") + " " + styles("pen-icon")}>
-            <img src="/Adminpanel/img/trash-03.svg" alt="" />
-          </div>
-        </button>
+        {user?.role >= 2 ? (
+          <button className={styles("btn-3")} onClick={handleDelete}>
+            <div className={styles("pen-icon__mod") + " " + styles("pen-icon")}>
+              <img src="/Adminpanel/img/trash-03.svg" alt="" />
+            </div>
+          </button>
+        ) : null}
       </td>
     </tr>
   );

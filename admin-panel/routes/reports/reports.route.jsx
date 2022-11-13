@@ -7,7 +7,6 @@ import stylesb from "../../bootstrap.module.scss";
 import { SearchContext } from "../../contexts/searchfield/search.context";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { hostname } from "../../../config/hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
@@ -15,6 +14,7 @@ const styles = (classname) => {
 };
 
 export default function Reports({ reports }) {
+  const { user } = useContext(UserContext);
   const [current, Setcurrent] = useState(0);
   const [shortreports, Setshortreports] = useState([]);
   const [filteredReports, SetfilteredReports] = useState([]);
@@ -24,18 +24,33 @@ export default function Reports({ reports }) {
     if (searchfield !== "") {
       SetfilteredReports(
         reports.filter((report) => {
-          console.log(report);
-          return (
-            report.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
-            report.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
-          );
+          if (user?.role >= 2) {
+            return (
+              report.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              report.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              report.user_id === user?.id &&
+              (report.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                report.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
         })
       );
       Setcurrent(0);
     } else {
-      SetfilteredReports(reports);
+      SetfilteredReports(
+        reports.filter((report) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return report.user_id === user?.id;
+          }
+        })
+      );
     }
-  }, [searchfield, reports]);
+  }, [searchfield, reports, user]);
 
   const Addcurrent = () => {
     if (current + 10 > filteredReports.length) {
@@ -54,7 +69,6 @@ export default function Reports({ reports }) {
   useEffect(() => {
     Setshortreports(filteredReports.slice(current, current + 10));
   }, [current, filteredReports]);
-  // }, [current, reports]);
 
   return (
     <div className={styles("main2")}>
@@ -86,23 +100,6 @@ export default function Reports({ reports }) {
             </ol>
           </nav>
         </div>
-        {/* <div className={styles("edit-users")}>
-          <a href=" ">
-            Newest <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
-          </a>
-        </div>
-        <div className={styles("dropdown edit-users")}>
-          <button className={styles("dropdown-toggle")} type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-            <span>Newest</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
-          </button>
-          <ul className={styles("dropdown-menu dropdown-menu-shadow")} aria-labelledby="dropdownMenuButton4">
-            <li>
-              <a href=" " className={styles("btn btn-light report-old")}>
-                Oldest
-              </a>
-            </li>
-          </ul>
-        </div> */}
       </div>
       <div className={styles("table-container")}>
         <table className={styles("table")}>
@@ -120,7 +117,7 @@ export default function Reports({ reports }) {
       </div>
       <div className={styles("foot")}>
         <p>
-          Displaying {current + shortreports.length} Out of {reports.length}
+          Displaying {current + shortreports.length} Out of {filteredReports.length}
         </p>
         <div>
           <p>
@@ -134,12 +131,14 @@ export default function Reports({ reports }) {
 }
 
 import Router from "next/router";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 function Tr({ report }) {
   const { name: by_name, body, title: script_name } = report;
+  const { user } = useContext(UserContext);
   async function handleResolve() {
     const res = await axios({
-      url: `${hostname}/api/reports`,
+      url: `/api/reports`,
       method: "post",
       data: {
         method: "update",
@@ -150,16 +149,13 @@ function Tr({ report }) {
       },
     });
     toast.success("Report resolved successfully!");
-    setTimeout(() => {
-      Router.reload(window.location.pathname);
-    }, 1000);
+    Router.replace(Router.asPath);
   }
   return (
     <tr>
       <td>
         <div style={{ minWidth: "180px" }}>
           <p className={styles("im-1")}>{script_name}</p>
-          {/* <p className={styles("im-1")} date-edit">21 June 2020, 12:42 AM</p> */}
           <p className={styles("im-1") + " " + styles("date-edit")}>Reported by: {by_name}</p>
         </div>
       </td>
@@ -168,10 +164,12 @@ function Tr({ report }) {
       </td>
       <td>
         <div style={{ display: "flex" }}>
-          <button className={styles("resolve-a")} onClick={handleResolve}>
-            {" "}
-            Resolve{" "}
-          </button>
+          {user?.role >= 2 && (
+            <button className={styles("resolve-a")} onClick={handleResolve}>
+              {" "}
+              Resolve{" "}
+            </button>
+          )}
         </div>
       </td>
     </tr>

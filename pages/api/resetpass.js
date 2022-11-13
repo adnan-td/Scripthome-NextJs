@@ -7,6 +7,7 @@ let transporter = nodemailer.createTransport({
     user: process.env.EMAIL_SERVER_USER,
     pass: process.env.EMAIL_SERVER_PASSWORD,
   },
+  tls: { rejectUnauthorized: false },
 });
 
 export default async function getuser(req, res) {
@@ -43,7 +44,7 @@ export default async function getuser(req, res) {
       } catch (e) {
         if (e) console.log(e);
       }
-      res.status(201).send({ otp: val * 123456 - 69, expiry: Date.now() + 300000 });
+      res.status(201).send({ otp: val * 123456 - 69, expiry: Date.now() + 600000 });
     } else {
       res.status(200).send({ message: "User with the Email does not exists!" });
     }

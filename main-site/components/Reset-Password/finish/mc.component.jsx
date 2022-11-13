@@ -1,6 +1,5 @@
 import styles from "./mc.module.scss";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 import { toast } from "react-toastify";
 
 const Modalmc = ({ handleClose, newuser }) => {
@@ -22,7 +21,7 @@ const Modalmc = ({ handleClose, newuser }) => {
   async function GetUserbyEmail(email) {
     const res = await axios({
       method: "get",
-      url: `${hostname}/api/checkuser/${email}`,
+      url: `/api/checkuser/${email}`,
     });
     if (res.status === 200) {
       return (await res).data;
@@ -35,7 +34,7 @@ const Modalmc = ({ handleClose, newuser }) => {
   async function UpdateUser(user) {
     const res = await axios({
       method: "put",
-      url: `${hostname}/api/users/${user.id}`,
+      url: `/api/users/${user.id}`,
       data: { password: user.password, new_password: newuser.password },
     });
     if (res.status === 201) {

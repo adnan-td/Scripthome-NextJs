@@ -150,7 +150,11 @@
             border: 2px solid rgba(97, 191, 101, 0.1);
           }
           &:active {
-            background: linear-gradient(153.06deg, #74d680 -0.31%, #378b29 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #74d680 -0.31%,
+              #378b29 99.69%
+            );
           }
           &:focus {
             border: 2px solid rgba(116, 214, 128, 1);
@@ -183,12 +187,16 @@
       align-items: center;
       width: 75%;
       border-radius: 12px 12px 0px 0px;
-      border: 8px solid #31343f;
+      border: 8px solid rgba(0, 0, 0, 0.2);
       border-bottom: none;
       width: 100%;
       .htimg {
         width: 100%;
-        border-radius: 12px 12px 0px 0px;
+        height: 100%;
+        position: relative;
+        border-radius: 6px 6px 0px 0px;
+        aspect-ratio: 1109/275.266;
+        overflow: hidden;
 
         @media (max-width: 500px) {
           aspect-ratio: 709/276;
@@ -210,9 +218,10 @@
           display: none;
         }
 
-        img {
+        &__img {
           position: absolute;
           width: 48px;
+          height: 48px;
           top: -15px;
           left: -7px;
         }
@@ -227,7 +236,7 @@
   .home-data {
     width: 100%;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.76)),
-      url(/Script/Image/Main-image.jpg);
+      url(/Script/Image/Main-image.webp);
     background-position: 50% 63%;
     .ht-data__mod {
       width: 100%;
@@ -349,6 +358,7 @@
           .hficon-2,
           .hficon-3 {
             width: 48px;
+            height: 48px;
           }
 
           .hf-text {
@@ -364,7 +374,7 @@
             }
             .hf-subp {
               font-weight: 400;
-              font-size: 0.875rem;
+              font-size: 1rem;
               line-height: 24px;
               color: #d0d5dd;
             }
@@ -381,12 +391,16 @@
         display: none;
       }
 
-      img {
+      &__img {
         width: 512px;
+        height: 100%;
+        aspect-ratio: 512/655.219;
         z-index: 1;
+        position: relative;
 
         @media (min-width: 1600px) {
           width: 712px;
+          aspect-ratio: 712/912;
         }
       }
     }

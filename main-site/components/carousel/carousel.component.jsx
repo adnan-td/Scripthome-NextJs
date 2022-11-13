@@ -1,11 +1,11 @@
 import styles from "./carousel.module.scss";
-
+import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WidthContext } from "../../contexts/screenwidth/screenwidth.context";
 import Link from "next/link";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
+import { imghost } from "../../../config/img_hostname";
 
 export default function Carousel2({ scripts }) {
   const screenwidth = useContext(WidthContext);
@@ -51,7 +51,7 @@ export default function Carousel2({ scripts }) {
           setClick({ 1: true, 2: false });
         }}
       >
-        <img alt="loading" src="/Homepage/icons/Chevrons Left.png" />
+        <img alt="loading" src="/Homepage/icons/Chevrons Left.svg" />
       </button>
       <AnimatePresence mode="wait">
         {current === 0 && show && (
@@ -66,7 +66,9 @@ export default function Carousel2({ scripts }) {
             key="1"
           >
             <CarouselCard script={scripts[0]} />
-            {screenwidth > screenlimit ? <CarouselCard script={scripts[1]} /> : null}
+            {screenwidth > screenlimit ? (
+              <CarouselCard script={scripts[1]} />
+            ) : null}
           </motion.div>
         )}
         {current === 1 && show && (
@@ -81,7 +83,9 @@ export default function Carousel2({ scripts }) {
             key="2"
           >
             <CarouselCard script={scripts[2]} />
-            {screenwidth > screenlimit ? <CarouselCard script={scripts[3]} /> : null}
+            {screenwidth > screenlimit ? (
+              <CarouselCard script={scripts[3]} />
+            ) : null}
           </motion.div>
         )}
         {current === 2 && show && (
@@ -96,7 +100,9 @@ export default function Carousel2({ scripts }) {
             key="3"
           >
             <CarouselCard script={scripts[4]} />
-            {screenwidth > screenlimit ? <CarouselCard script={scripts[5]} /> : null}
+            {screenwidth > screenlimit ? (
+              <CarouselCard script={scripts[5]} />
+            ) : null}
           </motion.div>
         )}
       </AnimatePresence>
@@ -107,7 +113,7 @@ export default function Carousel2({ scripts }) {
           setClick({ 1: false, 2: true });
         }}
       >
-        <img alt="loading" src="/Homepage/icons/Chevrons Right.png" />
+        <img alt="loading" src="/Homepage/icons/Chevrons Right.svg" />
       </button>
     </div>
   );
@@ -116,7 +122,7 @@ export default function Carousel2({ scripts }) {
 const CarouselCard = ({ script }) => {
   var slugify = require("slugify");
   async function handleView() {
-    await axios(`${hostname}/api/views`, {
+    await axios(`/api/views`, {
       method: "post",
       data: {
         method: "add",
@@ -127,7 +133,14 @@ const CarouselCard = ({ script }) => {
   return (
     <Link href={`/scripts/${slugify(script?.title, { lower: true })}`}>
       <div className={styles["carousel-card"]} onClick={handleView}>
-        <img alt="loading" src={script?.img} className={styles["cc-img"]} />
+        <div className={styles["cc-img"]}>
+          <Image
+            alt="loading"
+            src={`${imghost}/${script?.img}`}
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
         <div className={styles["card-content"]}>
           <div className={styles["card-content-header"]}>
             <h4>{script?.title}</h4>

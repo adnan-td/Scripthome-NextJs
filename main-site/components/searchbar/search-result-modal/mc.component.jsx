@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
 import styles from "./mc.module.scss";
+import { imghost } from "../../../../config/img_hostname";
+import Link from "next/link";
 
 const Modalmc = ({ formField, setFormField, results }) => {
+  var slugify = require("slugify");
   const inputref = useRef(null);
   useEffect(() => {
     inputref.current.focus();
@@ -32,15 +35,21 @@ const Modalmc = ({ formField, setFormField, results }) => {
             <div className={styles["script-div-wrapper"]}>
               {results.map((result, i) => {
                 return (
-                  <div className={styles["script-div"]} key={i}>
-                    <div className={styles["script-img"]}>
-                      <img className={styles["script-img__img"]} src={result.img} alt="loading" />
+                  <Link href={`/scripts/${slugify(result.title, { lower: true })}`} key={i}>
+                    <div className={styles["script-div"]}>
+                      <div className={styles["script-img"]}>
+                        <img
+                          className={styles["script-img__img"]}
+                          src={`${imghost}/${result.img}`}
+                          alt="loading"
+                        />
+                      </div>
+                      <div className={styles["content-div-script"]}>
+                        <p className={styles["scripts-title"]}>{result.title}</p>
+                        <p className={styles["scripts-subheading"]}>{result.description}</p>
+                      </div>
                     </div>
-                    <div className={styles["content-div-script"]}>
-                      <p className={styles["scripts-title"]}>{result.title}</p>
-                      <p className={styles["scripts-subheading"]}>{result.description}</p>
-                    </div>
-                  </div>
+                  </Link>
                 );
               })}
               {/* <div className={styles["script-div"]}>

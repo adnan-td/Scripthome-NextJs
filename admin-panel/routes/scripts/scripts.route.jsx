@@ -7,7 +7,7 @@ import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
 import { AllScriptContext } from "../../../main-site/contexts/allscripts/scripts.context";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
+import { imghost } from "../../../config/img_hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
@@ -15,6 +15,7 @@ const styles = (classname) => {
 };
 
 export default function Scripts() {
+  const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
   const { scripts } = useContext(AllScriptContext);
   const [current, Setcurrent] = useState(0);
@@ -39,18 +40,33 @@ export default function Scripts() {
     if (searchfield !== "") {
       Setfilteredscripts(
         scripts.filter((script) => {
-          return (
-            script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
-            script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
-          );
+          if (user?.role >= 2) {
+            return (
+              script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              script.user_id === user?.id &&
+              (script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
         })
       );
       Setcurrent(0);
     } else {
-      Setfilteredscripts(scripts);
+      Setfilteredscripts(
+        scripts.filter((script) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return script.user_id === user?.id;
+          }
+        })
+      );
     }
-  }, [searchfield, scripts]);
-  // }, [searchfield, scripts]);
+  }, [searchfield, scripts, user]);
 
   useEffect(() => {
     Setshortscripts(filteredscripts.slice(current, current + 6));
@@ -100,7 +116,9 @@ export default function Scripts() {
       <div className={styles("group-cards")}>
         <div className={styles("container-of-cards")}>
           {shortscripts.map((item, key) => {
-            return <Card img={item.img} script={item} key={key} srno={current + key} />;
+            return (
+              <Card img={`${imghost}/${item.img}`} script={item} key={key} srno={current + key} />
+            );
           })}
         </div>
       </div>
@@ -180,16 +198,17 @@ function Card({ img, script, srno }) {
   );
 }
 
-import Router from "next/router";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 function ButtonIA({ SetisActive, script }) {
+  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   async function handleUpdate(ia) {
     const res = await axios({
-      url: `${hostname}/api/scripts/${script.id}`,
+      url: `/api/scripts/${script.id}`,
       method: "put",
       data: { ...script, isActive: ia },
     });
-    Router.reload(window.location.pathname);
+    setRefreshScripts(!refreshScripts);
   }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -197,7 +216,7 @@ function ButtonIA({ SetisActive, script }) {
         className={styles("unselected")}
         onClick={() => {
           SetisActive(false);
-          handleUpdate(false);
+          handleUpdate(0);
         }}
       >
         Inactive
@@ -208,14 +227,14 @@ function ButtonIA({ SetisActive, script }) {
 }
 
 function ButtonAI({ SetisActive, script }) {
+  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   async function handleUpdate(ia) {
     const res = await axios({
-      url: `${hostname}/api/scripts/${script.id}`,
+      url: `/api/scripts/${script.id}`,
       method: "put",
       data: { ...script, isActive: ia },
     });
-
-    Router.reload(window.location.pathname);
+    setRefreshScripts(!refreshScripts);
   }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -224,7 +243,7 @@ function ButtonAI({ SetisActive, script }) {
         className={styles("unselected")}
         onClick={() => {
           SetisActive(true);
-          handleUpdate(true);
+          handleUpdate(1);
         }}
       >
         Active

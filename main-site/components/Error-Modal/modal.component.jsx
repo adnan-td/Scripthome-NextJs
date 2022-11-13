@@ -1,17 +1,10 @@
 import { useState } from "react";
-import Modalmc from "./sign-up-s4-100/mc.component";
+import Modalmc from "./Inactive-Script-Modal/mc.component";
 
-export default function Signupmodal({ className, children }) {
-  const [show, setShow] = useState(false);
+export default function InactiveScriptModal({ className, children }) {
+  const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
 
-  return (
-    <>
-      <button onClick={handleShow} className={className}>
-        {children}
-      </button>
-      {show ? <Modalmc handleClose={handleClose} /> : ""}
-    </>
-  );
+  return <>{show ? <Modalmc handleClose={handleClose} /> : null}</>;
 }

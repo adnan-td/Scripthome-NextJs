@@ -1,6 +1,5 @@
 import styles from "./mc.module.scss";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 import { useContext, useState } from "react";
 import { UserContext } from "../../../contexts/user/user.context";
 import { toast } from "react-toastify";
@@ -12,17 +11,16 @@ const Modalmc = ({ handleClose, newuser }) => {
   async function handleConfirm() {
     const checkpass = await axios({
       method: "post",
-      url: `${hostname}/api/checkuser`,
+      url: `/api/checkuser`,
       data: {
         email: newuser.email,
         password: password,
       },
     });
     if (checkpass.status === 201) {
-      console.log(newuser);
       await axios({
         method: "put",
-        url: `${hostname}/api/users/${newuser.id}`,
+        url: `/api/users/${newuser.id}`,
         data: { ...newuser, password: password },
       });
       setRefresh(!refresh);

@@ -1,38 +1,51 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./mc.module.scss";
+import Select from "react-select";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
+import { toast } from "react-toastify";
+import Router from "next/router";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
 
-function CheckUserName(name) {
-  var decimal = /^[A-Za-z]\w{4,14}$/;
-  if (name.match(decimal)) {
-    return true;
-  } else {
-    return false;
-  }
-}
+const Modalmc = ({ handleClose, newuser }) => {
+  const [adsense, setAdsense] = useState("");
+  const { user } = useContext(UserContext);
+  const [role, setRole] = useState(newuser.role);
 
-const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
-  const [name, setName] = useState("");
-
-  async function existsUser(name) {
-    const res = await axios({
-      url: `${hostname}/api/getuserbyname/${name}`,
-      method: "get",
-    });
-    return res.data.exists;
-  }
+  const options = [
+    { value: 2, label: "Admin", isDisabled: user.role <= 2 },
+    { value: 1, label: "Verified", isDisabled: user.role <= 1 },
+    { value: 0, label: "User", isDisabled: user.role <= 0 },
+    { value: -1, label: "Deactivated", isDisabled: user.role <= -1 },
+  ];
 
   async function handleNext() {
-    if (!CheckUserName(name)) {
-      toast.error(
-        "Please enter username of atleast 5 character long, containing only letters, numbers, underscores!"
-      );
-    } else if (await existsUser(name)) {
-      toast.error("Username already exists! Please select another one!");
+    if (newuser.id === user.id) {
+      if (role !== newuser.role) {
+        toast("You cannot change your own role!");
+      }
+      if (adsense) {
+        const res = await axios({
+          url: `/api/users/${newuser.id}`,
+          method: "put",
+          data: { ...newuser, adsense: adsense ? adsense : null },
+        });
+        Router.replace(Router.asPath);
+        toast.success("Monetisation code has been updated!");
+        handleClose();
+      }
+      return;
+    }
+    if (role !== newuser.role || adsense) {
+      const res = await axios({
+        url: `/api/users/${newuser.id}`,
+        method: "put",
+        data: { ...newuser, adsense: adsense ? adsense : null, role: role },
+      });
+      Router.replace(Router.asPath);
+      toast.success("Profile has been updated!");
+      handleClose();
     } else {
-      setnewuser({ ...newuser, name: name });
-      setShow("Confirm");
+      toast("No changes found!");
     }
   }
 
@@ -54,20 +67,32 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
             <input
               type="text"
               name="name"
+              value={adsense}
               onChange={(e) => {
-                setName(e.target.value);
+                setAdsense(e.target.value);
               }}
             />
           </form>
 
           <form className={styles["username-input"] + " " + styles["input-field"]}>
             <label htmlFor="">Role</label>
-            <select className={styles["select-field"]}>
-              <option value="1">Admin</option>
-              <option value="2">Verified</option>
-              <option value="3">User</option>
-              <option value="4">Deactivate</option>
-            </select>
+            <Select
+              options={options}
+              onChange={(option) => {
+                setRole(option.value);
+              }}
+              value={options.filter((item) => {
+                return item.value === role;
+              })}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 8,
+                colors: {
+                  ...theme.colors,
+                  primary: "#7839ee",
+                },
+              })}
+            />
           </form>
         </div>
         <div className={styles["bottom-button"]}>

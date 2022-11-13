@@ -5,25 +5,62 @@ import Navigation from "../main-site/components/navigation/navigation.component"
 import Footer from "../main-site/components/footer/footer.component";
 import Home from "../main-site/routes/home/home.route";
 import FI from "../main-site/components/floatingicon/fi.component";
-import axios from "axios";
-import { hostname } from "../config/hostname";
+import Script from "next/script";
+import { scriptqueries } from "../db/scripts.model";
+import { otherqueries } from "../db/otherqueries.model";
 
 import styles from "../styles/mainpage.module.scss";
 
 export async function getServerSideProps(context) {
-  const res = await axios.get(`${hostname}/api/statistics`);
-  const res2 = await axios.get(`${hostname}/api/scripts`);
-  const statistics = res.data;
+  const res = JSON.parse(JSON.stringify(await otherqueries.getStatistics()));
+  const res2 = JSON.parse(JSON.stringify(await scriptqueries.getAllScripts()));
+  const res3 = JSON.parse(
+    JSON.stringify(await otherqueries.getAdsenseDefault())
+  );
+  const statistics = res;
   return {
-    props: { statistics, scripts: res2.data },
+    props: { statistics, scripts: res2, adsense: res3.adsense },
   };
 }
 
-export default function HomePage({ statistics, scripts }) {
+export default function HomePage({ statistics, scripts, adsense }) {
   return (
     <div className={styles["mainsite-bg"]}>
       <Head>
-        <title>Scripthome</title>
+        <title>ScriptHome</title>
+        {/* Primary Meta Tags  */}
+        <meta name="title" content="ScriptHome" />
+        <meta
+          name="description"
+          content="Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server."
+        />
+
+        {/* Open Graph / Facebook  */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://scripthome.org/" />
+        <meta property="og:title" content="ScriptHome" />
+        <meta
+          property="og:description"
+          content="Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server."
+        />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/yash1014/image/upload/v1667901327/sitepreviewscripthome.jpg"
+        />
+
+        {/* Twitter  */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://scripthome.org/" />
+        <meta property="twitter:domain" content="https://scripthome.org/" />
+        <meta property="twitter:title" content="ScriptHome" />
+        <meta
+          property="twitter:description"
+          content="Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server."
+        />
+        <meta
+          property="twitter:image"
+          content="https://res.cloudinary.com/yash1014/image/upload/v1667901327/sitepreviewscripthome.jpg"
+        />
       </Head>
 
       <AnimatePresence mode="wait">
@@ -34,6 +71,7 @@ export default function HomePage({ statistics, scripts }) {
           <Footer />
         </AnimatedPage>
       </AnimatePresence>
+      <Script src={adsense} />
     </div>
   );
 }

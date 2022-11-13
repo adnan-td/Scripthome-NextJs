@@ -137,6 +137,10 @@
         &:hover {
           background-color: rgba(0, 0, 0, 0.23);
         }
+
+        &--mod {
+          width: 80% !important;
+        }
       }
 
       .nav-b2 {
@@ -157,7 +161,11 @@
         }
 
         &--mod {
-          background: linear-gradient(153.06deg, #ff0000 -0.31%, #990000 99.69%);
+          background: linear-gradient(
+            153.06deg,
+            #ff0000 -0.31%,
+            #990000 99.69%
+          );
           display: flex;
           gap: 0.25rem;
           justify-content: center;
@@ -293,7 +301,7 @@
         margin: 0;
         margin-left: 20px;
         left: 10vw;
-        top: 3px;
+        top: 12px;
         position: absolute;
       }
     }

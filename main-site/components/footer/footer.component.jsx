@@ -8,9 +8,16 @@ const Footer = () => {
     <footer className={styles["footer"]}>
       <div className={styles["footer__top"]}>
         <div className={styles["footer__top__left"]}>
-          <img className={styles["footer__top__left__img"]} src="/Logo/Logo-text.svg" alt="Logo" />
+          <Link href="/">
+            <img
+              className={styles["footer__top__left__img"]}
+              src="/Logo/Logo-text.svg"
+              alt="Logo"
+            />
+          </Link>
           <p className={styles["footer__top__left__para"]}>
-            The following scripts uploaded on our site are for educational use only.
+            The following scripts uploaded on our site are for educational use
+            only.
           </p>
         </div>
         <div className={styles["footer__top__right"]}>
@@ -18,20 +25,28 @@ const Footer = () => {
             <p className={styles["footer__top__right__col__head"]}>site</p>
             <div className={styles["footer__top__right__col__link"]}>
               <Link href="/">
-                <a className={styles["footer__top__right__col__link__item"]}>Home</a>
+                <a className={styles["footer__top__right__col__link__item"]}>
+                  Home
+                </a>
               </Link>
               <Link href="/scripts">
-                <a className={styles["footer__top__right__col__link__item"]}>Scripts</a>
+                <a className={styles["footer__top__right__col__link__item"]}>
+                  Scripts
+                </a>
               </Link>
             </div>
           </div>
           <div className={styles["footer__top__right__col"]}>
             <p className={styles["footer__top__right__col__head"]}>Account</p>
             <div className={styles["footer__top__right__col__link"]}>
-              <Signinmodal className={styles["footer__top__right__col__link__item"]}>
+              <Signinmodal
+                className={styles["footer__top__right__col__link__item"]}
+              >
                 Log in
               </Signinmodal>
-              <Signupmodal className={styles["footer__top__right__col__link__item"]}>
+              <Signupmodal
+                className={styles["footer__top__right__col__link__item"]}
+              >
                 Sign Up
               </Signupmodal>
             </div>
@@ -48,7 +63,7 @@ const Footer = () => {
                 Discord
               </a>
               <a
-                href="https://www.youtube.com/channel/UC2_Ab-9puBiqcQGcwoz6Rag"
+                href="https://www.youtube.com/@hacoscripts"
                 target="_blank"
                 rel="noreferrer"
                 className={styles["footer__top__right__col__link__item"]}
@@ -61,10 +76,14 @@ const Footer = () => {
             <p className={styles["footer__top__right__col__head"]}>Legal</p>
             <div className={styles["footer__top__right__col__link"]}>
               <Link href="/terms">
-                <a className={styles["footer__top__right__col__link__item"]}>Terms</a>
+                <a className={styles["footer__top__right__col__link__item"]}>
+                  Terms
+                </a>
               </Link>
               <Link href="/privacy">
-                <a className={styles["footer__top__right__col__link__item"]}>Privacy</a>
+                <a className={styles["footer__top__right__col__link__item"]}>
+                  Privacy
+                </a>
               </Link>
             </div>
           </div>

@@ -3,7 +3,6 @@ import styles from "./scripts.module.scss";
 import ScriptPreview from "../../components/script-preview/preview.component";
 import Background from "../../components/background/background.component";
 import { useContext, useEffect, useState } from "react";
-import { hostname } from "../../../config/hostname";
 import ReactPaginate from "react-paginate";
 import { WidthContext } from "../../contexts/screenwidth/screenwidth.context";
 

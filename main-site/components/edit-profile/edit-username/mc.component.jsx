@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styles from "./mc.module.scss";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 
 function CheckUserName(name) {
   var decimal = /^[A-Za-z]\w{4,14}$/;
@@ -17,7 +16,7 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
 
   async function existsUser(name) {
     const res = await axios({
-      url: `${hostname}/api/getuserbyname/${name}`,
+      url: `/api/getuserbyname/${name}`,
       method: "get",
     });
     return res.data.exists;

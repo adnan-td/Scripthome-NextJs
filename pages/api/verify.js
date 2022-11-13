@@ -7,6 +7,7 @@ let transporter = nodemailer.createTransport({
     user: process.env.EMAIL_SERVER_USER,
     pass: process.env.EMAIL_SERVER_PASSWORD,
   },
+  tls: { rejectUnauthorized: false },
 });
 
 export default async function getuser(req, res) {
@@ -39,6 +40,7 @@ export default async function getuser(req, res) {
           </div>
           `,
         };
+
         await transporter.sendMail(mailoptions);
       } catch (e) {
         if (e) console.log(e);

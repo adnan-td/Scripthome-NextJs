@@ -93,6 +93,7 @@ const Modalmc = ({ handleClose, setModal, newuser, otp, expiry, getOTP }) => {
               <p className={styles["re-text"]}>
                 Didn{"'"}t get the code?{" "}
                 <button
+                  style={{ fontSize: "0.9rem" }}
                   type="button"
                   onClick={() => {
                     getOTP(newuser.email);

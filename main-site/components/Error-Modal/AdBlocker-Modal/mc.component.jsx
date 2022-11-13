@@ -1,10 +1,9 @@
 import styles from "./mc.module.scss";
 import Router from "next/router";
-import { useEffect, useRef, useState } from "react";
 
-const Modalmc = () => {
+const Modalmc = ({ refresh, setRefresh }) => {
   const handleClick = () => {
-    Router.push("/");
+    setRefresh(!refresh);
     Router.reload();
   };
   return (

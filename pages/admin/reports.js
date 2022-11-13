@@ -1,8 +1,7 @@
 import Reports from "../../admin-panel/routes/reports/reports.route";
 import MainContent from "../../admin-panel/components/maincontent/maincontent.component";
 import { getSession } from "next-auth/react";
-import axios from "axios";
-import { hostname } from "../../config/hostname";
+import { otherqueries } from "../../db/otherqueries.model";
 
 const ReportsPage = ({ reports }) => {
   return (
@@ -23,15 +22,9 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const res = await axios({
-    url: `${hostname}/api/reports`,
-    method: "post",
-    data: {
-      method: "getall",
-    },
-  });
+  const res = JSON.parse(JSON.stringify(await otherqueries.getReports()));
   return {
-    props: { reports: res.data },
+    props: { reports: res },
   };
 }
 

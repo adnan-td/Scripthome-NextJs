@@ -5,15 +5,31 @@ import stylesa from "../../../../admin-panel/app.module.scss";
 import stylesb from "../../../../admin-panel/bootstrap.module.scss";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { hostname } from "../../../../config/hostname";
 import Link from "next/link";
 import MainContent from "../../../../admin-panel/components/maincontent/maincontent.component";
 import { UserContext } from "../../../../main-site/contexts/user/user.context";
+import { AllScriptContext } from "../../../../main-site/contexts/allscripts/scripts.context";
+import { imghost } from "../../../../config/img_hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
+
+function isNumeric(str) {
+  if (typeof str != "string") return false;
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
+function extractGameCode(gameLink) {
+  const temp = gameLink.split("/games/")[1];
+  const temp2 = temp?.split("/")[0];
+  if (isNumeric(temp2)) {
+    return temp2;
+  } else {
+    return 0;
+  }
+}
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -33,8 +49,10 @@ export async function getServerSideProps(context) {
 
 export default function FormScript() {
   const formRef = useRef(null);
+  const fileInputRef = useRef(null);
   var slugify = require("slugify");
   const { user } = useContext(UserContext);
+  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   const [formFields, setFormFields] = useState({
     img: "",
     title: "",
@@ -56,10 +74,10 @@ export default function FormScript() {
   };
 
   const submitHandler = async () => {
-    const final = { ...formFields, user_id: user.id, gameCode: gameLink };
+    const final = { ...formFields, user_id: user.id, gameCode: extractGameCode(gameLink) };
     if (await checkvalidscript(final)) {
       const res = await axios({
-        url: `${hostname}/api/scripts`,
+        url: `/api/scripts`,
         method: "post",
         data: final,
       });
@@ -76,6 +94,7 @@ export default function FormScript() {
         description: "",
         user_id: "",
       });
+      setRefreshScripts(!refreshScripts);
       toast.success("Script has been successfully added!");
     }
   };
@@ -96,7 +115,7 @@ export default function FormScript() {
     } = script;
 
     const res = await axios({
-      url: `${hostname}/api/getscriptbyslug/${slugify(title, { lower: true })}`,
+      url: `/api/getscriptbyslug/${slugify(title, { lower: true })}`,
       method: "post",
       data: {
         method: "getscript",
@@ -142,16 +161,18 @@ export default function FormScript() {
     const onChange = async (formData) => {
       const config = {
         headers: { "content-type": "multipart/form-data" },
-        onUploadProgress: (event) => {
-          console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-        },
       };
 
-      const response = await axios.post(`${hostname}/api/uploadimg`, formData, config);
+      try {
+        const response = await axios.post(`${imghost}/request`, formData, config);
 
-      // console.log("response ---> ", response);
-      setFormFields({ ...formFields, img: response.data.img });
-      toast.success("Image was Successfully Uploaded!");
+        setFormFields({ ...formFields, img: response.data.img });
+        toast.success("Image was Successfully Uploaded!");
+      } catch (e) {
+        console.log(e);
+        fileInputRef.current.form.reset();
+        toast.error("Sorry something happened! Please make sure file size is under 100 Kb");
+      }
     };
     onChange(formData);
   };
@@ -261,6 +282,7 @@ export default function FormScript() {
                   onChange={onChangeHandler}
                   type="file"
                   style={{ marginTop: "0.5rem" }}
+                  ref={fileInputRef}
                 />
               </div>
               <div className={styles("form-floating")}>

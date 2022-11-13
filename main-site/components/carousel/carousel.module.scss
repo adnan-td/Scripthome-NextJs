@@ -57,14 +57,18 @@
       }
 
       .cc-img {
-        width: 250px;
+        min-width: 250px;
+        height: 100%;
         border-radius: 12px;
         aspect-ratio: 230/165;
+        position: relative;
         object-fit: cover;
+        overflow: hidden;
 
         @media (max-width: 600px) {
-          width: 100%;
+          min-width: 20px;
           aspect-ratio: 197/111;
+          width: 100%;
         }
       }
 
@@ -115,7 +119,8 @@
 
             .lav-img-c {
               background: #17151f;
-              box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05), 0px 2px 4px rgba(48, 49, 51, 0.1);
+              box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05),
+                0px 2px 4px rgba(48, 49, 51, 0.1);
               border-radius: 6px;
               width: 40px;
               height: 40px;

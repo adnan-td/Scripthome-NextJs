@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import styles from "./mc.module.scss";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 import { UserContext } from "../../../contexts/user/user.context";
 import InputPassword from "../../input/input.component";
 
@@ -33,7 +32,7 @@ const Modalmc = ({ handleClose, newuser }) => {
   async function checkoldpass(pass, email) {
     const checkpass = await axios({
       method: "post",
-      url: `${hostname}/api/checkuser`,
+      url: `/api/checkuser`,
       data: {
         email: email,
         password: pass,
@@ -60,7 +59,7 @@ const Modalmc = ({ handleClose, newuser }) => {
     } else {
       await axios({
         method: "put",
-        url: `${hostname}/api/users/${user.id}`,
+        url: `/api/users/${user.id}`,
         data: { new_password: new_password, password: old_password },
       });
       setRefresh(!refresh);

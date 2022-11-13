@@ -1,6 +1,5 @@
 import styles from "./mc.module.scss";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 import { toast } from "react-toastify";
 
 const Modalmc = ({ handleClose, newuser }) => {
@@ -22,7 +21,7 @@ const Modalmc = ({ handleClose, newuser }) => {
   async function PostNewUser(data) {
     const res = await axios({
       method: "post",
-      url: `${hostname}/api/users`,
+      url: `/api/users`,
       data: { ...data },
     });
     return await res;

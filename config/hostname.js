@@ -1,3 +1,2 @@
-const isNotDevlopment = process.env.HOST;
-
-export const hostname = isNotDevlopment !== undefined ? process.env.HOST : "http://localhost:3000";
+// export const hostname = "https://scripthome.org";
+export const hostname = "http://localhost:3000";

@@ -1,5 +1,4 @@
 import { useState, createContext, useEffect } from "react";
-import { hostname } from "../../../config/hostname";
 import axios from "axios";
 
 export const AllScriptContext = createContext({ scripts: null });
@@ -13,8 +12,18 @@ export const ScriptsAll = ({ children }) => {
       setLoading(true);
       const res = await axios({
         method: "get",
-        url: `${hostname}/api/scripts`,
+        url: `/api/scripts`,
       });
+      function dateComparison(a, b) {
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date);
+        return date2 - date1;
+      }
+      function viewComparison(a, b) {
+        return b.views - a.views;
+      }
+      res.data.sort(viewComparison);
+      res.data.sort(dateComparison);
       setScripts(res.data);
       setLoading(false);
     }

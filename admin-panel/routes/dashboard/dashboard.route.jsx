@@ -6,7 +6,8 @@ import { AllScriptContext } from "./../../../main-site/contexts/allscripts/scrip
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
-import { hostname } from "../../../config/hostname";
+import { imghost } from "../../../config/img_hostname";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
@@ -14,6 +15,7 @@ const styles = (classname) => {
 };
 
 export default function Dashboard() {
+  const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
   const { scripts } = useContext(AllScriptContext);
   const [current, Setcurrent] = useState(0);
@@ -37,18 +39,33 @@ export default function Dashboard() {
     if (searchfield !== "") {
       Setfilteredscripts(
         scripts.filter((script) => {
-          return (
-            script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
-            script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
-          );
+          if (user?.role >= 2) {
+            return (
+              script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              script.user_id === user?.id &&
+              (script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
         })
       );
       Setcurrent(0);
     } else {
-      Setfilteredscripts(scripts);
+      Setfilteredscripts(
+        scripts.filter((script) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return script.user_id === user?.id;
+          }
+        })
+      );
     }
-  }, [searchfield, scripts]);
-  // }, [searchfield, scripts]);
+  }, [searchfield, scripts, user]);
 
   useEffect(() => {
     Setshortscripts(filteredscripts.slice(current, current + 6));
@@ -85,7 +102,9 @@ export default function Dashboard() {
               <td>View Script</td>
             </tr>
             {shortscripts.map((item, key) => {
-              return <Tr img={item.img} script={item} key={key} srno={current + key} />;
+              return (
+                <Tr img={`${imghost}/${item.img}`} script={item} key={key} srno={current + key} />
+              );
             })}
           </tbody>
         </table>
@@ -138,7 +157,7 @@ function Tr({ img, script, srno }) {
         <p style={{ minWidth: "96px" }}>{new Date(date).toDateString()}</p>
       </td>
       <td className={styles("align-middle")}>
-        <Link href={`/admin/scripts/editscript?id=${srno}`}>
+        <Link href={`/admin/scripts/editscript/${script.id}`}>
           <a className={styles("btn-3")}>
             <div className={styles("pen-icon")}>
               <img src="/Adminpanel/img/Pencil.svg" alt="" />

@@ -121,6 +121,8 @@
           }
 
           .script-number {
+            min-width: fit-content;
+            overflow: auto;
             .s-line-num {
               -webkit-user-select: none; /* Safari */
               -ms-user-select: none; /* IE 10 and IE 11 */

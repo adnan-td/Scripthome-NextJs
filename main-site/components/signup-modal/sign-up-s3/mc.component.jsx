@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import styles from "./mc.module.scss";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 import { toast } from "react-toastify";
+import { imghost } from "../../../../config/img_hostname";
 
 const Modalmc = ({ handleClose, setnewuser, newuser, next }) => {
   const fileInputRef = useRef(null);
@@ -26,17 +26,18 @@ const Modalmc = ({ handleClose, setnewuser, newuser, next }) => {
     const onChange = async (formData) => {
       const config = {
         headers: { "content-type": "multipart/form-data" },
-        onUploadProgress: (event) => {
-          console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-        },
       };
 
-      const response = await axios.post(`${hostname}/api/uploadimg`, formData, config);
+      try {
+        const response = await axios.post(`${imghost}/request`, formData, config);
 
-      // console.log("response ---> ", response);
-      setnewuser({ ...newuser, img: response.data.img });
-      toast.success("Image was Successfully Uploaded!");
-      next(5);
+        setnewuser({ ...newuser, img: `${imghost}/${response.data.img}` });
+        toast.success("Image was Successfully Uploaded!");
+        next(5);
+      } catch (e) {
+        console.log(e);
+        toast.error("Sorry something happened! Please make sure file size is under 100 Kb");
+      }
     };
     onChange(formData);
 
@@ -58,16 +59,16 @@ const Modalmc = ({ handleClose, setnewuser, newuser, next }) => {
             <span>Upload the photograph that you want for your profile.</span>
           </div>
 
-          <form className={styles["upload-div"]} ref={formRef}>
+          <form className={styles["upload-div"]} ref={formRef} onClick={onClickHandler}>
             <img src="/Modal/sign-up/upload-icon.svg" alt="" />
             <div className={styles["up-content-div"]}>
               <p className={styles["up-text"]}>
-                <button type="button" className={styles["up-action"]} onClick={onClickHandler}>
+                <button type="button" className={styles["up-action"]}>
                   Click to upload
                 </button>{" "}
                 or drag and drop
               </p>
-              <p>SVG, PNG, JPG or Webp (max. 500 KB)</p>
+              <p>SVG, PNG, JPG or Webp (max. 100 KB)</p>
             </div>
             <input
               multiple={false}

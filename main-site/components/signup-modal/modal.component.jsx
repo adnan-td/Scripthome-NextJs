@@ -6,7 +6,6 @@ import Modalmc3 from "./sign-up-s3/mc.component";
 import Modalmc4 from "./sign-up-s4-random-select/mc.component";
 import Modalmc5 from "./sign-up-s5/mc.component";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
 import { toast } from "react-toastify";
 
 export default function Signupmodal({ className, children }) {
@@ -20,7 +19,7 @@ export default function Signupmodal({ className, children }) {
     const res = await axios({
       method: "post",
       data: { email: email },
-      url: `${hostname}/api/verify`,
+      url: `/api/verify`,
     });
     if (res.status === 201) {
       setotp(res.data.otp);

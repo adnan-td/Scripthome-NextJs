@@ -4,10 +4,11 @@ import Link from "next/link";
 import { SearchContext } from "../../contexts/searchfield/search.context";
 import { AllScriptContext } from "./../../../main-site/contexts/allscripts/scripts.context";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
+import { imghost } from "../../../config/img_hostname";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
@@ -15,6 +16,7 @@ const styles = (classname) => {
 };
 
 export default function ShowComments() {
+  const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
   const { scripts } = useContext(AllScriptContext);
   const [current, Setcurrent] = useState(0);
@@ -38,17 +40,33 @@ export default function ShowComments() {
     if (searchfield !== "") {
       Setfilteredscripts(
         scripts.filter((script) => {
-          return (
-            script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
-            script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
-          );
+          if (user?.role >= 2) {
+            return (
+              script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              script.user_id === user?.id &&
+              (script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
         })
       );
       Setcurrent(0);
     } else {
-      Setfilteredscripts(scripts);
+      Setfilteredscripts(
+        scripts.filter((script) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return script.user_id === user?.id;
+          }
+        })
+      );
     }
-  }, [searchfield, scripts]);
+  }, [searchfield, scripts, user]);
   // }, [searchfield, scripts]);
 
   useEffect(() => {
@@ -98,7 +116,9 @@ export default function ShowComments() {
               <td>View Script</td>
             </tr>
             {shortscripts.map((item, key) => {
-              return <Tr img={item.img} script={item} key={key} srno={current + key} />;
+              return (
+                <Tr img={`${imghost}/${item.img}`} script={item} key={key} srno={current + key} />
+              );
             })}
           </tbody>
         </table>
@@ -125,7 +145,7 @@ function Tr({ img, script }) {
   async function getnoofcomments(id) {
     const res = await axios({
       method: "post",
-      url: `${hostname}/api/comments`,
+      url: `/api/comments`,
       data: {
         method: "getcomments",
         id_script: id,

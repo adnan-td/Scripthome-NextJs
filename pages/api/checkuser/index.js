@@ -27,7 +27,6 @@ export default async function getuser(req, res) {
         }
       } else {
         errorobj.message = "User does not exist";
-        console.log(errorobj);
         res.status(200).send(errorobj);
       }
     }

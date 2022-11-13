@@ -11,7 +11,9 @@ export default async function viewQueries(req, res) {
     } else if (query.method === "add") {
       // this id is of script
       await otherqueries.addNewView(query.id);
-      res.status(200);
+      res.status(200).send({});
     }
+  } else {
+    res.status(200).send({});
   }
 }

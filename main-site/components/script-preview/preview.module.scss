@@ -13,8 +13,8 @@
 
   .sideimage {
     width: 100%;
-    // min-height: 185px;
     object-fit: cover;
+    height: 100%;
   }
 }
 .overlaytext1 {
@@ -56,13 +56,12 @@
 
       &__para {
         margin-bottom: 7px;
-        font-size: 0.75rem;
-        overflow: hidden;
+        font-size: 0.875rem;
         max-height: 30px;
         position: relative;
         font-weight: 400;
         line-height: 17px;
-        color: #ffffe5;
+        color: #e7dfda;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

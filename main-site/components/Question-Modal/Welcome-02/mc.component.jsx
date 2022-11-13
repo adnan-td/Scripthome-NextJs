@@ -1,4 +1,5 @@
 import styles from "./mc.module.scss";
+import Image from "next/image";
 
 const Modalmc = ({ handleClose, next }) => {
   const handleNext = () => {
@@ -12,10 +13,17 @@ const Modalmc = ({ handleClose, next }) => {
       >
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
-            <img
+            {/* <img
               src="/Question-Modal/Welcome-02.jpg"
               alt=""
               className={styles["welcome-img"]}
+            /> */}
+            <Image
+              layout="fill"
+              src="/Question-Modal/Welcome-02.jpg"
+              alt="welcomeimg"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,LNHo9oItJ$S|T}msoMoeEKaLxsn%"
             />
           </div>
           <div className={styles["h-content-div"]}>
@@ -39,7 +47,12 @@ const Modalmc = ({ handleClose, next }) => {
           <a className={styles["anchorlink"]} onClick={handleNext}>
             <button className={styles["cancel-button"]}>Skip</button>
           </a>
-          <a target="_blank" rel="noreferrer" href="https://www.youtube.com/channel/UC2_Ab-9puBiqcQGcwoz6Rag" className={styles["anchorlink"]}>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.youtube.com/@hacoscripts"
+            className={styles["anchorlink"]}
+          >
             <button className={styles["next-button"]}>Subscribe</button>
           </a>
         </div>

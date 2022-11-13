@@ -30,7 +30,6 @@ export default async function getoneuser(req, res) {
     }
   } else if (req.method === "GET") {
     const script = await scriptqueries.getScriptbyID(id);
-    console.log(script);
     res.status(200).send(script);
   } else {
     res.status(200).send({ message: "Does not exist" });
@@ -38,14 +37,7 @@ export default async function getoneuser(req, res) {
 }
 
 function isValid(script) {
-  if (
-    script.id &&
-    script.user_id &&
-    script.title.length !== 0 &&
-    script.madeby.length !== 0 &&
-    script.script_code.length !== 0 &&
-    script.description.length !== 0
-  ) {
+  if (script.user_id && script.title && script.madeby && script.script_code && script.description) {
     return true;
   } else return false;
 }

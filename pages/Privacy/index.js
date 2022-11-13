@@ -1,8 +1,44 @@
 import style from "./privacy.module.scss";
+import Head from "next/head";
 
 export default function PrivacyPage() {
   return (
     <div className={style["mainsite-bg"]}>
+      <Head>
+        {/* Primary Meta Tags  */}
+        <meta name="title" content="ScriptHome | Privacy" />
+        <meta
+          name="description"
+          content="Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server."
+        />
+
+        {/* Open Graph / Facebook  */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://scripthome.org/" />
+        <meta property="og:title" content="ScriptHome | Privacy" />
+        <meta
+          property="og:description"
+          content="Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server."
+        />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/yash1014/image/upload/v1667065497/site-preview_vcfic9.png"
+        />
+
+        {/* Twitter  */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://scripthome.org/" />
+        <meta property="twitter:domain" content="https://scripthome.org/" />
+        <meta property="twitter:title" content="ScriptHome | Privacy" />
+        <meta
+          property="twitter:description"
+          content="Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server."
+        />
+        <meta
+          property="twitter:image"
+          content="https://res.cloudinary.com/yash1014/image/upload/v1667065497/site-preview_vcfic9.png"
+        />
+      </Head>
       <div>
         <nav className={style["navbar"]}>
           <div className={style["container"]}>
@@ -118,8 +154,8 @@ export default function PrivacyPage() {
                   </li>
                   <li className={style["font-family"]}>
                     Company: when this policy mentions “Company,” “we,” “us,” or
-                    “our,” it refers to Scripthome, that is responsible for
-                    your information under this Privacy Policy.
+                    “our,” it refers to Scripthome, that is responsible for your
+                    information under this Privacy Policy.
                   </li>
                   <li className={style["font-family"]}>
                     Country: where Scripthome or the owners/founders of
@@ -165,8 +201,8 @@ export default function PrivacyPage() {
                     may interest you.
                   </li>
                   <li className={style["font-family"]}>
-                    Website: Scripthome{"'"}s site, which can be accessed via this
-                    URL: https://scripthome.org/
+                    Website: Scripthome{"'"}s site, which can be accessed via
+                    this URL: https://scripthome.org/
                   </li>
                   <li className={style["font-family"]}>
                     You: a person or entity that is registered with Scripthome
@@ -253,8 +289,8 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Scripthome will collect End User Data necessary to provide
-                  the Scripthome services to our customers. End users may
+                  Scripthome will collect End User Data necessary to provide the
+                  Scripthome services to our customers. End users may
                   voluntarily provide us with information they have made
                   available on social media websites. If you provide us with any
                   such information, we may collect publicly available
@@ -1025,9 +1061,9 @@ export default function PrivacyPage() {
                     style["para"]
                   }
                 >
-                  Scripthome uses {"'"}Cookies{"'"} to identify the areas of
-                  our website that you have visited. A Cookie is a small piece
-                  of data stored on your computer or mobile device by your web
+                  Scripthome uses {"'"}Cookies{"'"} to identify the areas of our
+                  website that you have visited. A Cookie is a small piece of
+                  data stored on your computer or mobile device by your web
                   browser. We use Cookies to enhance the performance and
                   functionality of our website but are non-essential to their
                   use. However, without these cookies, certain functionality
@@ -1235,7 +1271,6 @@ export default function PrivacyPage() {
                   <br />
                   <li className={style["font-family"]}>
                     Cookies <br />
-                    
                     <p
                       className={
                         style["font-family"] +
@@ -1257,7 +1292,6 @@ export default function PrivacyPage() {
                   <br />
                   <li className={style["font-family"]}>
                     Local Storage <br />
-                   
                     <p
                       className={
                         style["font-family"] +
@@ -1277,7 +1311,6 @@ export default function PrivacyPage() {
                   <br />
                   <li className={style["font-family"]}>
                     Sessions <br />
-                    
                     <p
                       className={
                         style["font-family"] +

@@ -1,7 +1,6 @@
 import styles from "./mc.module.scss";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { hostname } from "../../../../config/hostname";
 import { toast } from "react-toastify";
 import axios from "axios";
 import ResetPass from "../../Reset-Password/modal.component";
@@ -22,7 +21,7 @@ const Modalmc = ({ handleClose, handleShow }) => {
     };
     const res = await axios({
       method: "post",
-      url: `${hostname}/api/checkuser`,
+      url: `/api/checkuser`,
       data: { ...loginDetails },
     });
 
@@ -30,7 +29,6 @@ const Modalmc = ({ handleClose, handleShow }) => {
       signIn("email", { redirect: false, email: email });
       handleShow(2);
     } else {
-      // console.log(res);
       const message = res.data.message;
       toast.error(message);
     }

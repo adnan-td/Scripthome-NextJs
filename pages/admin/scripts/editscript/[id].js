@@ -1,19 +1,36 @@
 import { getSession } from "next-auth/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Router from "next/router";
 import stylesa from "../../../../admin-panel/app.module.scss";
 import stylesb from "../../../../admin-panel/bootstrap.module.scss";
 import axios from "axios";
+import { scriptqueries } from "../../../../db/scripts.model";
 import { toast } from "react-toastify";
-import { hostname } from "../../../../config/hostname";
 import Link from "next/link";
 import MainContent from "../../../../admin-panel/components/maincontent/maincontent.component";
 import { UserContext } from "../../../../main-site/contexts/user/user.context";
+import { AllScriptContext } from "../../../../main-site/contexts/allscripts/scripts.context";
+import { imghost } from "../../../../config/img_hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
+
+function isNumeric(str) {
+  if (typeof str != "string") return false;
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
+function extractGameCode(gameLink) {
+  const temp = gameLink.split("/games/")[1];
+  const temp2 = temp.split("/")[0];
+  if (isNumeric(temp2)) {
+    return temp2;
+  } else {
+    return 0;
+  }
+}
 
 export async function getServerSideProps(context) {
   const id = context.params.id;
@@ -27,21 +44,31 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const res = await axios({
-    url: `${hostname}/api/scripts/${id}`,
-    method: "get",
-  });
-  console.log(res.data, "data");
+  const res = JSON.parse(JSON.stringify(await scriptqueries.getScriptbyID(id)));
   return {
-    props: { script: res.data },
+    props: { script: res },
   };
 }
 
 export default function FormScript({ script }) {
   const formRef = useRef(null);
+  const fileInputRef = useRef(null);
   var slugify = require("slugify");
   const { user } = useContext(UserContext);
-  const [formFields, setFormFields] = useState(script);
+  const [formFields, setFormFields] = useState({
+    id: script.id,
+    img: script.img,
+    title: script.title,
+    madeby: script.madeby,
+    gameLink: script.gameLink,
+    youtubeLink: script.youtubeLink,
+    features: script.features,
+    tags: script.tags,
+    script_code: script.script_code,
+    description: script.description,
+    user_id: script.user_id,
+  });
+  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   const {
     img,
     title,
@@ -61,13 +88,15 @@ export default function FormScript({ script }) {
   };
 
   const submitHandler = async () => {
-    const final = { ...formFields, user_id: user.id, gameCode: gameLink };
+    const final = { ...formFields, gameCode: extractGameCode(gameLink) };
     if (await checkvalidscript(final)) {
+      console.log(final);
       const res = await axios({
-        url: `${hostname}/api/scripts/${script.id}`,
+        url: `/api/scripts/${script.id}`,
         method: "put",
-        data: final,
+        data: { ...final },
       });
+      setRefreshScripts(!refreshScripts);
       toast.success("Script has been successfully updated!");
     }
   };
@@ -76,7 +105,7 @@ export default function FormScript({ script }) {
     const { title, user_id, img, madeby, gameLink, script_code, description } = script;
 
     const res = await axios({
-      url: `${hostname}/api/getscriptbyslug/${slugify(title, { lower: true })}`,
+      url: `/api/getscriptbyslug/${slugify(title, { lower: true })}`,
       method: "post",
       data: {
         method: "getscript",
@@ -128,16 +157,18 @@ export default function FormScript({ script }) {
     const onChange = async (formData) => {
       const config = {
         headers: { "content-type": "multipart/form-data" },
-        onUploadProgress: (event) => {
-          console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-        },
       };
 
-      const response = await axios.post(`${hostname}/api/uploadimg`, formData, config);
-
-      // console.log("response ---> ", response);
-      setFormFields({ ...formFields, img: response.data.img });
-      toast.success("Image was Successfully Uploaded!");
+      try {
+        const response = await axios.post(`${imghost}/request`, formData, config);
+        setFormFields({ ...formFields, img: response.data.img });
+        toast.success("Image was Successfully Uploaded!");
+      } catch (e) {
+        console.log(e);
+        console.log(fileInputRef);
+        fileInputRef.current.form.reset();
+        toast.error("Sorry something happened! Please make sure file size is under 100 Kb");
+      }
     };
     onChange(formData);
   };
@@ -247,6 +278,7 @@ export default function FormScript({ script }) {
                   onChange={onChangeHandler}
                   type="file"
                   style={{ marginTop: "0.5rem" }}
+                  ref={fileInputRef}
                 />
               </div>
               <div className={styles("form-floating")}>

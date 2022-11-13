@@ -8,7 +8,6 @@ function Adblock() {
 
   let x_width = fakeAd.offsetHeight;
   // let msg = document.getElementById("msg")
-  console.log(x_width);
 
   if (x_width) {
     window.location = "/";

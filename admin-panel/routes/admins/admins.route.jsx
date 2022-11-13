@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
 import ArrowButtons from "../../components/arrowbuttons/arrowbuttons.component";
 import { useContext, useState, useEffect } from "react";
@@ -6,6 +7,7 @@ import Edit from "../../components/edit-admin-role-modal/mc.component.jsx";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
@@ -18,6 +20,7 @@ export default function Admins({ admins }) {
   const [shortadmins, Setshortadmins] = useState([]);
   const [filteredadmins, Setfilteredadmins] = useState([]);
   const [temp, setTemp] = useState(null);
+  const { user } = useContext(UserContext);
 
   const Addcurrent = () => {
     if (current + 10 > filteredadmins.length) {
@@ -52,14 +55,22 @@ export default function Admins({ admins }) {
     if (searchfield !== "") {
       Setfilteredadmins(
         admins.filter((admin) => {
-          return admin.name.includes(searchfield) || admin.email.includes(searchfield);
+          return (
+            admin.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+            admin.email.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+            admin.role < user.role
+          );
         })
       );
       Setcurrent(0);
     } else {
-      Setfilteredadmins(admins);
+      Setfilteredadmins(
+        admins.filter((admin) => {
+          return admin?.role <= user?.role;
+        })
+      );
     }
-  }, [searchfield, admins]);
+  }, [searchfield, admins, user]);
 
   useEffect(() => {
     Setshortadmins(filteredadmins.slice(current, current + 10));
@@ -128,6 +139,7 @@ export default function Admins({ admins }) {
 }
 
 function Tr({ srno, admin }) {
+  const { user } = useContext(UserContext);
   let { name, email, role } = admin;
   const roleconverter = (role) => {
     if (role === -1) role = "Deactivated";
@@ -137,21 +149,22 @@ function Tr({ srno, admin }) {
     if (role === 3) role = "Super-Admin";
     return role;
   };
-  role = roleconverter(role);
   return (
     <tr>
       <td>{srno + 1}</td>
       <td>{name}</td>
       <td>{email}</td>
       <td>
-        <div className={styles(role.toLocaleLowerCase())}>{role}</div>
+        <div className={styles(roleconverter(role).toLocaleLowerCase())}>{roleconverter(role)}</div>
       </td>
       <td>
-        <div>
-          <EditUser className={styles("dropdown-item-mod")} user={admin}>
-            Edit
-          </EditUser>
-        </div>
+        {user?.role > role && user?.role >= 2 ? (
+          <div>
+            <EditUser className={styles("dropdown-item-mod")} user={admin}>
+              Edit
+            </EditUser>
+          </div>
+        ) : null}
       </td>
     </tr>
   );
@@ -159,24 +172,13 @@ function Tr({ srno, admin }) {
 
 function EditUser({ className, user, children }) {
   const [show, setShow] = useState(false);
-  const [newUser, setNewUser] = useState(user);
 
   const handleClose = () => {
     setShow(false);
   };
   const handleShow = () => {
     setShow(true);
-    setNewUser(user);
   };
-
-  // useEffect(() => {
-  //   async function SubmitForm() {
-  //     setShow(false);
-  //   }
-  //   if (show === "Submit") {
-  //     SubmitForm();
-  //   }
-  // }, [show, newUser]);
 
   return (
     <>
@@ -187,14 +189,7 @@ function EditUser({ className, user, children }) {
       >
         {children}
       </button>
-      {show ? (
-        <Edit
-          handleClose={handleClose}
-          setnewuser={setNewUser}
-          newuser={newUser}
-          setShow={setShow}
-        />
-      ) : null}
+      {show ? <Edit handleClose={handleClose} newuser={user} /> : null}
     </>
   );
 }

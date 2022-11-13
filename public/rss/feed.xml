@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[ScriptHome]]></title>
+        <description><![CDATA[Automatically optimize your Roblox experience with scripts from ScriptHome. Roblox Scripts, which are frequently updated and uploaded, where almost everyone can contribute!. Get notified for new roblox scripts by joining our server.]]></description>
+        <link>http://localhost:3000</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Sat, 12 Nov 2022 17:55:04 GMT</lastBuildDate>
+        <atom:link href="http://localhost:3000/rss/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Sat, 12 Nov 2022 17:55:04 GMT</pubDate>
+        <copyright><![CDATA[All rights reserved 2022, Scripthome]]></copyright>
+        <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[UFO Simulator: Auto Kill, Collect Drops, Auto Rebirth]]></title>
+            <description><![CDATA[A brand new script brought to you by the team of scripthome for the game UFO Simulator. A very overpowered UFO Simulator script that allows you to play this game with differently impression. This script has a lot of very useful features, one of them is Auto Farm, it will automatically farm for you.]]></description>
+            <link>http://localhost:3000/scripts/ufo-simulator:-auto-kill-collect-drops-auto-rebirth</link>
+            <guid isPermaLink="true">http://localhost:3000/scripts/ufo-simulator:-auto-kill-collect-drops-auto-rebirth</guid>
+            <pubDate>Mon, 31 Oct 2022 18:30:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Sans Multiversal Battles 2: Tool Giver, Get All Attacks, Godmode]]></title>
+            <description><![CDATA[A brand new script brought to you by the team of scripthome for the game Sans Multiversal Battles 2. A very overpowered Sans Multiversal Battles! 2 script that allows you to play this game with differently impression. This script has a lot of very useful features, one of them is Get All Attacks, it will give for you all attacks in game.]]></description>
+            <link>http://localhost:3000/scripts/sans-multiversal-battles-2:-tool-giver-get-all-attacks-godmode</link>
+            <guid isPermaLink="true">http://localhost:3000/scripts/sans-multiversal-battles-2:-tool-giver-get-all-attacks-godmode</guid>
+            <pubDate>Mon, 31 Oct 2022 18:30:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Word Bomb: Options, Auto Play, Type Word]]></title>
+            <description><![CDATA[A brand new script brought to you by the team of scripthome for the game Word Bomb. A very overpowered Word Bomb script that allows you to play this game with differently impression. This script has a lot of very useful features, one of them is Auto Play, it will automatically play for you.]]></description>
+            <link>http://localhost:3000/scripts/word-bomb:-options-auto-play-type-word</link>
+            <guid isPermaLink="true">http://localhost:3000/scripts/word-bomb:-options-auto-play-type-word</guid>
+            <pubDate>Mon, 31 Oct 2022 18:30:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Speed Run Simulator: Auto Click, Auto Rebirth, Auto Rings]]></title>
+            <description><![CDATA[A brand new script brought to you by the team of scripthome for the game Speed Run Simulator. New and hot script for a game like Speed Run Simulator. This script has a lot of very useful features, one of them is Auto Rings, it will automatically collect rings for you.]]></description>
+            <link>http://localhost:3000/scripts/speed-run-simulator:-auto-click-auto-rebirth-auto-rings</link>
+            <guid isPermaLink="true">http://localhost:3000/scripts/speed-run-simulator:-auto-click-auto-rebirth-auto-rings</guid>
+            <pubDate>Mon, 31 Oct 2022 18:30:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Anime Evolution Simulator: Auto Use Boosts, Auto Click, Auto Rank Up]]></title>
+            <description><![CDATA[A brand new script brought to you by the team of scripthome for the game Anime Evolution Simulator. As you already understood this script for the game Anime Evolution Simulator. This script has a lot of very useful features, one of them is Auto Collect COins, it will automatically collect coins for you.]]></description>
+            <link>http://localhost:3000/scripts/anime-evolution-simulator:-auto-use-boosts-auto-click-auto-rank-up</link>
+            <guid isPermaLink="true">http://localhost:3000/scripts/anime-evolution-simulator:-auto-use-boosts-auto-click-auto-rank-up</guid>
+            <pubDate>Mon, 31 Oct 2022 18:30:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Swim Race Clicker: Auto Craft All, Auto Prestige]]></title>
+            <description><![CDATA[A brand new script brought to you by the team of scripthome for the game Swim Race Clicker. A very overpowered Swim Race Clicker script that allows you to play this game with differently impression. This script has a lot of very useful features, one of them is Auto Click, it will automatically click for you.]]></description>
+            <link>http://localhost:3000/scripts/swim-race-clicker:-auto-craft-all-auto-prestige</link>
+            <guid isPermaLink="true">http://localhost:3000/scripts/swim-race-clicker:-auto-craft-all-auto-prestige</guid>
+            <pubDate>Mon, 31 Oct 2022 18:30:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

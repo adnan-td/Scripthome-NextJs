@@ -48,6 +48,7 @@
         font-size: 12px;
         right: 23px;
         top: 20px;
+        z-index: 1;
 
         .script-like-para {
           margin-top: 0.25rem;
@@ -104,9 +105,11 @@
         width: 100%;
         aspect-ratio: 16/9;
         border: 6px solid #31343f;
+        position: relative;
         img {
           width: 100%;
           object-fit: cover;
+          height: 100%;
         }
       }
 
@@ -135,6 +138,11 @@
         line-height: 47px;
         letter-spacing: -0.01em;
         color: #fcfcf9;
+
+        @media (max-width: 600px) {
+          font-size: 1.5rem;
+          line-height: 32px;
+        }
       }
 
       .scripts-left-buttons {
@@ -181,7 +189,11 @@
             border: 2px solid rgba(97, 191, 101, 0.1);
           }
           &:active {
-            background: linear-gradient(153.06deg, #74d680 -0.31%, #378b29 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #74d680 -0.31%,
+              #378b29 99.69%
+            );
           }
           &:focus {
             border: 2px solid rgba(116, 214, 128, 1);
@@ -198,7 +210,11 @@
             );
           }
           &:active {
-            background: linear-gradient(153.06deg, #ff0000 -0.31%, #990000 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #ff0000 -0.31%,
+              #990000 99.69%
+            );
           }
           &:focus {
             border: 2px solid #ff0000;
@@ -219,7 +235,11 @@
             );
           }
           &:active {
-            background: linear-gradient(153.06deg, #f6fc9c -0.31%, #eaf818 99.69%);
+            background: linear-gradient(
+              153.06deg,
+              #f6fc9c -0.31%,
+              #eaf818 99.69%
+            );
           }
           &:focus {
             border: 2px solid #f6fc9c;
@@ -232,7 +252,7 @@
         }
       }
 
-      @media only screen and (max-width: 1330px) {
+      @media only screen and (max-width: 1400px) {
         .scripts-left-buttons {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -327,8 +347,10 @@
 .authorimage2 {
   width: 48px;
   height: 48px;
+  overflow: hidden;
   border-radius: 48px;
   margin-right: 10px;
+  position: relative;
 }
 .authorimage2 {
   margin-right: 0;
@@ -375,6 +397,10 @@
   p {
     width: 100%;
     text-align: end;
+
+    @media (max-width: 500px) {
+      text-align: start;
+    }
   }
 }
 .authorboxc12 {
@@ -529,10 +555,6 @@
     border: 2px solid rgba(105, 65, 198, 1);
   }
 
-  img {
-    width: 55px;
-  }
-
   &__div {
     display: flex;
     justify-content: space-between;
@@ -681,6 +703,10 @@
 .white-border {
   border: 2px solid white;
   border-radius: 55px;
+  position: relative;
+  width: 55px !important;
+  overflow: hidden;
+  aspect-ratio: 1;
 }
 
 // Responsive Author Div
@@ -778,6 +804,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
 
     &__heading {
       font-weight: 600;

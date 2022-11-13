@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
@@ -11,6 +13,7 @@ const styles = (classname) => {
 };
 
 const Tabs = ({ isopen, screenwidth }) => {
+  const { user } = useContext(UserContext);
   const router = useRouter();
   return (
     <>
@@ -20,7 +23,7 @@ const Tabs = ({ isopen, screenwidth }) => {
           id="sb"
           style={{ width: "100%" }}
         >
-          <Link href="/admin/dashboard">
+          <Link href="/">
             <a style={{ textDecoration: "none", cursor: "pointer" }}>
               <h3>Scripthome</h3>
             </a>
@@ -60,17 +63,19 @@ const Tabs = ({ isopen, screenwidth }) => {
                   Reports
                 </a>
               </Link>
-              <Link href="/admin/admins">
-                <a
-                  className={
-                    router.pathname.includes("/admin/admins")
-                      ? styles("nav-link") + " " + styles("active")
-                      : styles("nav-link")
-                  }
-                >
-                  Admins
-                </a>
-              </Link>
+              {user?.role >= 2 && (
+                <Link href="/admin/admins">
+                  <a
+                    className={
+                      router.pathname.includes("/admin/admins")
+                        ? styles("nav-link") + " " + styles("active")
+                        : styles("nav-link")
+                    }
+                  >
+                    Admins
+                  </a>
+                </Link>
+              )}
               <Link href="/admin/comments">
                 <a
                   className={

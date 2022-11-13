@@ -1,7 +1,6 @@
 import styles from "./mc.module.scss";
 import { useState } from "react";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
 import { toast } from "react-toastify";
 
 export default function ReportScriptModal({ className, children, script_id, reported_by, status }) {
@@ -38,7 +37,7 @@ const Modalmc = ({ handleClose, script_id, reported_by, status }) => {
     } else if (script_id && reported_by) {
       await axios({
         method: "post",
-        url: `${hostname}/api/reports`,
+        url: `/api/reports`,
         data: {
           method: "add",
           report: {

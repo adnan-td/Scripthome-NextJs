@@ -21,8 +21,9 @@ const Modalmc = ({ handleClose, code }) => {
   const [codelist, setcl] = useState([]);
   useEffect(() => {
     if (code) {
-      setcl(code.split("\n"));
-      console.log(code.split("\n"));
+      const list = code.split("\n");
+      list.unshift("--Powered by Scripthome.com--");
+      setcl(list);
     }
   }, [code]);
 
@@ -59,8 +60,8 @@ const Modalmc = ({ handleClose, code }) => {
           <button
             className={styles["next-button"]}
             onClick={() => {
-              navigator.clipboard.writeText(code);
-              toast.success("Game Link copied to your Clipboard!");
+              navigator.clipboard.writeText("--Powered by Scripthome.com--\n" + code);
+              toast.success("Game Script copied to your Clipboard!");
             }}
           >
             Copy Script

@@ -7,7 +7,7 @@ export default async function getoneuser(req, res) {
     if (user) {
       res.status(200).send(user);
     } else {
-      res.status(202).send({ message: "user not found" });
+      res.status(201).send({ message: "user not found" });
     }
   }
 }

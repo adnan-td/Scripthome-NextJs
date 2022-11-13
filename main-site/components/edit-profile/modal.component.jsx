@@ -32,7 +32,7 @@ export default function EditUser({ className, children }) {
   return (
     <>
       <button
-        style={{ border: "none", backgroundColor: "transparent" }}
+        style={{ border: "none", backgroundColor: "transparent", width: "100%" }}
         onClick={handleShow}
         className={className}
       >

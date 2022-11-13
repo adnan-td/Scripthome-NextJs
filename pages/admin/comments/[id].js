@@ -1,8 +1,7 @@
 import MainContent from "../../../admin-panel/components/maincontent/maincontent.component";
 import Comments from "../../../admin-panel/routes/comments/comments.route";
-import { hostname } from "../../../config/hostname";
 import { getSession } from "next-auth/react";
-import axios from "axios";
+import { otherqueries } from "../../../db/otherqueries.model";
 
 export async function getServerSideProps(context) {
   const id = context.params.id;
@@ -16,16 +15,9 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const res = await axios({
-    method: "post",
-    url: `${hostname}/api/comments`,
-    data: {
-      method: "getcomments",
-      id_script: id,
-    },
-  });
+  const res = JSON.parse(JSON.stringify(await otherqueries.getAllCommentsAdmin(id)));
   return {
-    props: { comments: res.data },
+    props: { comments: res },
   };
 }
 

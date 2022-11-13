@@ -1,18 +1,24 @@
 import styles from "./mc.module.scss";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Router from "next/router";
 
-export default function GetScriptModal({ className, link, children }) {
+export default function GetScriptModal({ className, link, code, children }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <>
-      <button onClick={handleShow} className={className}>
+      <a
+        onClick={handleShow}
+        className={className}
+        href={`roblox://experiences/start?placeId=${code}`}
+        target="_top"
+      >
         {children}
-      </button>
-      {show ? <Modalmc handleClose={handleClose} link={link} /> : ""}
+      </a>
+      {show ? <Modalmc handleClose={handleClose} link={link} code={code} /> : ""}
     </>
   );
 }
@@ -64,12 +70,7 @@ const Modalmc = ({ handleClose, link }) => {
           <a className={styles["anchorlink"]} onClick={handleClose}>
             <button className={styles["cancel-button"]}>Cancel</button>
           </a>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`//${gamelink}`}
-            className={styles["anchorlink"]}
-          >
+          <a target="_blank" rel="noreferrer" href={gamelink} className={styles["anchorlink"]}>
             <button className={styles["next-button-mod-game"]}>Go to Game</button>
           </a>
         </div>

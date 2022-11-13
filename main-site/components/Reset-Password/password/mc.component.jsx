@@ -8,7 +8,7 @@ function CheckPassword(pass) {
   if (pass.match(decimal)) {
     return true;
   } else {
-    return true;
+    return false;
   }
 }
 

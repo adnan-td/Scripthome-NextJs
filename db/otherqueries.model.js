@@ -117,7 +117,7 @@ async function getReports() {
   const query = new Promise((resolve, reject) => {
     db.query(
       `
-    SELECT report.body, report.id, user.name, script.title
+    SELECT report.body, report.id, user.name, script.title, script.user_id
     FROM report
     INNER JOIN user ON report.reported_by=user.id
     INNER JOIN script ON report.script_id=script.id
@@ -192,7 +192,7 @@ async function getAllCommentsAdmin() {
   const query = new Promise((resolve, reject) => {
     db.query(
       `
-    SELECT comments.body, comments.id, user.name, script.img, script.title
+    SELECT comments.body, comments.id, user.name, user.img AS user_img, script.img, script.title
     FROM comments
     INNER JOIN user ON comments.comment_by=user.id
     INNER JOIN script ON comments.script_id=script.id
@@ -227,6 +227,48 @@ async function removeComment(id) {
   });
 }
 
+async function getAdsenseDefault() {
+  const query = new Promise((resolve, reject) => {
+    db.query(`SELECT * FROM default_adsense WHERE id=1`, (err, result) => {
+      if (err) throw err;
+      if (result) resolve(result[0]);
+      else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function updateDefaultAdsense(adsense) {
+  db.query(
+    `UPDATE default_adsense SET adsense = '${adsense}' WHERE default_adsense.id = 1`,
+    (err, result) => {
+      if (err) throw err;
+    }
+  );
+}
+
+async function getImageList() {
+  const query = new Promise((resolve, reject) => {
+    db.query(
+      `
+      SELECT img FROM script
+      UNION
+      SELECT img FROM user;
+      `,
+      (err, result) => {
+        if (err) throw err;
+        if (result) resolve(result);
+        else resolve(null);
+      }
+    );
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
 export const otherqueries = {
   getViewsByScript,
   getViewsByUser,
@@ -244,4 +286,7 @@ export const otherqueries = {
   addComment,
   updateComment,
   removeComment,
+  getAdsenseDefault,
+  updateDefaultAdsense,
+  getImageList,
 };

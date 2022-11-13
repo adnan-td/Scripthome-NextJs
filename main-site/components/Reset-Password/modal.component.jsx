@@ -4,7 +4,6 @@ import Modalmc2 from "./otp/mc.component";
 import Modalmc3 from "./password/mc.component";
 import Modalmc4 from "./finish/mc.component";
 import axios from "axios";
-import { hostname } from "../../../config/hostname";
 import { toast } from "react-toastify";
 
 export default function ResetPass({ className, prevclose, children }) {
@@ -18,7 +17,7 @@ export default function ResetPass({ className, prevclose, children }) {
     const res = await axios({
       method: "post",
       data: { email: email },
-      url: `${hostname}/api/resetpass`,
+      url: `/api/resetpass`,
     });
     if (res.status === 201) {
       setotp(res.data.otp);

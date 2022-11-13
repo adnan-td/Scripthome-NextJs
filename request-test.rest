@@ -1,7 +1,0 @@
-POST http://localhost:3000/api/checkuser HTTP/3.1
-content-type: application/json
-
-{
-  "email": "adff@faafsd",
-  "password": "afasdfflgj",
-}

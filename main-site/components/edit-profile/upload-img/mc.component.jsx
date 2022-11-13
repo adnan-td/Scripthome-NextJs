@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styles from "./mc.module.scss";
 import axios from "axios";
-import { hostname } from "../../../../config/hostname";
+import { imghost } from "../../../../config/img_hostname";
 import { toast } from "react-toastify";
 
 const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
@@ -26,17 +26,19 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
     const onChange = async (formData) => {
       const config = {
         headers: { "content-type": "multipart/form-data" },
-        onUploadProgress: (event) => {
-          console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-        },
       };
 
-      const response = await axios.post(`${hostname}/api/uploadimg`, formData, config);
+      try {
+        const response = await axios.post(`${imghost}/request`, formData, config);
 
-      // console.log("response ---> ", response);
-      setnewuser({ ...newuser, img: response.data.img });
-      toast.success("Image was Successfully Uploaded!");
-      setShow("Confirm");
+        setnewuser({ ...newuser, img: `${imghost}/${response.data.img}` });
+        toast.success("Image was Successfully Uploaded!");
+        setShow("Confirm");
+      } catch (e) {
+        console.log(e);
+
+        toast.error("Sorry something happened! Please make sure file size is under 100 Kb");
+      }
     };
     onChange(formData);
 
@@ -67,7 +69,7 @@ const Modalmc = ({ handleClose, setnewuser, newuser, setShow }) => {
                 </button>{" "}
                 or drag and drop
               </p>
-              <p>SVG, PNG, JPG or Webp (max. 500 KB)</p>
+              <p>SVG, PNG, JPG or Webp (max. 100 KB)</p>
             </div>
             <input
               multiple={false}
