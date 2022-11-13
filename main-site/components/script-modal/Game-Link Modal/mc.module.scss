@@ -27,6 +27,7 @@
     gap: 2rem;
     flex-direction: column;
     position: relative;
+    top: -200px;
     margin: 1rem;
 
     @media (max-width: 700px) {
@@ -123,6 +124,8 @@
 
               &__link {
                 color: #101828;
+                width: 100%;
+                overflow-wrap: anywhere;
               }
             }
 

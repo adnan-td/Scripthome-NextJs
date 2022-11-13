@@ -4,7 +4,7 @@ import { useState } from "react";
 const Modalmc = ({ handleClose, setShow }) => {
   const [selected, setSelected] = useState(0);
   const handleNext = () => {
-    if (selected === 0) setShow(null);
+    if (selected === 0) setShow("Upload");
     if (selected === 1) setShow("Eusername");
     if (selected === 2) setShow("Epass");
   };

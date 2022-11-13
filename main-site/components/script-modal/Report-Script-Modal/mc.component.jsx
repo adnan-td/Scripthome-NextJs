@@ -1,7 +1,9 @@
 import styles from "./mc.module.scss";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export default function ReportScriptModal({ className, children }) {
+export default function ReportScriptModal({ className, children, script_id, reported_by, status }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -11,12 +13,49 @@ export default function ReportScriptModal({ className, children }) {
       <button onClick={handleShow} className={className}>
         {children}
       </button>
-      {show ? <Modalmc handleClose={handleClose} /> : ""}
+      {show ? (
+        <Modalmc
+          handleClose={handleClose}
+          script_id={script_id}
+          reported_by={reported_by}
+          status={status}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 }
 
-const Modalmc = ({ handleClose }) => {
+const Modalmc = ({ handleClose, script_id, reported_by, status }) => {
+  const [body, setBody] = useState("");
+  async function handleSubmitReport() {
+    if (status !== "authenticated") {
+      toast.error("Please login to continue!");
+    } else if (body.length < 20) {
+      toast.error("Report should have atleast 20 characters!");
+    } else if (script_id && reported_by) {
+      await axios({
+        method: "post",
+        url: `/api/reports`,
+        data: {
+          method: "add",
+          report: {
+            body: body,
+            script_id: script_id,
+            reported_by: reported_by,
+            resolved: 0,
+          },
+        },
+      });
+      setBody("");
+      handleClose();
+      toast.success("Report posted successfully!");
+    } else {
+      toast.error("Something must be wrong. Please try again later!");
+    }
+  }
+
   return (
     <div className={styles["modal-cover"]} onClick={handleClose}>
       <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
@@ -31,7 +70,14 @@ const Modalmc = ({ handleClose }) => {
             </div>
             <div className={styles["report-box"]}>
               <label className={styles["r-title"]}>Reason for Reporting Script</label>
-              <textarea className={styles["r-input"]} />
+              <textarea
+                className={styles["r-input"]}
+                name="body"
+                value={body}
+                onChange={(e) => {
+                  setBody(e.target.value);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -39,7 +85,9 @@ const Modalmc = ({ handleClose }) => {
           <button className={styles["cancel-button"]} onClick={handleClose}>
             Cancel
           </button>
-          <button className={styles["next-button"]}>Report Script</button>
+          <button className={styles["next-button"]} onClick={handleSubmitReport}>
+            Report Script
+          </button>
         </div>
       </div>
     </div>

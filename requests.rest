@@ -1,0 +1,38 @@
+/api/users
+(GET-all POST-one)
+
+/api/users/:id
+(PUT-updateone GET-one POST-getbyemail)
+
+
+/api/scripts
+(GET-all POST-one)
+
+/api/scripts/:id
+(PUT-updateone GET-one)
+
+/api/scripts/user/:id
+(GET-scriptsbyuserid)
+
+
+/api/uploadimg
+(POST-formdata_post_one_img)
+
+
+/api/checkuser
+(POST-checks_email_and_password)
+
+/api/checkuser/:email
+(GET-user_by_email)
+
+/api/getuserbyname/:name
+(GET-user_by_name, # POST=user_by_slug)
+
+/api/verify
+(GET-verification_otp)
+
+/api/statistics
+/api/views
+/api/likes
+/api/comments
+/api/reports

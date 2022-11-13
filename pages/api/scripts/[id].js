@@ -10,9 +10,9 @@ export default async function getoneuser(req, res) {
         await scriptqueries.updateScript(script);
         res.status(200).send({ message: "The User has been updated" });
       } else if (exists) {
-        res.status(406).send({ message: "Please fill all the required fields" });
+        res.status(200).send({ message: "Please fill all the required fields" });
       } else {
-        res.status(404).send({ message: "The User does not exist" });
+        res.status(200).send({ message: "The User does not exist" });
       }
     }
     // else if (req.method === "DELETE") {
@@ -28,20 +28,16 @@ export default async function getoneuser(req, res) {
       const script = await scriptqueries.getScriptbyID(id);
       res.status(200).send(script);
     }
+  } else if (req.method === "GET") {
+    const script = await scriptqueries.getScriptbyID(id);
+    res.status(200).send(script);
   } else {
-    res.status(404).send({ message: "Does not exist" });
+    res.status(200).send({ message: "Does not exist" });
   }
 }
 
 function isValid(script) {
-  if (
-    script.id &&
-    script.user_id &&
-    script.title.length === 0 &&
-    script.madeby.length === 0 &&
-    script.script_code.length === 0 &&
-    script.description.length === 0
-  ) {
+  if (script.user_id && script.title && script.madeby && script.script_code && script.description) {
     return true;
   } else return false;
 }

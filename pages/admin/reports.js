@@ -1,11 +1,12 @@
 import Reports from "../../admin-panel/routes/reports/reports.route";
 import MainContent from "../../admin-panel/components/maincontent/maincontent.component";
 import { getSession } from "next-auth/react";
+import { otherqueries } from "../../db/otherqueries.model";
 
-const ReportsPage = () => {
+const ReportsPage = ({ reports }) => {
   return (
     <MainContent>
-      <Reports />
+      <Reports reports={reports} />
     </MainContent>
   );
 };
@@ -21,8 +22,9 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  const res = JSON.parse(JSON.stringify(await otherqueries.getReports()));
   return {
-    props: {},
+    props: { reports: res },
   };
 }
 

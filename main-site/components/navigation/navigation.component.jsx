@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext, useEffect, useRef } from "react";
 
 import Signinmodal from "../../components/signin-modal/modal.component";
 import Signupmodal from "../../components/signup-modal/modal.component";
@@ -57,7 +57,11 @@ const Navigation = () => {
         <div className={styles["nav-links-container-background"]}>
           <div
             className={styles["nav-links-container"]}
-            style={!isOpen && screenwidth < navResponse ? { display: "none" } : { display: "flex" }}
+            style={
+              !isOpen && screenwidth < navResponse
+                ? { display: "none" }
+                : { display: "flex" }
+            }
             open={isOpen}
           >
             <Link href="/">
@@ -92,7 +96,12 @@ const Navigation = () => {
                     : styles["nav-link"]
                 }
               >
-                <svg width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="21"
+                  height="20"
+                  viewBox="0 0 21 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
@@ -105,17 +114,26 @@ const Navigation = () => {
             </Link>
             <a
               className={styles["nav-link"] + " " + styles["nav-link2"]}
-              href="https://discord.gg/9N6FWkshpk"
+              href="https://discord.gg/aVxZkmjhtb"
               target="_blank"
               rel="noreferrer"
             >
-              <svg width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="21"
+                height="20"
+                viewBox="0 0 21 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g clipPath="url(#clip0_456_67679)">
                   <path d="M17.8746 3.74333C16.5996 3.16833 15.2329 2.74333 13.8038 2.50167C13.791 2.49922 13.7779 2.5008 13.7661 2.50617C13.7543 2.51155 13.7444 2.52046 13.7379 2.53167C13.5629 2.83917 13.3679 3.24 13.2313 3.55667C11.7155 3.3302 10.1745 3.3302 8.65876 3.55667C8.50654 3.20572 8.33488 2.86352 8.14459 2.53167C8.13814 2.52032 8.12839 2.51121 8.11662 2.50555C8.10486 2.49989 8.09165 2.49795 8.07876 2.5C6.65043 2.74166 5.28376 3.16667 4.00793 3.7425C3.99695 3.7471 3.98765 3.75495 3.98126 3.765C1.38793 7.5775 0.677093 11.2958 1.02626 14.9675C1.02723 14.9765 1.03002 14.9852 1.03446 14.9931C1.03891 15.001 1.0449 15.0078 1.05209 15.0133C2.56575 16.1154 4.25404 16.9548 6.04626 17.4967C6.05875 17.5005 6.07212 17.5005 6.0846 17.4966C6.09709 17.4928 6.10812 17.4852 6.11626 17.475C6.50192 16.9592 6.84367 16.412 7.13793 15.8392C7.14201 15.8313 7.14436 15.8227 7.14483 15.8139C7.14529 15.8051 7.14386 15.7963 7.14062 15.788C7.13738 15.7798 7.13241 15.7724 7.12605 15.7663C7.11969 15.7601 7.11209 15.7554 7.10376 15.7525C6.56543 15.5498 6.04383 15.3051 5.54376 15.0208C5.53477 15.0157 5.5272 15.0084 5.52172 14.9996C5.51625 14.9909 5.51303 14.9809 5.51237 14.9705C5.51171 14.9602 5.51362 14.9499 5.51794 14.9405C5.52225 14.9311 5.52883 14.9229 5.53709 14.9167C5.64209 14.8392 5.74709 14.7583 5.84709 14.6775C5.85609 14.6702 5.86694 14.6656 5.87841 14.6641C5.88989 14.6627 5.90155 14.6644 5.91209 14.6692C9.18459 16.1392 12.7288 16.1392 15.9629 14.6692C15.9735 14.6641 15.9853 14.6621 15.9969 14.6635C16.0086 14.6648 16.0196 14.6694 16.0288 14.6767C16.1288 14.7583 16.2329 14.8392 16.3388 14.9167C16.3471 14.9228 16.3538 14.9308 16.3582 14.9402C16.3627 14.9495 16.3648 14.9598 16.3643 14.9701C16.3638 14.9804 16.3607 14.9904 16.3554 14.9993C16.3501 15.0082 16.3426 15.0156 16.3338 15.0208C15.8354 15.3075 15.3171 15.55 14.7729 15.7517C14.7646 15.7547 14.757 15.7595 14.7506 15.7657C14.7442 15.7719 14.7393 15.7794 14.736 15.7877C14.7328 15.796 14.7314 15.8048 14.7318 15.8137C14.7323 15.8226 14.7347 15.8313 14.7388 15.8392C15.0388 16.4117 15.3821 16.9567 15.7596 17.4742C15.7674 17.4848 15.7784 17.4927 15.7909 17.4969C15.8034 17.5011 15.8169 17.5013 15.8296 17.4975C17.6249 16.9572 19.3159 16.1173 20.8313 15.0133C20.8387 15.0082 20.8449 15.0015 20.8495 14.9937C20.8541 14.986 20.8569 14.9773 20.8579 14.9683C21.2746 10.7233 20.1596 7.035 17.9004 3.76666C17.8949 3.75604 17.8857 3.74776 17.8746 3.74333ZM7.62709 12.7317C6.64209 12.7317 5.82959 11.8408 5.82959 10.7483C5.82959 9.655 6.62626 8.765 7.62709 8.765C8.63543 8.765 9.44043 9.6625 9.42459 10.7483C9.42459 11.8417 8.62793 12.7317 7.62709 12.7317ZM14.2729 12.7317C13.2871 12.7317 12.4754 11.8408 12.4754 10.7483C12.4754 9.655 13.2713 8.765 14.2729 8.765C15.2813 8.765 16.0863 9.6625 16.0704 10.7483C16.0704 11.8417 15.2821 12.7317 14.2729 12.7317Z" />
                 </g>
                 <defs>
                   <clipPath id="clip0_456_67679">
-                    <rect width="20" height="20" transform="translate(0.943359)" />
+                    <rect
+                      width="20"
+                      height="20"
+                      transform="translate(0.943359)"
+                    />
                   </clipPath>
                 </defs>
               </svg>
@@ -123,11 +141,16 @@ const Navigation = () => {
             </a>
             <a
               className={styles["nav-link"] + " " + styles["nav-link2"]}
-              href="https://www.youtube.com/channel/UC2_Ab-9puBiqcQGcwoz6Rag"
+              href="https://www.youtube.com/@hacoscripts"
               target="_blank"
               rel="noreferrer"
             >
-              <svg width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="21"
+                height="20"
+                viewBox="0 0 21 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -136,25 +159,35 @@ const Navigation = () => {
               </svg>
               <span>Youtube</span>
             </a>
-            {screenwidth > 1400 && (
+            {/* {screenwidth > 1400 && (
               <Link href="/admin">
                 <a className={styles["nav-link"]}>
                   <img src="/Nav-Icon/script-nav.svg" alt="script-icon" />
                   <span>Admin</span>
                 </a>
               </Link>
-            )}
+            )} */}
             <div className={styles["nav-button-container"]}>
               <Search />
               <div className={styles["nav-button-separator"]}>
                 <img src="/Nav-Icon/nav-seperator.svg" alt="" />
               </div>
-              {status !== "unauthenticated" ? (
-                <NavUserIcon user={user} logout={HandleLogout} />
+              {status !== "unauthenticated" && user ? (
+                screenwidth > navResponse ? (
+                  <NavUserIcon user={user} logout={HandleLogout} />
+                ) : (
+                  <NavUserButtonsMobile
+                    user={user}
+                    logout={HandleLogout}
+                    screenwidth={screenwidth}
+                  />
+                )
               ) : (
                 <>
                   <Signinmodal className={styles["nav-b1"]}>Log In</Signinmodal>{" "}
-                  <Signupmodal className={styles["nav-b2"]}>Join Community</Signupmodal>
+                  <Signupmodal className={styles["nav-b2"]}>
+                    Join Community
+                  </Signupmodal>
                 </>
               )}
             </div>
@@ -177,6 +210,24 @@ export default Navigation;
 
 function NavUserIcon({ user, logout }) {
   const [isOpen, SetisOpen] = useState(false);
+  const boxRef = useRef(null);
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          SetisOpen(false);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  useOutsideAlerter(boxRef);
   return (
     <div className={styles["nui"]}>
       <div
@@ -185,14 +236,16 @@ function NavUserIcon({ user, logout }) {
           SetisOpen(!isOpen);
         }}
       >
-        <img alt="" src="/Script/Avatars/avatar.png" />
+        {/* <img alt="" src="/Script/Avatars/avatar.png" /> */}
+        <img alt="" src={user.img} />
       </div>
 
       {isOpen && (
-        <div className={styles["nui-dropdown"]}>
+        <div className={styles["nui-dropdown"]} ref={boxRef}>
           <div className={styles["nui-header"]}>
             <div className={styles["nui-header-inner"]}>
-              <img alt="" src="/Script/Avatars/avatar.png" />
+              <img alt="" src={user.img} />
+              {/* <img alt="" src="/Script/Avatars/avatar.png" /> */}
               <div className={styles["nui-details"]}>
                 <p className={styles["nui-p1"]}>{user.name}</p>
                 <p className={styles["nui-p2"]}>{user.email}</p>
@@ -209,6 +262,38 @@ function NavUserIcon({ user, logout }) {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+function NavUserButtonsMobile({ user, logout, screenwidth }) {
+  return (
+    <div className={styles["nav-button-container"]}>
+      <>
+        <button
+          className={styles["nav-b2"] + " " + styles["nav-b2--mod"]}
+          onClick={logout}
+        >
+          Log Out{" "}
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M14.8658 1.6665L5.13487 1.6665C4.6956 1.66649 4.31661 1.66648 4.00447 1.69198C3.67502 1.7189 3.34733 1.77833 3.03202 1.93899C2.56161 2.17867 2.17916 2.56112 1.93948 3.03153C1.77882 3.34685 1.71939 3.67453 1.69247 4.00398C1.66697 4.31612 1.66698 4.69508 1.66699 5.13435L1.66699 14.8653C1.66698 15.3046 1.66697 15.6836 1.69247 15.9957C1.71939 16.3252 1.77882 16.6528 1.93948 16.9681C2.17916 17.4386 2.56161 17.821 3.03202 18.0607C3.34733 18.2214 3.67502 18.2808 4.00447 18.3077C4.31661 18.3332 4.69557 18.3332 5.13486 18.3332H14.8658C15.3051 18.3332 15.684 18.3332 15.9962 18.3077C16.3256 18.2808 16.6533 18.2214 16.9686 18.0607C17.439 17.821 17.8215 17.4386 18.0612 16.9681C18.2218 16.6528 18.2813 16.3252 18.3082 15.9957C18.3337 15.6836 18.3337 15.3046 18.3337 14.8653V5.13437C18.3337 4.69508 18.3337 4.31612 18.3082 4.00398C18.2813 3.67453 18.2218 3.34685 18.0612 3.03153C17.8215 2.56112 17.439 2.17867 16.9686 1.93899C16.6533 1.77833 16.3256 1.7189 15.9962 1.69198C15.684 1.66648 15.3051 1.66649 14.8658 1.6665ZM9.41107 6.07725C9.73651 5.75181 10.2641 5.75181 10.5896 6.07725L13.9229 9.41058C14.2484 9.73602 14.2484 10.2637 13.9229 10.5891L10.5896 13.9224C10.2641 14.2479 9.73651 14.2479 9.41107 13.9224C9.08563 13.597 9.08563 13.0694 9.41107 12.7439L11.3218 10.8332L6.66699 10.8332C6.20676 10.8332 5.83366 10.4601 5.83366 9.99984C5.83366 9.5396 6.20676 9.1665 6.66699 9.1665H11.3218L9.41107 7.25576C9.08563 6.93032 9.08563 6.40269 9.41107 6.07725Z"
+              fill="white"
+            />
+          </svg>
+        </button>{" "}
+        <EditUser className={styles["nav-b1"] + " " + styles["nav-b1--mod"]}>
+          Edit Profile
+        </EditUser>
+      </>
     </div>
   );
 }

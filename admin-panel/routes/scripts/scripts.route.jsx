@@ -5,22 +5,22 @@ import { SearchContext } from "../../contexts/searchfield/search.context";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { AllScriptContext } from "../../../main-site/contexts/allscripts/scripts.context";
+import axios from "axios";
+import { imghost } from "../../../config/img_hostname";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
 
-const scripts = [{}, {}, {}, {}, {}, {}];
 export default function Scripts() {
+  const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
+  const { scripts } = useContext(AllScriptContext);
   const [current, Setcurrent] = useState(0);
   const [shortscripts, Setshortscripts] = useState([]);
   const [filteredscripts, Setfilteredscripts] = useState([]);
-  const images = [];
-  for (let i = 1; i < 7; i++) {
-    images.push(`/Adminpanel/img/img${i}.jpg`);
-  }
 
   const Addcurrent = () => {
     if (current + 6 > filteredscripts.length) {
@@ -40,15 +40,33 @@ export default function Scripts() {
     if (searchfield !== "") {
       Setfilteredscripts(
         scripts.filter((script) => {
-          return script.title.includes(searchfield) || script.madeby.includes(searchfield);
+          if (user?.role >= 2) {
+            return (
+              script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              script.user_id === user?.id &&
+              (script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
         })
       );
       Setcurrent(0);
     } else {
-      Setfilteredscripts(scripts);
+      Setfilteredscripts(
+        scripts.filter((script) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return script.user_id === user?.id;
+          }
+        })
+      );
     }
-  }, [searchfield]);
-  // }, [searchfield, scripts]);
+  }, [searchfield, scripts, user]);
 
   useEffect(() => {
     Setshortscripts(filteredscripts.slice(current, current + 6));
@@ -99,12 +117,7 @@ export default function Scripts() {
         <div className={styles("container-of-cards")}>
           {shortscripts.map((item, key) => {
             return (
-              <Card
-                img={images[Math.floor(Math.random() * images.length)]}
-                script={item}
-                key={key}
-                srno={current + key}
-              />
+              <Card img={`${imghost}/${item.img}`} script={item} key={key} srno={current + key} />
             );
           })}
         </div>
@@ -125,9 +138,8 @@ export default function Scripts() {
 }
 
 function Card({ img, script, srno }) {
-  const { title, likes, views, active } = script;
+  const { title, likes, views, isActive: active } = script;
   const [isActive, SetisActive] = useState(null);
-  // const {title, madeby, active, likes, views, date} = script
   useEffect(() => {
     SetisActive(active);
   }, [active]);
@@ -159,15 +171,25 @@ function Card({ img, script, srno }) {
               paddingTop: "0.5rem",
             }}
           >
-            <Link href={`editscript?id=${srno}`}>
-              <a className={styles("btn") + " " + styles("btn-primary") + " " + styles("btn-1") + " " + styles("btn-orange-mod")}>
+            <Link href={`/admin/scripts/editscript/${script.id}`}>
+              <a
+                className={
+                  styles("btn") +
+                  " " +
+                  styles("btn-primary") +
+                  " " +
+                  styles("btn-1") +
+                  " " +
+                  styles("btn-orange-mod")
+                }
+              >
                 Edit Script
               </a>
             </Link>
             {isActive ? (
-              <ButtonIA SetisActive={SetisActive} />
+              <ButtonIA SetisActive={SetisActive} script={script} />
             ) : (
-              <ButtonAI SetisActive={SetisActive} />
+              <ButtonAI SetisActive={SetisActive} script={script} />
             )}
           </div>
         </div>
@@ -176,13 +198,25 @@ function Card({ img, script, srno }) {
   );
 }
 
-function ButtonIA({ SetisActive }) {
+import { UserContext } from "../../../main-site/contexts/user/user.context";
+
+function ButtonIA({ SetisActive, script }) {
+  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
+  async function handleUpdate(ia) {
+    const res = await axios({
+      url: `/api/scripts/${script.id}`,
+      method: "put",
+      data: { ...script, isActive: ia },
+    });
+    setRefreshScripts(!refreshScripts);
+  }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button
         className={styles("unselected")}
         onClick={() => {
           SetisActive(false);
+          handleUpdate(0);
         }}
       >
         Inactive
@@ -192,7 +226,16 @@ function ButtonIA({ SetisActive }) {
   );
 }
 
-function ButtonAI({ SetisActive }) {
+function ButtonAI({ SetisActive, script }) {
+  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
+  async function handleUpdate(ia) {
+    const res = await axios({
+      url: `/api/scripts/${script.id}`,
+      method: "put",
+      data: { ...script, isActive: ia },
+    });
+    setRefreshScripts(!refreshScripts);
+  }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button className={styles("inactive-script")}>Inactive</button>
@@ -200,6 +243,7 @@ function ButtonAI({ SetisActive }) {
         className={styles("unselected")}
         onClick={() => {
           SetisActive(true);
+          handleUpdate(1);
         }}
       >
         Active

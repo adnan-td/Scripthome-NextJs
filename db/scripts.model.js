@@ -1,11 +1,12 @@
 import db from "./mysql";
+import getRSS from "../config/rssfeed";
 
 async function getAllScripts() {
   const query = new Promise((resolve, reject) => {
     db.query(`select * from script`, (err, result) => {
       if (err) throw err;
       if (result) resolve(result);
-      else reject(null);
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -13,12 +14,47 @@ async function getAllScripts() {
   });
 }
 
+async function addAllScripttoRSS() {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select * from script`, (err, result) => {
+      if (err) throw err;
+      if (result) resolve(result);
+      else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    getRSS(result);
+  });
+}
+
+// addAllScripttoRSS();
+
 async function getScriptbyID(id) {
   const query = new Promise((resolve, reject) => {
-    db.query(`select * from script where id='${id}'`, (err, result) => {
-      if (err) throw err;
+    db.query(
+      `
+    SELECT script.*, user.adsense
+    FROM script
+    INNER JOIN user ON script.user_id = user.id
+    WHERE script.id='${id}'`,
+      (err, result) => {
+        if (err) throw err;
+        if (result) resolve(result[0]);
+        else resolve(null);
+      }
+    );
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function getScriptbyTitle(title) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select * from script where title='${title}'`, (err, result) => {
       if (result) resolve(result[0]);
-      else reject(null);
+      if (err) throw err;
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -32,7 +68,20 @@ async function getScriptsbyUserID(id) {
       if (err) throw err;
       if (result) resolve(result);
       if (result.length === 0) resolve([]);
-      else reject(null);
+      else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function getScriptAdsense(id) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select user.adsense from user where id='${id}'`, (err, result) => {
+      if (err) throw err;
+      if (result) resolve(result[0].adsense);
+      else resolve(null);
     });
   });
   return query.then((result) => {
@@ -41,12 +90,13 @@ async function getScriptsbyUserID(id) {
 }
 
 async function addNewScript(script) {
+  addAllScripttoRSS();
   db.query(`insert into script set ?`, script, (err, result) => {
     if (err) throw err;
   });
 }
 async function updateScript(script) {
-  db.query(`update script where id=${script.id} set ?`, script, (err, result) => {
+  db.query(`update script set ? where id=${script.id}`, script, (err, result) => {
     if (err) throw err;
   });
 }
@@ -62,7 +112,26 @@ async function existsScriptWithId(id) {
           break;
         }
         resolve(result);
-      } else reject(null);
+      } else resolve(null);
+    });
+  });
+  return query.then((result) => {
+    return result;
+  });
+}
+
+async function existsScriptWithTitle(title) {
+  const query = new Promise((resolve, reject) => {
+    db.query(`select exists(select 1 from script where title=${title})`, (err, result) => {
+      if (err) throw err;
+      if (result) {
+        result = result[0];
+        for (var k in result) {
+          result = result[k];
+          break;
+        }
+        resolve(result);
+      } else resolve(null);
     });
   });
   return query.then((result) => {
@@ -77,12 +146,15 @@ async function removeScriptById(id) {
 }
 
 export const scriptqueries = {
+  getScriptAdsense,
   getAllScripts,
   addNewScript,
   updateScript,
   existsScriptWithId,
+  existsScriptWithTitle,
   removeScriptById,
   getScriptbyID,
+  getScriptbyTitle,
   getScriptsbyUserID,
 };
 

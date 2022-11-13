@@ -1,7 +1,7 @@
 import MainContent from "../../../admin-panel/components/maincontent/maincontent.component";
 import Admins from "../../../admin-panel/routes/admins/admins.route";
-import { hostname } from "../../../config/hostname";
 import { getSession } from "next-auth/react";
+import { userqueries } from "../../../db/users.model";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -14,8 +14,8 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const res = await fetch(`${hostname}/api/users`);
-  const admins = await res.json();
+
+  const admins = JSON.parse(JSON.stringify(await userqueries.getAllUsers()));
   return {
     props: { admins },
   };

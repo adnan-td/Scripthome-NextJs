@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./mc.module.scss";
 
 const Modalmc = ({ handleClose, next }) => {
@@ -10,7 +11,13 @@ const Modalmc = ({ handleClose, next }) => {
       <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
-            <img src="/Question-Modal/Welcome-01.png" alt="" className={styles["welcome-img"]} />
+            <Image
+              layout="fill"
+              src="/Question-Modal/Welcome-01.jpg"
+              alt="welcomeimg"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,LcNtb0T{3GJCrEI^WBkXi*WCKiw^"
+            />
           </div>
           <div className={styles["h-content-div"]}>
             <p className={styles["h-content-1"]}>Welcome to our Community</p>

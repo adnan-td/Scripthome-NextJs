@@ -1,22 +1,59 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import ArrowButtons from "../../components/arrowbuttons/arrowbuttons.component";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { SearchContext } from "../../contexts/searchfield/search.context";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
 
-const reports = [{}, {}];
-export default function Reports() {
+export default function Reports({ reports }) {
+  const { user } = useContext(UserContext);
   const [current, Setcurrent] = useState(0);
   const [shortreports, Setshortreports] = useState([]);
+  const [filteredReports, SetfilteredReports] = useState([]);
+  const { searchfield } = useContext(SearchContext);
+
+  useEffect(() => {
+    if (searchfield !== "") {
+      SetfilteredReports(
+        reports.filter((report) => {
+          if (user?.role >= 2) {
+            return (
+              report.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              report.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              report.user_id === user?.id &&
+              (report.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                report.name.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
+        })
+      );
+      Setcurrent(0);
+    } else {
+      SetfilteredReports(
+        reports.filter((report) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return report.user_id === user?.id;
+          }
+        })
+      );
+    }
+  }, [searchfield, reports, user]);
 
   const Addcurrent = () => {
-    if (current + 10 > reports.length) {
+    if (current + 10 > filteredReports.length) {
       return;
     }
     Setcurrent(current + 10);
@@ -30,9 +67,8 @@ export default function Reports() {
   };
 
   useEffect(() => {
-    Setshortreports(reports.slice(current, current + 10));
-  }, [current]);
-  // }, [current, reports]);
+    Setshortreports(filteredReports.slice(current, current + 10));
+  }, [current, filteredReports]);
 
   return (
     <div className={styles("main2")}>
@@ -64,23 +100,6 @@ export default function Reports() {
             </ol>
           </nav>
         </div>
-        {/* <div className={styles("edit-users")}>
-          <a href=" ">
-            Newest <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
-          </a>
-        </div>
-        <div className={styles("dropdown edit-users")}>
-          <button className={styles("dropdown-toggle")} type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-            <span>Newest</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
-          </button>
-          <ul className={styles("dropdown-menu dropdown-menu-shadow")} aria-labelledby="dropdownMenuButton4">
-            <li>
-              <a href=" " className={styles("btn btn-light report-old")}>
-                Oldest
-              </a>
-            </li>
-          </ul>
-        </div> */}
       </div>
       <div className={styles("table-container")}>
         <table className={styles("table")}>
@@ -98,7 +117,7 @@ export default function Reports() {
       </div>
       <div className={styles("foot")}>
         <p>
-          Displaying {current + shortreports.length} Out of {reports.length}
+          Displaying {current + shortreports.length} Out of {filteredReports.length}
         </p>
         <div>
           <p>
@@ -111,26 +130,46 @@ export default function Reports() {
   );
 }
 
+import Router from "next/router";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
+
 function Tr({ report }) {
-  const { rsName, reportedBy, review } = report;
+  const { name: by_name, body, title: script_name } = report;
+  const { user } = useContext(UserContext);
+  async function handleResolve() {
+    const res = await axios({
+      url: `/api/reports`,
+      method: "post",
+      data: {
+        method: "update",
+        report: {
+          id: report.id,
+          resolved: 1,
+        },
+      },
+    });
+    toast.success("Report resolved successfully!");
+    Router.replace(Router.asPath);
+  }
   return (
     <tr>
       <td>
         <div style={{ minWidth: "180px" }}>
-          <p className={styles("im-1")}>{rsName}</p>
-          {/* <p className={styles("im-1")} date-edit">21 June 2020, 12:42 AM</p> */}
-          <p className={styles("im-1") + " " + styles("date-edit")}>Reported by: {reportedBy}</p>
+          <p className={styles("im-1")}>{script_name}</p>
+          <p className={styles("im-1") + " " + styles("date-edit")}>Reported by: {by_name}</p>
         </div>
       </td>
       <td>
-        <p className={styles("reports-review")}>{review}</p>
+        <p className={styles("reports-review")}>{body}</p>
       </td>
       <td>
         <div style={{ display: "flex" }}>
-          <a href=" " className={styles("resolve-a")}>
-            {" "}
-            Resolve{" "}
-          </a>
+          {user?.role >= 2 && (
+            <button className={styles("resolve-a")} onClick={handleResolve}>
+              {" "}
+              Resolve{" "}
+            </button>
+          )}
         </div>
       </td>
     </tr>

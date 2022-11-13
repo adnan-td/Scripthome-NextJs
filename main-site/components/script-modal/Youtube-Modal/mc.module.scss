@@ -28,6 +28,7 @@
     flex-direction: column;
     position: relative;
     margin: 1rem;
+    top: -200px;
 
     @media (max-width: 700px) {
       width: 90%;
@@ -91,7 +92,7 @@
           align-items: center;
           gap: 0.5rem;
           width: 100%;
-          aspect-ratio: 5/2;
+          aspect-ratio: 16/9;
           border-radius: 0.75rem;
           overflow: hidden;
           position: relative;

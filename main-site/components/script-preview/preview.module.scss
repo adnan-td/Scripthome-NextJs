@@ -12,19 +12,16 @@
   border: 3px solid #31343f;
 
   .sideimage {
-    position: absolute;
-    top: 0;
     width: 100%;
-    min-height: 185px;
+    object-fit: cover;
     height: 100%;
   }
 }
 .overlaytext1 {
   height: 100%;
-  position: relative;
 
   .cover-div {
-    background: rgba(0, 0, 0, 0.407);
+    background: rgba(0, 0, 0, 0.5);
     width: 100%;
     font-size: 12px;
     position: absolute;
@@ -43,22 +40,33 @@
       align-items: flex-start;
       flex-direction: column;
       padding: 10px 10px 5px 10px;
+      overflow-wrap: anywhere;
 
       &__heading {
         margin: 5px 0 3px 0;
         text-transform: capitalize;
         font-size: 1rem;
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
       }
 
       &__para {
         margin-bottom: 7px;
-        font-size: 0.75rem;
-        overflow: hidden;
+        font-size: 0.875rem;
         max-height: 30px;
         position: relative;
         font-weight: 400;
         line-height: 17px;
-        color: #ffffe5;
+        color: #e7dfda;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
       }
     }
   }

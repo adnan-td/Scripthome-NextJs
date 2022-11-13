@@ -2,25 +2,25 @@ import ArrowButtons from "../../components/arrowbuttons/arrowbuttons.component";
 import { useEffect, useContext, useState } from "react";
 import Link from "next/link";
 import { SearchContext } from "../../contexts/searchfield/search.context";
+import { AllScriptContext } from "./../../../main-site/contexts/allscripts/scripts.context";
 
 import stylesa from "../../app.module.scss";
 import stylesb from "../../bootstrap.module.scss";
+import { imghost } from "../../../config/img_hostname";
+import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 const styles = (classname) => {
   if (stylesa[classname]) return stylesa[classname];
   if (stylesb[classname]) return stylesb[classname];
 };
 
-const scripts = [{}, {}];
 export default function Dashboard() {
+  const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
+  const { scripts } = useContext(AllScriptContext);
   const [current, Setcurrent] = useState(0);
   const [shortscripts, Setshortscripts] = useState([]);
   const [filteredscripts, Setfilteredscripts] = useState([]);
-  const images = [];
-  for (let i = 1; i < 7; i++) {
-    images.push(`/Adminpanel/img/img${i}.jpg`);
-  }
 
   const Addcurrent = () => {
     if (current + 6 > filteredscripts.length) {
@@ -35,20 +35,37 @@ export default function Dashboard() {
     }
     Setcurrent(current - 6);
   };
-
   useEffect(() => {
     if (searchfield !== "") {
       Setfilteredscripts(
         scripts.filter((script) => {
-          return script.title.includes(searchfield) || script.madeby.includes(searchfield);
+          if (user?.role >= 2) {
+            return (
+              script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+              script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase())
+            );
+          } else {
+            return (
+              script.user_id === user?.id &&
+              (script.title.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()) ||
+                script.madeby.toLocaleLowerCase().includes(searchfield.toLocaleLowerCase()))
+            );
+          }
         })
       );
       Setcurrent(0);
     } else {
-      Setfilteredscripts(scripts);
+      Setfilteredscripts(
+        scripts.filter((script) => {
+          if (user?.role >= 2) {
+            return true;
+          } else {
+            return script.user_id === user?.id;
+          }
+        })
+      );
     }
-  }, [searchfield]);
-  // }, [searchfield, scripts]);
+  }, [searchfield, scripts, user]);
 
   useEffect(() => {
     Setshortscripts(filteredscripts.slice(current, current + 6));
@@ -81,23 +98,12 @@ export default function Dashboard() {
               <td>Views</td>
               <td>Status</td>
               <td>Date</td>
-              <td>Edit</td>
-              <td>Preview</td>
+              <td>Edit Script</td>
+              <td>View Script</td>
             </tr>
-            {/* <Tr img={img1} />
-            <Tr img={img2} />
-            <Tr img={img3} />
-            <Tr img={img1} />
-            <Tr img={img2} />
-            <Tr img={img3} /> */}
             {shortscripts.map((item, key) => {
               return (
-                <Tr
-                  img={images[Math.floor(Math.random() * images.length)]}
-                  script={item}
-                  key={key}
-                  srno={current + key}
-                />
+                <Tr img={`${imghost}/${item.img}`} script={item} key={key} srno={current + key} />
               );
             })}
           </tbody>
@@ -119,7 +125,8 @@ export default function Dashboard() {
 }
 
 function Tr({ img, script, srno }) {
-  const { title, madeby, active, likes, views, date } = script;
+  const { title, madeby, isActive, likes, views, date } = script;
+  var slugify = require("slugify");
 
   return (
     <tr>
@@ -135,7 +142,7 @@ function Tr({ img, script, srno }) {
       <td className={styles("align-middle")}>{likes} Likes</td>
       <td className={styles("align-middle")}>{views} Views</td>
       <td className={styles("align-middle")}>
-        {active ? (
+        {isActive ? (
           <div className={styles("active-script")} style={{ height: "40px", width: "60%" }}>
             Active
           </div>
@@ -147,10 +154,10 @@ function Tr({ img, script, srno }) {
       </td>
 
       <td className={styles("align-middle")}>
-        <p style={{ minWidth: "96px" }}>{date}</p>
+        <p style={{ minWidth: "96px" }}>{new Date(date).toDateString()}</p>
       </td>
       <td className={styles("align-middle")}>
-        <Link href={`/admin/scripts/editscript?id=${srno}`}>
+        <Link href={`/admin/scripts/editscript/${script.id}`}>
           <a className={styles("btn-3")}>
             <div className={styles("pen-icon")}>
               <img src="/Adminpanel/img/Pencil.svg" alt="" />
@@ -159,7 +166,12 @@ function Tr({ img, script, srno }) {
         </Link>
       </td>
       <td className={styles("align-middle")}>
-        <a href=" " className={styles("btn-3")}>
+        <a
+          href={`/scripts/${slugify(title, { lower: true })}`}
+          className={styles("btn-3")}
+          target="_blank"
+          rel="noreferrer"
+        >
           <div className={styles("eye-icon")}>
             <img src="/Adminpanel/img/Eye.svg" alt="" />
           </div>

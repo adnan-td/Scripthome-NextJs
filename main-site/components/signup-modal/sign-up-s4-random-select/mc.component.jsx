@@ -1,21 +1,43 @@
-import "./mc.module.scss";
-import AvatarImg from "../../../assets/Modal/sign-up/Avatar/Asian-Man.png";
+import { useEffect, useState } from "react";
+import styles from "./mc.module.scss";
 
-const Modalmc = ({ handleClose }) => {
+const Modalmc = ({ handleClose, newuser, setnewuser, next }) => {
+  const [avatar, setavatar] = useState(null);
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  function handleGenerate() {
+    setavatar(`/default-avatars/${getRandomInt(1, 21)}.jpg`);
+  }
+  function handleNext() {
+    setnewuser({ ...newuser, img: avatar });
+    next(5);
+  }
+
+  useEffect(() => {
+    setavatar(`/default-avatars/${getRandomInt(1, 21)}.jpg`);
+  }, []);
+
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="sign-up-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="top-content">
-          <div className="header-content-mod">
-            <div className="avatar-div">
-              <img src={AvatarImg} alt="Avatar PNG" />
+    <div className={styles["modal-cover"]}>
+      <div className={styles["sign-up-modal"]} onClick={(e) => e.stopPropagation()}>
+        <div className={styles["top-content"]}>
+          <div className={styles["header-content-mod"]}>
+            <div className={styles["avatar-div"]}>
+              <img src={avatar} alt="Avatar PNG" />
             </div>
             <p>Choose an Avatar</p>
           </div>
         </div>
-        <div className="bottom-button">
-          <button className="cancel-button">Generate Again</button>
-          <button className="next-button">Confirm Selection</button>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["cancel-button"]} onClick={handleGenerate}>
+            Generate Again
+          </button>
+          <button className={styles["next-button"]} onClick={handleNext}>
+            Confirm Selection
+          </button>
         </div>
       </div>
     </div>

@@ -1,12 +1,23 @@
 import styles from "./mc.module.scss";
+import Image from "next/image";
 
 const Modalmc = ({ handleClose }) => {
   return (
     <div className={styles["modal-cover"]} onClick={handleClose}>
-      <div className={styles["Script-Modal"]} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles["Script-Modal"]}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
-            <img src="/Question-Modal/Welcome-05.png" alt="" className={styles["welcome-img"]} />
+            {/* <img src="/Question-Modal/Welcome-05.jpg" alt="" className={styles["welcome-img"]} /> */}
+            <Image
+              layout="fill"
+              src="/Question-Modal/Welcome-05.jpg"
+              alt="welcomeimg"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,LqD1djtQyGX4jKX%bEX5staLi^oM"
+            />
           </div>
           <div className={styles["h-content-div"]}>
             <p className={styles["h-content-1"]}>Our Daily Uploads</p>
@@ -19,7 +30,9 @@ const Modalmc = ({ handleClose }) => {
             <div className={styles["dot-div"]}></div>
             <div className={styles["dot-div"]}></div>
             <div className={styles["dot-div"]}></div>
-            <div className={styles["dot-div"] + " " + styles["dot-div-active"]}></div>
+            <div
+              className={styles["dot-div"] + " " + styles["dot-div-active"]}
+            ></div>
           </div>
         </div>
         <div className={styles["bottom-button"]}>

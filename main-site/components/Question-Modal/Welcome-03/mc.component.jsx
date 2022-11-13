@@ -1,4 +1,5 @@
 import styles from "./mc.module.scss";
+import Image from "next/image";
 
 const Modalmc = ({ handleClose, next }) => {
   const handleNext = () => {
@@ -12,10 +13,13 @@ const Modalmc = ({ handleClose, next }) => {
       >
         <div className={styles["header-wrapper"]}>
           <div className={styles["h-img-wrap"]}>
-            <img
-              src="/Question-Modal/Welcome-03.png"
-              alt=""
-              className={styles["welcome-img"]}
+            {/* <img src="/Question-Modal/Welcome-03.jpg" alt="" className={styles["welcome-img"]} /> */}
+            <Image
+              layout="fill"
+              src="/Question-Modal/Welcome-03.jpg"
+              alt="welcomeimg"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,LlP;re*C^N$$t$OYw]s+xtniNIX7"
             />
           </div>
           <div className={styles["h-content-div"]}>
@@ -42,7 +46,7 @@ const Modalmc = ({ handleClose, next }) => {
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://discord.gg/9N6FWkshpk"
+            href="https://discord.gg/aVxZkmjhtb"
             className={styles["anchorlink"]}
           >
             <button className={styles["next-button"]}>Join Server</button>

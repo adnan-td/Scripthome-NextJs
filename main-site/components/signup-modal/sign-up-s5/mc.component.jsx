@@ -1,26 +1,53 @@
-import "./mc.module.scss";
-import AvatarGrp from "../../../assets/Modal/sign-up/Avatar/Avatar-group.png";
-import CloseIcon from "../../../assets/Modal/sign-up/x-close.svg";
+import styles from "./mc.module.scss";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const Modalmc = ({ handleClose, next }) => {
-  const handleNext = () => {
-    next(1);
+const Modalmc = ({ handleClose, newuser }) => {
+  const handleclose = () => {
+    handleSubmit();
+    handleClose();
   };
+
+  const handleSubmit = async () => {
+    const res = await PostNewUser(newuser);
+    if (res.status === 201) {
+      handleClose();
+      toast.success(res.data.message);
+    } else {
+      toast.error(res.data.message);
+    }
+  };
+
+  async function PostNewUser(data) {
+    const res = await axios({
+      method: "post",
+      url: `/api/users`,
+      data: { ...data },
+    });
+    return await res;
+  }
   return (
-    <div className="modal-cover" onClick={handleClose}>
-      <div className="sign-up-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close-div" onClick={handleClose}>
-          <img src={CloseIcon} alt="" className="close-icon" />
+    <div className={styles["modal-cover"]} onClick={handleclose}>
+      <div className={styles["sign-up-modal"]} onClick={(e) => e.stopPropagation()}>
+        <button className={styles["close-div"]} onClick={handleclose}>
+          <img src="/Modal/sign-up/x-close.svg" alt="" className={styles["close-icon"]} />
         </button>
-        <img src={AvatarGrp} className="avatar-grp" alt="avatar group" />
-        <div className="top-content">
-          <div className="header-content">
-            <p>Congrats you account has been registered!</p>
-            <span>Welcome to Scripthome community. Enjoy the perks of joining our community.</span>
+        <img
+          src="/Modal/sign-up/Avatar/Avatar-group.png"
+          className={styles["avatar-grp"]}
+          alt="avatar group"
+        />
+        <div className={styles["top-content"]}>
+          <div className={styles["header-content"]}>
+            <p>Congrats your account has been registered!</p>
+            <span>
+              Welcome to Scripthome community. Now you can login and enjoy the perks of joining our
+              community.
+            </span>
           </div>
         </div>
-        <div className="bottom-button" onClick={handleNext}>
-          <button className="next-button" onClick={handleClose}>
+        <div className={styles["bottom-button"]}>
+          <button className={styles["next-button"]} onClick={handleSubmit}>
             Complete Sign Up
           </button>
         </div>

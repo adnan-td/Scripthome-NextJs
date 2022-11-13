@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Disallow: /admin
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://scripthome.org
+
+# Sitemaps
+Sitemap: https://scripthome.org/sitemap.xml
+Sitemap: https://scripthome.org/scripts-sitemap.xml
+Sitemap: https://scripthome.org/users-sitemap.xml

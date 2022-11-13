@@ -1,4 +1,5 @@
 import styles from "./mc.module.scss";
+import Link from "next/link";
 
 const Modalmc = ({ handleClose }) => {
   return (
@@ -17,7 +18,9 @@ const Modalmc = ({ handleClose }) => {
           </div>
         </div>
         <div className={styles["bottom-button"]}>
-          <button className={styles["confirm-button"]}>Return to Home</button>
+          <Link href="/">
+            <button className={styles["confirm-button"]}>Return to Home</button>
+          </Link>
         </div>
       </div>
     </div>
