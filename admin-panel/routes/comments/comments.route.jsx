@@ -130,7 +130,7 @@ import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 function Tr({ comment }) {
   const { user } = useContext(UserContext);
-  const { name, body, user_img } = comment;
+  const { name, body, img } = comment;
 
   async function handleDelete() {
     await axios({
@@ -149,7 +149,7 @@ function Tr({ comment }) {
     <tr>
       <td className={styles("dashboard-scripts")}>
         <div className={styles("im")}>
-          <img src={user_img} alt="loading" />
+          <img src={img} alt="loading" />
         </div>
         <div>
           <p className={styles("im-1")}>{name}</p>
