@@ -15,7 +15,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const res = JSON.parse(JSON.stringify(await otherqueries.getAllCommentsAdmin(id)));
+  const res = JSON.parse(JSON.stringify(await otherqueries.getComments(id)));
   return {
     props: { comments: res },
   };
