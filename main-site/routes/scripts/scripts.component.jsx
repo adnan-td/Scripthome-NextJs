@@ -184,7 +184,9 @@ const Scripts = ({ script, comments }) => {
               <button
                 className={
                   isLiked
-                    ? styles["scripts-like"] + " " + styles["scripts-like__active"]
+                    ? styles["scripts-like"] +
+                      " " +
+                      styles["scripts-like__active"]
                     : styles["scripts-like"]
                 }
                 onClick={handleLikeButton}
@@ -209,7 +211,11 @@ const Scripts = ({ script, comments }) => {
                   />
                 </svg>
                 <p className={["script-like-span"]}>
-                  {isLiked ? <p className={styles["script-like-para"]}>{script.likes}</p> : "Like"}
+                  {isLiked ? (
+                    <p className={styles["script-like-para"]}>{script.likes}</p>
+                  ) : (
+                    "Like"
+                  )}
                 </p>
               </button>
               <div className={styles["scripts-img"]}>
@@ -238,35 +244,60 @@ const Scripts = ({ script, comments }) => {
               </div>
               <div className={styles["scripts-left-buttons"]}>
                 <GetScriptModal
-                  className={styles["styled-button"] + " " + styles["button__style"]}
+                  className={
+                    styles["styled-button"] + " " + styles["button__style"]
+                  }
                   code={script.script_code}
                 >
-                  <span className={styles["button__style__span"]}>Get Script</span>
-                  <img src="/Script/Icons/arrow-square-right.svg" alt="Get Script Button" />
+                  <span className={styles["button__style__span"]}>
+                    Get Script
+                  </span>
+                  <img
+                    src="/Script/Icons/arrow-square-right.svg"
+                    alt="Get Script Button"
+                  />
                 </GetScriptModal>
                 <GameLinkModal
-                  className={styles["game-link"] + " " + styles["button__style"]}
+                  className={
+                    styles["game-link"] + " " + styles["button__style"]
+                  }
                   link={script.gameLink}
                   code={script.gameCode}
                 >
-                  <span className={styles["button__style__span"]}>Join Game</span>
-                  <img src="/Script/Icons/game-link-icon.svg" alt="Game Link Button" />
+                  <span className={styles["button__style__span"]}>
+                    Join Game
+                  </span>
+                  <img
+                    src="/Script/Icons/game-link-icon.svg"
+                    alt="Game Link Button"
+                  />
                 </GameLinkModal>
                 <WatchVideoModal
-                  className={styles["watch-video"] + " " + styles["button__style"]}
+                  className={
+                    styles["watch-video"] + " " + styles["button__style"]
+                  }
                   link={script.youtubeLink}
                 >
-                  <span className={styles["button__style__span"]}>Watch Video</span>
+                  <span className={styles["button__style__span"]}>
+                    Watch Video
+                  </span>
                   <img src="/Script/Icons/youtube.svg" alt="Youtube Button" />
                 </WatchVideoModal>
                 <ReportScriptModal
-                  className={styles["report-script"] + " " + styles["button__style"]}
+                  className={
+                    styles["report-script"] + " " + styles["button__style"]
+                  }
                   script_id={script.id}
                   reported_by={user?.id}
                   status={status}
                 >
-                  <span className={styles["button__style__span"]}>Report Script</span>
-                  <img src="/Script/Icons/report-script-flag.svg" alt="Report Script Button" />
+                  <span className={styles["button__style__span"]}>
+                    Report Script
+                  </span>
+                  <img
+                    src="/Script/Icons/report-script-flag.svg"
+                    alt="Report Script Button"
+                  />
                 </ReportScriptModal>
               </div>
               <div className={styles["authorbox"]}>
@@ -274,10 +305,17 @@ const Scripts = ({ script, comments }) => {
                   <p className={styles["madeby"]}>Made by</p>
                   <div className={styles["authorboxc1"]}>
                     <div className={styles["authorimage1"]}>
-                      <Image layout="fill" src="/Script/Avatars/avatar2.png" alt="author1_image" />
+                      <Image
+                        layout="fill"
+                        src="/Script/Avatars/avatar2.png"
+                        alt="author1_image"
+                        objectFit="cover"
+                      />
                     </div>
                     <div className={styles["authorboxc2"]}>
-                      <h4 className={styles["contentauthor1"]}>{script.madeby}</h4>
+                      <h4 className={styles["contentauthor1"]}>
+                        {script.madeby}
+                      </h4>
                       <p className={styles["lighttext"]}>Script Developer</p>
                     </div>
                   </div>
@@ -286,20 +324,38 @@ const Scripts = ({ script, comments }) => {
                 <div className={styles["rightauthor"]}>
                   <p className={styles["uploadby"]}>Uploaded by</p>
                   <Link
-                    href={`/users/${slugify(scriptuser.name ? scriptuser.name : "null", {
-                      lower: true,
-                    })}`}
+                    href={`/users/${slugify(
+                      scriptuser.name ? scriptuser.name : "null",
+                      {
+                        lower: true,
+                      }
+                    )}`}
                   >
                     <div
-                      className={styles["authorboxc1"] + " " + styles["authorboxc12"]}
+                      className={
+                        styles["authorboxc1"] + " " + styles["authorboxc12"]
+                      }
                       style={{ cursor: "pointer" }}
                     >
                       <div className={styles["authorimage2"]}>
-                        <Image layout="fill" src={scriptuser.img} alt="author2_image" />
+                        <Image
+                          layout="fill"
+                          src={scriptuser.img}
+                          alt="author2_image"
+                          objectFit="cover"
+                        />
                       </div>
-                      <div className={styles["authorboxc2"] + " " + styles["authorboxc3"]}>
-                        <h4 className={styles["contentauthor1"]}>{scriptuser.name}</h4>
-                        <p className={styles["lighttext"]}>{noofuserscripts}+ Scripts Uploaded</p>
+                      <div
+                        className={
+                          styles["authorboxc2"] + " " + styles["authorboxc3"]
+                        }
+                      >
+                        <h4 className={styles["contentauthor1"]}>
+                          {scriptuser.name}
+                        </h4>
+                        <p className={styles["lighttext"]}>
+                          {noofuserscripts}+ Scripts Uploaded
+                        </p>
                       </div>
                     </div>
                   </Link>
@@ -334,7 +390,9 @@ const Scripts = ({ script, comments }) => {
                 <div
                   className={
                     inputActive
-                      ? styles["post-comment"] + " " + styles["post-comment--active"]
+                      ? styles["post-comment"] +
+                        " " +
+                        styles["post-comment--active"]
                       : styles["post-comment"]
                   }
                   ref={inputRef}

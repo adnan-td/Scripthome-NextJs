@@ -6,6 +6,7 @@ import Background from "../../components/background/background.component";
 import ReactPaginate from "react-paginate";
 import { useContext, useEffect, useState } from "react";
 import { WidthContext } from "../../contexts/screenwidth/screenwidth.context";
+import Image from "next/image";
 
 const Adduser = ({ userscripts, userdata }) => {
   const [displayscripts, setds] = useState([]);
@@ -30,9 +31,11 @@ const Adduser = ({ userscripts, userdata }) => {
   useEffect(() => {
     const pagesVisited = pageNumber * itemsPerPage;
     setds(
-      userscripts.slice(pagesVisited, pagesVisited + itemsPerPage).map((script, key) => {
-        return <ScriptPreview script={script} key={key} />;
-      })
+      userscripts
+        .slice(pagesVisited, pagesVisited + itemsPerPage)
+        .map((script, key) => {
+          return <ScriptPreview script={script} key={key} />;
+        })
     );
   }, [pageNumber, userscripts]);
 
@@ -76,7 +79,14 @@ const Adduser = ({ userscripts, userdata }) => {
       <Background />
       <div className={styles["scriptall__wrapper"]}>
         <div className={styles["userdiv"]}>
-          <img className={styles["userdiv__img"]} src={userdata.img} alt="loading" />
+          <div className={styles["userdiv__img"]}>
+            <Image
+              src={userdata.img}
+              alt="loading"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
           <div className={styles["userdiv__content"]}>
             <p className={styles["userdiv__content__name"]}>{userdata.name}</p>
             <p className={styles["userdiv__content__post"]}>Script Uploader</p>
@@ -90,16 +100,24 @@ const Adduser = ({ userscripts, userdata }) => {
                 <p className={styles["ht-data-name"]}>Total scripts posted</p>
               </div>
               <div className={styles["ht-data-inside"]}>
-                <p className={styles["ht-data-no"]}>{statistics.thisMonthScript}</p>
-                <p className={styles["ht-data-name"]}>Total scripts this month</p>
+                <p className={styles["ht-data-no"]}>
+                  {statistics.thisMonthScript}
+                </p>
+                <p className={styles["ht-data-name"]}>
+                  Total scripts this month
+                </p>
               </div>
               <div className={styles["ht-data-inside"]}>
                 <p className={styles["ht-data-no"]}>{statistics.totalViews}</p>
                 <p className={styles["ht-data-name"]}>Total scripts views</p>
               </div>
               <div className={styles["ht-data-inside"]}>
-                <p className={styles["ht-data-no"]}>{statistics.thisMonthViews}</p>
-                <p className={styles["ht-data-name"]}>Total scripts views this month</p>
+                <p className={styles["ht-data-no"]}>
+                  {statistics.thisMonthViews}
+                </p>
+                <p className={styles["ht-data-name"]}>
+                  Total scripts views this month
+                </p>
               </div>
             </div>
           </div>
@@ -116,7 +134,9 @@ const Adduser = ({ userscripts, userdata }) => {
         previousLinkClassName={styles["paginationCon"]}
         nextLinkClassName={styles["paginationCon"]}
         disabledLinkClassName={styles["paginationCon"]}
-        activeLinkClassName={styles["paginationCon"] + " " + styles["paginationCon__active"]}
+        activeLinkClassName={
+          styles["paginationCon"] + " " + styles["paginationCon__active"]
+        }
       />
     </div>
   );
