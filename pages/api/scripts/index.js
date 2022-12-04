@@ -6,7 +6,12 @@ export default async function getuser(req, res) {
     res.status(200).send(allscripts);
   } else if (req.method === "POST") {
     const script = req.body;
-    await scriptqueries.addNewScript(script);
-    res.status(200).send("Added successfully");
+    try {
+      await scriptqueries.addNewScript(script);
+      res.status(200).send("Added successfully");
+    } catch (e) {
+      if (e) console.log(e);
+      res.status(201).send("Failed");
+    }
   }
 }

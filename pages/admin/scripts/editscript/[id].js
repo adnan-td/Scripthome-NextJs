@@ -24,7 +24,7 @@ function isNumeric(str) {
 
 function extractGameCode(gameLink) {
   const temp = gameLink.split("/games/")[1];
-  const temp2 = temp.split("/")[0];
+  const temp2 = temp?.split("/")[0];
   if (isNumeric(temp2)) {
     return temp2;
   } else {
