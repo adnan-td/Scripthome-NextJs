@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import MainContent from "../../../../admin-panel/components/maincontent/maincontent.component";
 import { UserContext } from "../../../../main-site/contexts/user/user.context";
-import { AllScriptContext } from "../../../../main-site/contexts/allscripts/scripts.context";
 import { imghost } from "../../../../config/img_hostname";
 
 const styles = (classname) => {
@@ -52,7 +51,6 @@ export default function FormScript() {
   const fileInputRef = useRef(null);
   var slugify = require("slugify");
   const { user } = useContext(UserContext);
-  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   const [formFields, setFormFields] = useState({
     img: "",
     title: "",
@@ -94,7 +92,6 @@ export default function FormScript() {
         description: "",
         user_id: "",
       });
-      setRefreshScripts(!refreshScripts);
       toast.success("Script has been successfully added!");
     }
   };

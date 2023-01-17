@@ -6,7 +6,7 @@ import Background from "../../components/backgroundmod/backgroundmod.component";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-export default function Home({ statistics, scripts }) {
+export default function Home({ statistics, scripts, script_hviews }) {
   // Dynamic Imports
   const HomeData = dynamic(() => import("./hdata.component"));
   const HomeFeatureSec = dynamic(() => import("./hfeature.component"));
@@ -27,10 +27,7 @@ export default function Home({ statistics, scripts }) {
             with scripts from
             <span className={styles["home__span"]}>
               ScriptHome
-              <img
-                alt="loading"
-                src="/Homepage/pattern/hero-section-underline.svg"
-              />
+              <img alt="loading" src="/Homepage/pattern/hero-section-underline.svg" />
             </span>
           </h1>
 
@@ -38,10 +35,7 @@ export default function Home({ statistics, scripts }) {
             <Link href="/scripts">
               <a className={styles["styled-button"]}>
                 <span>View Scripts</span>
-                <img
-                  src="/Script/Icons/arrow-square-right.svg"
-                  alt="arrow-icon"
-                />
+                <img src="/Script/Icons/arrow-square-right.svg" alt="arrow-icon" />
               </a>
             </Link>
             <a
@@ -51,10 +45,7 @@ export default function Home({ statistics, scripts }) {
               className={styles["secondary-button"]}
             >
               <span>Download Executor</span>
-              <img
-                src="/Homepage/icons/download-cloud-02.svg"
-                alt="download-icon"
-              />
+              <img src="/Homepage/icons/download-cloud-02.svg" alt="download-icon" />
             </a>
           </div>
         </div>
@@ -71,11 +62,7 @@ export default function Home({ statistics, scripts }) {
           </div>
           <div className={styles["ht-corner"]}>
             <div className={styles["ht-corner__img"]}>
-              <Image
-                layout="fill"
-                alt="loading"
-                src="/Homepage/Image/trophy.webp"
-              />
+              <Image layout="fill" alt="loading" src="/Homepage/Image/trophy.webp" />
             </div>
             <p>#1 Roblox Script provider</p>
           </div>
@@ -83,7 +70,7 @@ export default function Home({ statistics, scripts }) {
       </div>
       <HomeData statistics={statistics} />
       <HomeFeatureSec />
-      <HomeMps scripts={scripts} />
+      <HomeMps scripts={script_hviews} />
       <HomeRecent scripts={scripts} />
     </div>
   );

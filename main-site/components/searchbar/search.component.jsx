@@ -1,7 +1,7 @@
 import styles from "./search.module.scss";
 import NotFound from "./search-noresult-modal/mc.component";
 import Found from "./search-result-modal/mc.component";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AllScriptContext } from "../../contexts/allscripts/scripts.context";
 
 const Search = ({ style }) => {
@@ -12,8 +12,18 @@ const Search = ({ style }) => {
   const [searchField, SetSearchField] = useState("");
   const [found, setFound] = useState(true);
   const [result, setResult] = useState([]);
-  const { scripts } = useContext(AllScriptContext);
+  const [scripts, setScripts] = useState([]);
   const inputrefmain = useRef(null);
+
+  async function setIt() {
+    setScripts(await AllScriptContext.getScriptsAll());
+  }
+
+  useEffect(() => {
+    if (searchField.length > 0 && scripts.length == 0) {
+      setIt();
+    }
+  }, [searchField, scripts]);
 
   useEffect(() => {
     if (!showBottom) {

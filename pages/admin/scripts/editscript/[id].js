@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import MainContent from "../../../../admin-panel/components/maincontent/maincontent.component";
 import { UserContext } from "../../../../main-site/contexts/user/user.context";
-import { AllScriptContext } from "../../../../main-site/contexts/allscripts/scripts.context";
 import { imghost } from "../../../../config/img_hostname";
 
 const styles = (classname) => {
@@ -68,7 +67,6 @@ export default function FormScript({ script }) {
     description: script.description,
     user_id: script.user_id,
   });
-  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   const {
     img,
     title,
@@ -96,7 +94,6 @@ export default function FormScript({ script }) {
         method: "put",
         data: { ...final },
       });
-      setRefreshScripts(!refreshScripts);
       toast.success("Script has been successfully updated!");
     }
   };

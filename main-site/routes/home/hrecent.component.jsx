@@ -9,16 +9,10 @@ export default function HomeRecent({ scripts }) {
   const [shortscripts, setShortScripts] = useState([]);
   const screenwidth = useContext(WidthContext);
 
-  function dateComparison(a, b) {
-    const date1 = new Date(a.date);
-    const date2 = new Date(b.date);
-    return date2 - date1;
-  }
-
   useEffect(() => {
     function getshortarr(arr, num) {
       if (!arr) return [];
-      return arr.sort(dateComparison).slice(0, num);
+      return arr.slice(0, num);
     }
     setShortScripts(getshortarr(scripts, screenwidth >= 1600 ? 8 : 6));
   }, [scripts, screenwidth]);

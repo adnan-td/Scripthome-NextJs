@@ -18,10 +18,17 @@ const styles = (classname) => {
 export default function ShowComments() {
   const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
-  const { scripts } = useContext(AllScriptContext);
+  const [scripts, setScripts] = useState([]);
   const [current, Setcurrent] = useState(0);
   const [shortscripts, Setshortscripts] = useState([]);
   const [filteredscripts, Setfilteredscripts] = useState([]);
+
+  useEffect(() => {
+    async function setIt() {
+      setScripts(await AllScriptContext.getScriptsAll());
+    }
+    setIt();
+  }, []);
 
   const Addcurrent = () => {
     if (current + 6 > filteredscripts.length) {

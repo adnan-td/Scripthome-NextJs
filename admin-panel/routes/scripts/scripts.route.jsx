@@ -17,10 +17,17 @@ const styles = (classname) => {
 export default function Scripts() {
   const { user } = useContext(UserContext);
   const { searchfield } = useContext(SearchContext);
-  const { scripts } = useContext(AllScriptContext);
+  const [scripts, setScripts] = useState([]);
   const [current, Setcurrent] = useState(0);
   const [shortscripts, Setshortscripts] = useState([]);
   const [filteredscripts, Setfilteredscripts] = useState([]);
+
+  useEffect(() => {
+    async function setIt() {
+      setScripts(await AllScriptContext.getScriptsAll());
+    }
+    setIt();
+  }, []);
 
   const Addcurrent = () => {
     if (current + 6 > filteredscripts.length) {
@@ -201,14 +208,12 @@ function Card({ img, script, srno }) {
 import { UserContext } from "../../../main-site/contexts/user/user.context";
 
 function ButtonIA({ SetisActive, script }) {
-  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   async function handleUpdate(ia) {
     const res = await axios({
       url: `/api/scripts/${script.id}`,
       method: "put",
       data: { ...script, isActive: ia },
     });
-    setRefreshScripts(!refreshScripts);
   }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -227,14 +232,12 @@ function ButtonIA({ SetisActive, script }) {
 }
 
 function ButtonAI({ SetisActive, script }) {
-  const { refreshScripts, setRefreshScripts } = useContext(AllScriptContext);
   async function handleUpdate(ia) {
     const res = await axios({
       url: `/api/scripts/${script.id}`,
       method: "put",
       data: { ...script, isActive: ia },
     });
-    setRefreshScripts(!refreshScripts);
   }
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
