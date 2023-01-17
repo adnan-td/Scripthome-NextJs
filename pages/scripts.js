@@ -1,5 +1,4 @@
 import Head from "next/head";
-//
 import { AnimatePresence } from "framer-motion";
 import AnimatedPage from "../main-site/components/animations/animatedpage";
 import Navigation from "../main-site/components/navigation/navigation.component";
@@ -10,20 +9,15 @@ import Script from "next/script";
 import { otherqueries } from "../db/otherqueries.model";
 
 import styles from "../styles/mainpage.module.scss";
-import { useContext } from "react";
-import { AllScriptContext } from "../main-site/contexts/allscripts/scripts.context";
 
 export async function getServerSideProps(context) {
-  const res = JSON.parse(
-    JSON.stringify(await otherqueries.getAdsenseDefault())
-  );
+  const res = JSON.parse(JSON.stringify(await otherqueries.getAdsenseDefault()));
   return {
     props: { adsense: res.adsense },
   };
 }
 
 const ScriptsPage = ({ adsense }) => {
-  const { scripts } = useContext(AllScriptContext);
   return (
     <div className={styles["mainsite-bg"]}>
       <Head>
@@ -51,10 +45,7 @@ const ScriptsPage = ({ adsense }) => {
         {/* Twitter  */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://scripthome.org/scripts" />
-        <meta
-          property="twitter:domain"
-          content="https://scripthome.org/scripts"
-        />
+        <meta property="twitter:domain" content="https://scripthome.org/scripts" />
         <meta property="twitter:title" content="ScriptHome Scripts" />
         <meta
           property="twitter:description"
@@ -70,7 +61,7 @@ const ScriptsPage = ({ adsense }) => {
         <FI />
         <AnimatedPage key={2}>
           <div className={styles["place-center-t"]}>
-            <ScriptsAll scripts={scripts} />
+            <ScriptsAll />
             <Footer />
           </div>
         </AnimatedPage>

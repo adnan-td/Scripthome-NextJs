@@ -20,7 +20,7 @@ import InactiveScriptModal from "../../components/Error-Modal/modal.component";
 
 const Scripts = ({ script, comments }) => {
   var slugify = require("slugify");
-  const { scripts: allscripts } = useContext(AllScriptContext);
+  const [allscripts, setAllscripts] = useState([]);
   const [scriptuser, setsu] = useState({});
   const [shortscripts, setss] = useState([]);
   const [inputActive, setIA] = useState(false);
@@ -36,10 +36,16 @@ const Scripts = ({ script, comments }) => {
   }
 
   useEffect(() => {
+    async function setIt() {
+      setAllscripts(await AllScriptContext.getScriptsHighViews());
+    }
+    setIt();
+  }, []);
+
+  useEffect(() => {
     async function getUserScripts() {
-      const res = await axios.get(`/api/scripts/user/${script.user_id}`);
-      console.log(res.data);
-      setnoofuserscripts(res.data.length);
+      const res = await axios.get(`/api/scripts/user/${script?.user_id}`);
+      setnoofuserscripts(res.data?.length);
     }
     getUserScripts();
   }, [script]);
@@ -77,8 +83,8 @@ const Scripts = ({ script, comments }) => {
       });
       setsu(res.data);
     }
-    getscriptusername(script.user_id);
-  }, [script.user_id]);
+    getscriptusername(script?.user_id);
+  }, [script?.user_id]);
 
   async function handleLikeButton() {
     if (isLiked) {
@@ -99,7 +105,7 @@ const Scripts = ({ script, comments }) => {
         data: {
           method: "add",
           id_user: user?.id,
-          id_script: script.id,
+          id_script: script?.id,
         },
       });
       setIsLiked(true);
@@ -118,7 +124,7 @@ const Scripts = ({ script, comments }) => {
         data: {
           method: "remove",
           id_user: user?.id,
-          id_script: script.id,
+          id_script: script?.id,
         },
       });
       setIsLiked(false);
@@ -145,7 +151,7 @@ const Scripts = ({ script, comments }) => {
       toast.success("Comment posted Successfully!");
       comments.push({
         body: inputBody,
-        img: user.img,
+        img: user?.img,
         name: user.name,
         role: user.role,
       });
@@ -209,13 +215,13 @@ const Scripts = ({ script, comments }) => {
                   />
                 </svg>
                 <p className={["script-like-span"]}>
-                  {isLiked ? <p className={styles["script-like-para"]}>{script.likes}</p> : "Like"}
+                  {isLiked ? <p className={styles["script-like-para"]}>{script?.likes}</p> : "Like"}
                 </p>
               </button>
               <div className={styles["scripts-img"]}>
                 {/* <img src={`${imghost}/${script.img}`} alt="loading" /> */}
                 <Image
-                  src={`${imghost}/${script.img}`}
+                  src={`${imghost}/${script?.img}`}
                   layout="fill"
                   alt="loading"
                   objectFit="cover"
@@ -295,7 +301,7 @@ const Scripts = ({ script, comments }) => {
                       style={{ cursor: "pointer" }}
                     >
                       <div className={styles["authorimage2"]}>
-                        <Image layout="fill" src={scriptuser.img} alt="author2_image" />
+                        <Image layout="fill" src={scriptuser?.img} alt="author2_image" />
                       </div>
                       <div className={styles["authorboxc2"] + " " + styles["authorboxc3"]}>
                         <h4 className={styles["contentauthor1"]}>{scriptuser.name}</h4>
@@ -344,7 +350,7 @@ const Scripts = ({ script, comments }) => {
                       objectFit="cover"
                       layout="fill"
                       alt="loading"
-                      src={user?.img ? user.img : "/Script/Avatars/avatar.png"}
+                      src={user?.img ? user?.img : "/Script/Avatars/avatar.png"}
                     />
                   </div>
                   <div className={styles["post-comment__div"]}>
@@ -455,7 +461,7 @@ function SpComment({ comment }) {
         <Link href={`/users/${slugify(comment.name, { lower: true })}`}>
           <img
             alt="loading"
-            src={comment.img}
+            src={comment?.img}
             className={styles["white-border"]}
             style={{ cursor: "pointer" }}
             loading="lazy"

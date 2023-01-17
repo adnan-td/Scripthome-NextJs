@@ -1,4 +1,4 @@
-import db from "./mysql";
+var db = require("./mysql");
 
 async function getAllUsers() {
   const query = new Promise((resolve, reject) => {
@@ -126,7 +126,7 @@ async function removeUserById(id) {
   });
 }
 
-export const userqueries = {
+module.exports.userqueries = {
   getAllUsers,
   addNewUser,
   updateUser,

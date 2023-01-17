@@ -1,4 +1,4 @@
-import db from "./mysql";
+var db = require("./mysql");
 
 async function getViewsByScript(script_id) {
   const query = new Promise((resolve, reject) => {
@@ -98,6 +98,16 @@ async function getStatistics() {
   return query.then((result) => {
     return result;
   });
+}
+
+async function setStatistics(total_scripts_month, total_views_month) {
+  db.query(
+    `update statistics set ? where id=1`,
+    { total_scripts_month, total_views_month },
+    (err, result) => {
+      if (err) console.log(err);
+    }
+  );
 }
 
 // async function getReports() {
@@ -269,7 +279,7 @@ async function getImageList() {
   });
 }
 
-export const otherqueries = {
+module.exports.otherqueries = {
   getViewsByScript,
   getViewsByUser,
   getLike,
@@ -277,6 +287,7 @@ export const otherqueries = {
   addNewLike,
   removeLike,
   getStatistics,
+  setStatistics,
   getReports,
   addReport,
   updateReport,

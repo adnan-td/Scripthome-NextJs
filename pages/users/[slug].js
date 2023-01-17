@@ -5,10 +5,9 @@ import Navigation from "../../main-site/components/navigation/navigation.compone
 import Footer from "../../main-site/components/footer/footer.component";
 import FI from "../../main-site/components/floatingicon/fi.component";
 import Adduser from "../../main-site/routes/uploaduser/adduser.route";
-import { useContext, useEffect, useState } from "react";
-import { AllScriptContext } from "../../main-site/contexts/allscripts/scripts.context";
 import Script from "next/script";
 import { otherqueries } from "../../db/otherqueries.model";
+import { scriptqueries } from "../../db/scripts.model";
 import { userqueries } from "../../db/users.model";
 
 import styles from "../../styles/mainpage.module.scss";
@@ -20,8 +19,11 @@ export async function getServerSideProps(context) {
   if (res.exists) {
     const userdata = res.user;
     const exists = true;
+    const userscripts = JSON.parse(
+      JSON.stringify(await scriptqueries.getScriptsbyUserID(userdata.id))
+    );
     return {
-      props: { userdata, exists, adsense: res2.adsense },
+      props: { userdata, exists, adsense: res2.adsense, userscripts },
     };
   } else {
     const exists = false;
@@ -40,21 +42,7 @@ async function GetUserByName(name) {
   }
 }
 
-const AddUserPage = ({ userdata, exists, adsense }) => {
-  const [userscripts, setUS] = useState([]);
-  const { scripts } = useContext(AllScriptContext);
-  useEffect(() => {
-    if (!exists) {
-      alert("User does not exist!");
-    } else {
-      setUS(
-        scripts.filter((script) => {
-          return script.user_id === userdata.id;
-        })
-      );
-    }
-  }, [exists, scripts, userdata]);
-
+const AddUserPage = ({ userdata, exists, adsense, userscripts }) => {
   return (
     <div className={styles["mainsite-bg"]}>
       <Script src={adsense} />

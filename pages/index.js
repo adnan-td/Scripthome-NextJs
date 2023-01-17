@@ -13,17 +13,16 @@ import styles from "../styles/mainpage.module.scss";
 
 export async function getServerSideProps(context) {
   const res = JSON.parse(JSON.stringify(await otherqueries.getStatistics()));
-  const res2 = JSON.parse(JSON.stringify(await scriptqueries.getAllScripts()));
-  const res3 = JSON.parse(
-    JSON.stringify(await otherqueries.getAdsenseDefault())
-  );
+  const res21 = JSON.parse(JSON.stringify(await scriptqueries.get12ScriptRecent()));
+  const res22 = JSON.parse(JSON.stringify(await scriptqueries.get6ScriptHighViews()));
+  const res3 = JSON.parse(JSON.stringify(await otherqueries.getAdsenseDefault()));
   const statistics = res;
   return {
-    props: { statistics, scripts: res2, adsense: res3.adsense },
+    props: { statistics, scripts: res21, script_hviews: res22, adsense: res3.adsense },
   };
 }
 
-export default function HomePage({ statistics, scripts, adsense }) {
+export default function HomePage({ statistics, scripts, script_hviews, adsense }) {
   return (
     <div className={styles["mainsite-bg"]}>
       <Head>
@@ -67,7 +66,7 @@ export default function HomePage({ statistics, scripts, adsense }) {
         <Navigation key={1} />
         <FI />
         <AnimatedPage key={2}>
-          <Home statistics={statistics} scripts={scripts} />
+          <Home statistics={statistics} scripts={scripts} script_hviews={script_hviews} />
           <Footer />
         </AnimatedPage>
       </AnimatePresence>

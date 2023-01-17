@@ -7,9 +7,9 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://scripthome.org
+Host: http://localhost:3000
 
 # Sitemaps
-Sitemap: https://scripthome.org/sitemap.xml
-Sitemap: https://scripthome.org/scripts-sitemap.xml
-Sitemap: https://scripthome.org/users-sitemap.xml
+Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: http://localhost:3000/scripts-sitemap.xml
+Sitemap: http://localhost:3000/users-sitemap.xml

@@ -37,9 +37,9 @@ const Adduser = ({ userscripts, userdata }) => {
   }, [pageNumber, userscripts]);
 
   function updateStatistics() {
-    var a = 0;
-    var b = 0;
-    var c = 0;
+    var a = 0; // no of scripts
+    var b = 0; // no of views this month
+    var c = 0; // total no of views
     for (let i in userscripts) {
       const currentdate = new Date();
       const script = userscripts[i];
@@ -76,7 +76,7 @@ const Adduser = ({ userscripts, userdata }) => {
       <Background />
       <div className={styles["scriptall__wrapper"]}>
         <div className={styles["userdiv"]}>
-          <img className={styles["userdiv__img"]} src={userdata.img} alt="loading" />
+          <img className={styles["userdiv__img"]} src={userdata?.img} alt="loading" />
           <div className={styles["userdiv__content"]}>
             <p className={styles["userdiv__content__name"]}>{userdata.name}</p>
             <p className={styles["userdiv__content__post"]}>Script Uploader</p>

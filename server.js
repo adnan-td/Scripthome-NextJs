@@ -7,7 +7,10 @@ const port = process.env.PORT || 3000;
 const app = next({ dev: false, hostname, port });
 const handle = app.getRequestHandler();
 
+const StatisticCron = require("./cron/cron");
+
 app.prepare().then(() => {
+  StatisticCron();
   createServer(async (req, res) => {
     try {
       const parsedUrl = parse(req.url, true);

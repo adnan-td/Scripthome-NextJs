@@ -5,12 +5,21 @@ import Background from "../../components/background/background.component";
 import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { WidthContext } from "../../contexts/screenwidth/screenwidth.context";
+import { AllScriptContext } from "../../../main-site/contexts/allscripts/scripts.context";
 
-const ScriptsAll = ({ scripts }) => {
+const ScriptsAll = () => {
   const [displayscripts, setds] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [pageCount, setPageCount] = useState(null);
   const screenwidth = useContext(WidthContext);
+
+  useEffect(() => {
+    async function setIt() {
+      setPageCount(Math.ceil((await AllScriptContext.getScriptsAllLength()) / itemsPerPage));
+    }
+    setIt();
+  }, [itemsPerPage]);
 
   useEffect(() => {
     if (screenwidth > 1600) {
@@ -21,23 +30,23 @@ const ScriptsAll = ({ scripts }) => {
   }, [screenwidth]);
 
   useEffect(() => {
-    if (scripts) {
+    async function setIt() {
       const pagesVisited = pageNumber * itemsPerPage;
       setds(
-        scripts.slice(pagesVisited, pagesVisited + itemsPerPage).map((script, key) => {
-          return <ScriptPreview script={script} key={key} />;
-        })
+        (await AllScriptContext.getScriptsPaginated(itemsPerPage, pagesVisited)).map(
+          (script, key) => {
+            return <ScriptPreview script={script} key={key} />;
+          }
+        )
       );
     }
-  }, [pageNumber, scripts, itemsPerPage]);
+    setIt();
+  }, [pageNumber, itemsPerPage]);
 
-  if (scripts) {
-    var pageCount = Math.ceil(scripts.length / itemsPerPage);
-
-    var changePage = ({ selected }) => {
-      setPageNumber(selected);
-    };
-  }
+  // var pageCount = Math.ceil(scripts.length / itemsPerPage);
+  var changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <div className={styles["scriptall"]}>
