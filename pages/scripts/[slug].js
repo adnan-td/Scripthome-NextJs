@@ -66,7 +66,7 @@ const ScriptsPage = ({ script, allscripts, id, comments, exists }) => {
 
   return (
     <div className={styles["mainsite-bg"]}>
-      <Script src={script.adsense ? script?.adsense : script?.def_ads} />
+      <Script src={script?.adsense ? script?.adsense : script?.def_ads} />
       <Head>
         <title>{script?.title}</title>
         {/* Primary Meta Tags  */}
