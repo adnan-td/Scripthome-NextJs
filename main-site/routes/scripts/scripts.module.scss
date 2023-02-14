@@ -894,6 +894,8 @@
     border-radius: 0.5rem;
     height: 176px;
     width: 176px;
+    position: relative;
+    overflow: hidden;
 
     @media (max-width: 900px) {
       width: 88px;
